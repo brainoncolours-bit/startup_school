@@ -1,0 +1,124 @@
+.courses-container {
+  width: 100%;
+}
+
+.courses-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.courses-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.courses-subtitle {
+  font-size: 1.3rem;
+  opacity: 0.9;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.courses-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.course-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.course-level {
+  background: #f0f0f0;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #667eea;
+}
+
+.course-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.course-card h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.course-description {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.course-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.course-duration {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.btn-enroll {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-enroll:hover {
+  background: #5568d3;
+}
+
+@media (max-width: 768px) {
+  .courses-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .courses-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .courses-grid {
+    grid-template-columns: 1fr;
+  }
+}
