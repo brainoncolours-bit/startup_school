@@ -33,44 +33,8 @@ const IndustrialHazardPortal = () => {
         </div>
       </div>
 
-      {/* 2. UPDATED MAP SECTION: STARTUP PARK BENGALURU */}
-      <section className="h-screen sticky top-0 flex items-center justify-center p-6 bg-white overflow-hidden">
-        <motion.div 
-          style={{ rotateX: mapRotate, scale: useTransform(smoothProgress, [0, 0.4], [1, 0.9]) }}
-          className="relative w-full max-w-7xl h-[70vh] border-[15px] border-black bg-black overflow-hidden group shadow-[40px_40px_0px_#e72132]"
-        >
-          {/* LIVE GOOGLE MAP EMBED */}
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.632296541671!2d77.6186411!3d12.9312891!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae150058b75701%3A0xd3b7950ec31e6322!2sStartup%20Park%20By%20Ique%20Ventures!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
-            className="absolute inset-0 w-full h-full grayscale contrast-[1.2] invert opacity-70"
-            style={{ border: 0 }} 
-            allowFullScreen="" 
-            loading="lazy" 
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-
-          {/* Hazard Overlays */}
-          <div className="absolute inset-0 pointer-events-none border-[20px] border-black/10" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#e7213210_1px,transparent_1px),linear-gradient(to_bottom,#e7213210_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none" />
-
-          {/* Location Details Block */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none">
-             <div className="w-12 h-12 bg-[#e72132] rounded-full animate-ping mb-4" />
-             <h3 className="text-4xl italic uppercase bg-[#ffde17] text-black px-8 py-4 border-4 border-black shadow-[10px_10px_0px_#000]">
-                Startup_Park
-             </h3>
-          </div>
-
-          <div className="absolute bottom-10 left-10 p-6 border-l-8 border-[#ffde17] bg-black text-white z-10">
-             <p className="font-mono text-[10px] opacity-50 mb-1">GEOGRAPHIC_INTEL</p>
-             <p className="text-2xl font-black italic uppercase">12.9313° N // 77.6186° E</p>
-             <p className="text-sm font-mono text-[#ffde17]">KORAMANGALA_BLR</p>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* 3. THE HAZARD FORM (UNCHANGED BUT INTEGRATED) */}
-      <section className="min-h-screen relative z-10 bg-[#ffde17] border-t-[30px] border-black py-40 px-6">
+      {/* 2. THE HAZARD FORM */}
+      <section className="min-h-screen relative z-10 bg-[#ffde17] border-t-[30px] border-black py-40 px-6 mt-20">
         <motion.div style={{ x: hazardY }} className="absolute -top-8 left-0 flex whitespace-nowrap opacity-20">
            {[...Array(10)].map((_, i) => (
              <span key={i} className="text-6xl italic mr-20">CAUTION // WARNING // ACCESS_RESTRICTED //</span>
@@ -110,6 +74,42 @@ const IndustrialHazardPortal = () => {
                 </div>
                 <p className="text-xs font-mono opacity-60 uppercase">Startup Park operational hours: 24/7 Monitoring active for verified startups.</p>
              </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* 3. UPDATED MAP SECTION: STARTUP PARK BENGALURU */}
+      <section className="h-screen sticky top-0 flex items-center justify-center p-6 bg-white overflow-hidden">
+        <motion.div 
+          style={{ rotateX: mapRotate, scale: useTransform(smoothProgress, [0, 0.4], [1, 0.9]) }}
+          className="relative w-full max-w-7xl h-[70vh] border-[15px] border-black bg-black overflow-hidden group shadow-[40px_40px_0px_#e72132]"
+        >
+          {/* LIVE GOOGLE MAP EMBED */}
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.632296541671!2d77.6186411!3d12.9312891!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae150058b75701%3A0xd3b7950ec31e6322!2sStartup%20Park%20By%20Ique%20Ventures!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+            className="absolute inset-0 w-full h-full grayscale contrast-[1.2] invert opacity-70"
+            style={{ border: 0 }} 
+            allowFullScreen="" 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+
+          {/* Hazard Overlays */}
+          <div className="absolute inset-0 pointer-events-none border-[20px] border-black/10" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#e7213210_1px,transparent_1px),linear-gradient(to_bottom,#e7213210_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none" />
+
+          {/* Location Details Block */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none">
+             <div className="w-12 h-12 bg-[#e72132] rounded-full animate-ping mb-4" />
+             <h3 className="text-4xl italic uppercase bg-[#ffde17] text-black px-8 py-4 border-4 border-black shadow-[10px_10px_0px_#000]">
+                Startup_Park
+             </h3>
+          </div>
+
+          <div className="absolute bottom-10 left-10 p-6 border-l-8 border-[#ffde17] bg-black text-white z-10">
+             <p className="font-mono text-[10px] opacity-50 mb-1">GEOGRAPHIC_INTEL</p>
+             <p className="text-2xl font-black italic uppercase">12.9313° N // 77.6186° E</p>
+             <p className="text-sm font-mono text-[#ffde17]">KORAMANGALA_BLR</p>
           </div>
         </motion.div>
       </section>
