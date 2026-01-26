@@ -7,14 +7,13 @@ import About from './pages/About';
 import Courses from './pages/Courses';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
-import './App.css';
 
 function App() {
   return (
     <Router>
-      <div className="app">
+      <div className="flex flex-col min-h-screen w-full">
         <Navbar />
-        <main className="main-content">
+        <main className="flex-1 w-full bg-gray-50">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

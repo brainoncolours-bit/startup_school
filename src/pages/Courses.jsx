@@ -1,5 +1,4 @@
 import React from 'react';
-import './Courses.css';
 
 const Courses = () => {
   const courses = [
@@ -54,26 +53,26 @@ const Courses = () => {
   ];
 
   return (
-    <div className="courses-container">
-      <section className="courses-hero">
-        <h1>Our Courses</h1>
-        <p className="courses-subtitle">
+    <div className="w-full">
+      <section className="bg-gradient-to-br from-indigo-600 to-purple-700 text-white py-20 px-5 text-center">
+        <h1 className="text-5xl mb-4">Our Courses</h1>
+        <p className="text-xl opacity-90 max-w-3xl mx-auto">
           Choose from our comprehensive curriculum designed for every stage of your startup journey
         </p>
       </section>
 
-      <section className="courses-grid">
+      <section className="max-w-6xl mx-auto py-16 px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {courses.map((course) => (
-          <div key={course.id} className="course-card">
-            <div className="course-header">
-              <span className="course-level">{course.level}</span>
-              <span className="course-price">{course.price}</span>
+          <div key={course.id} className="bg-white rounded-xl p-8 shadow-md transition-all flex flex-col hover:-translate-y-1 hover:shadow-2xl">
+            <div className="flex justify-between items-center mb-5">
+              <span className="bg-gray-100 px-4 py-1 rounded-full text-sm font-semibold text-indigo-600">{course.level}</span>
+              <span className="text-2xl font-bold text-indigo-600">{course.price}</span>
             </div>
-            <h3>{course.title}</h3>
-            <p className="course-description">{course.description}</p>
-            <div className="course-footer">
-              <span className="course-duration">⏱️ {course.duration}</span>
-              <button className="btn-enroll">Enroll Now</button>
+            <h3 className="text-2xl text-gray-800 mb-4">{course.title}</h3>
+            <p className="text-gray-600 leading-relaxed mb-5 flex-grow">{course.description}</p>
+            <div className="flex justify-between items-center mt-auto pt-5 border-t border-gray-200">
+              <span className="text-gray-600 text-sm">⏱️ {course.duration}</span>
+              <button className="bg-indigo-600 text-white border-0 px-6 py-2 rounded-lg cursor-pointer font-semibold transition-all hover:bg-indigo-700">Enroll Now</button>
             </div>
           </div>
         ))}

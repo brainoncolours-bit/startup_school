@@ -1,5 +1,4 @@
 import React from 'react';
-import './Blog.css';
 
 const Blog = () => {
   const blogPosts = [
@@ -60,33 +59,33 @@ const Blog = () => {
   ];
 
   return (
-    <div className="blog-container">
-      <section className="blog-hero">
-        <h1>Our Blog</h1>
-        <p className="blog-subtitle">
+    <div className="w-full">
+      <section className="bg-gradient-to-br from-indigo-600 to-purple-700 text-white py-20 px-5 text-center">
+        <h1 className="text-5xl mb-4">Our Blog</h1>
+        <p className="text-xl opacity-90">
           Insights, tips, and stories from the startup world
         </p>
       </section>
 
-      <section className="blog-content">
-        <div className="blog-grid">
+      <section className="max-w-6xl mx-auto py-16 px-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post) => (
-            <article key={post.id} className="blog-card">
-              <div className="blog-card-header">
-                <span className="blog-category">{post.category}</span>
-                <span className="blog-read-time">{post.readTime}</span>
+            <article key={post.id} className="bg-white rounded-xl p-8 shadow-md transition-all flex flex-col hover:-translate-y-1 hover:shadow-2xl">
+              <div className="flex justify-between items-center mb-5">
+                <span className="bg-gray-100 px-4 py-1 rounded-full text-sm font-semibold text-indigo-600">{post.category}</span>
+                <span className="text-gray-400 text-sm">{post.readTime}</span>
               </div>
-              <h2>{post.title}</h2>
-              <p className="blog-excerpt">{post.excerpt}</p>
-              <div className="blog-card-footer">
-                <div className="blog-author">
-                  <span className="author-avatar">👤</span>
+              <h2 className="text-xl text-gray-800 mb-4 leading-tight">{post.title}</h2>
+              <p className="text-gray-600 leading-relaxed mb-5 flex-grow">{post.excerpt}</p>
+              <div className="flex justify-between items-center pt-5 border-t border-gray-200">
+                <div className="flex items-center gap-3">
+                  <span className="text-3xl">👤</span>
                   <div>
-                    <p className="author-name">{post.author}</p>
-                    <p className="blog-date">{post.date}</p>
+                    <p className="font-medium text-gray-800 text-sm">{post.author}</p>
+                    <p className="text-gray-500 text-xs">{post.date}</p>
                   </div>
                 </div>
-                <button className="btn-read-more">Read More →</button>
+                <button className="bg-indigo-600 text-white border-0 px-5 py-2 rounded-lg cursor-pointer font-medium transition-colors hover:bg-indigo-700">Read More →</button>
               </div>
             </article>
           ))}
