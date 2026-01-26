@@ -13,10 +13,11 @@ const Navbar = ({ show = true }) => {
   const navPadding = useTransform(scrollY, [0, 100], ["12px 24px", "8px 16px"]);
 
   const navLinks = [
-    { name: 'Studio', path: '/', icon: <Command size={16} /> },
-    { name: 'Projects', path: '/projects', icon: <Layers size={16} /> },
-    { name: 'Insights', path: '/blog', icon: <Zap size={16} /> },
+    { name: 'Home', path: '/', icon: <Command size={16} /> },
+    { name: 'About', path: '/about', icon: <Layers size={16} /> },
+    { name: 'Courses', path: '/courses', icon: <Zap size={16} /> },
     { name: 'Contact', path: '/contact', icon: <Navigation size={16} /> },
+    { name: 'Blog', path: '/blog', icon: <Sparkles size={16} /> },
   ];
 
   return (
