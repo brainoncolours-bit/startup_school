@@ -1,153 +1,152 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import {  AlertTriangle,  Compass,  HardHat,  Zap,  ArrowRight,  Phone,  Mail,  Globe, MapPin } from 'lucide-react';
+import { AlertTriangle, Terminal, ArrowUpRight, Zap, ShieldCheck, Activity, BookOpen, HardHat } from 'lucide-react';
 
-const IndustrialHazardPortal = () => {
+const IndustrialBlogArchive = () => {
   const containerRef = useRef(null);
-  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 80, damping: 25 });
+  const archiveY = useTransform(smoothProgress, [0, 1], ["0%", "-30%"]);
 
-  const mapRotate = useTransform(smoothProgress, [0, 0.4], [0, -10]);
-  const formScale = useTransform(smoothProgress, [0.4, 0.8], [0.8, 1]);
-  const hazardY = useTransform(smoothProgress, [0, 1], ["0%", "-50%"]);
+  const blogPosts = [
+    { id: 'RPT-001', title: '10 Essential Tips for First-Time Founders', excerpt: 'Critical failure points identified in early-stage operational deployment. Review protocol before launch.', author: 'SARAH JOHNSON', date: '20 JAN 2026', category: 'STRATEGY_CORE', readTime: '5 MIN', level: 'L1_ACCESS' },
+    { id: 'RPT-002', title: 'How to Validate Your Startup Idea', excerpt: 'Market saturation analysis and stress testing procedures for new product hypotheses.', author: 'MICHAEL CHEN', date: '18 JAN 2026', category: 'MARKET_STRESS', readTime: '7 MIN', level: 'L2_ACCESS' },
+    { id: 'RPT-003', title: 'The Art of Pitching to Investors', excerpt: 'Neuro-capital influence techniques. High-stakes communication blueprint for funding acquisition.', author: 'DAVID RODRIGUEZ', date: '15 JAN 2026', category: 'CAPITAL_FLOW', readTime: '8 MIN', level: 'L3_EXECUTIVE' },
+    { id: 'RPT-004', title: 'Building a Strong Company Culture', excerpt: 'Human resource structural integrity. Protocols for high-output team synchronization.', author: 'EMILY WATSON', date: '12 JAN 2026', category: 'HUMAN_ASSETS', readTime: '6 MIN', level: 'L1_ACCESS' },
+    { id: 'RPT-005', title: 'Growth Hacking Strategies That Work', excerpt: 'Non-linear scaling procedures. Exploiting system leverage for exponential reach.', author: 'ALEX TURNER', date: '10 JAN 2026', category: 'VELOCITY_MOD', readTime: '10 MIN', level: 'L2_ACCESS' },
+    { id: 'RPT-006', title: 'From Idea to MVP in 30 Days', excerpt: 'Rapid prototyping cycle. Compressing development timeline from concept to operational build.', author: 'RACHEL GREEN', date: '08 JAN 2026', category: 'RAPID_DEPLOY', readTime: '9 MIN', level: 'L1_ACCESS' }
+  ];
 
   return (
-    <div ref={containerRef} className="bg-white text-black font-black overflow-x-hidden selection:bg-[#ffde17]">
+    <div ref={containerRef} className="bg-[#ffde17] text-black font-sans selection:bg-black selection:text-[#ffde17] overflow-x-hidden">
       
-      {/* 1. THE OVERLAY HUD */}
+      {/* 1. THE ARCHIVE HUD (Persistent Overlay) */}
       <div className="fixed top-0 left-0 w-full z-[100] pointer-events-none p-6 flex justify-between">
-        <div className="flex items-center gap-4 bg-black text-[#ffde17] px-6 py-2">
-          <AlertTriangle size={20} className="animate-pulse" />
-          <span className="font-mono text-xs tracking-[0.3em]">OPERATIONAL_NODE_BLR</span>
+        <div className="flex items-center gap-4 bg-black text-white px-6 py-2">
+          <Terminal size={18} className="text-[#ffde17]" />
+          <span className="font-mono text-[10px] tracking-[0.4em] uppercase">Archive_System.Loaded</span>
         </div>
         <div className="flex flex-col items-end">
-           <span className="font-mono text-[10px] text-black/40">SCROLL_RELIANCE</span>
-           <div className="w-48 h-1 bg-black/10 mt-2">
-              <motion.div style={{ width: useTransform(smoothProgress, [0, 1], ["0%", "100%"]) }} className="h-full bg-[#e72132]" />
-           </div>
+          <div className="bg-white border-2 border-black px-4 py-1 mb-2">
+            <span className="font-mono text-[10px] font-black uppercase tracking-tighter">Encrypted_Feed</span>
+          </div>
+          <motion.div 
+            style={{ width: useTransform(smoothProgress, [0, 1], ["0%", "100%"]) }} 
+            className="h-2 bg-black w-48"
+          />
         </div>
       </div>
 
-      {/* 2. THE HAZARD FORM */}
-      <section className="min-h-screen relative z-10 bg-[#ffde17] border-t-[30px] border-black py-40 px-6 mt-20">
-        <motion.div style={{ x: hazardY }} className="absolute -top-8 left-0 flex whitespace-nowrap opacity-20">
-           {[...Array(10)].map((_, i) => (
-             <span key={i} className="text-6xl italic mr-20">CAUTION // WARNING // ACCESS_RESTRICTED //</span>
-           ))}
+      {/* 2. KINETIC HEADER SECTION */}
+      <section className="h-[70vh] flex flex-col items-center justify-center relative border-b-[20px] border-white pt-20">
+        <motion.div 
+          style={{ x: archiveY }} 
+          className="absolute top-10 left-0 flex whitespace-nowrap opacity-5 pointer-events-none"
+        >
+          {[...Array(5)].map((_, i) => (
+            <span key={i} className="text-[15vh] font-black mr-20">INTEL_ARCHIVE // DATA_DUMP // INTEL_ARCHIVE //</span>
+          ))}
         </motion.div>
 
         <motion.div 
-          style={{ scale: formScale }}
-          className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-px bg-black border-[10px] border-black"
+          initial={{ y: 50, opacity: 0 }} 
+          whileInView={{ y: 0, opacity: 1 }}
+          className="z-10 text-center"
         >
-          <div className="bg-white p-10 md:p-20">
-             <h2 className="text-7xl italic leading-none mb-16 tracking-tighter uppercase">Initiate<br />Request.</h2>
-             <form className="space-y-12" onSubmit={(e) => e.preventDefault()}>
-                <HazardInput label="IDENTIFIER" placeholder="LEGAL_NAME" color="#e72132" />
-                <HazardInput label="COMM_LINK" placeholder="ENCRYPTED_EMAIL" color="#e72132" />
-                <div className="space-y-4">
-                   <label className="font-mono text-[10px] font-black uppercase tracking-widest text-black/40">Transmission_Payload</label>
-                   <textarea className="w-full bg-slate-50 border-4 border-black p-6 text-2xl italic uppercase h-48 outline-none focus:bg-[#ffde17] transition-colors" placeholder="BUSINESS_INTENT" />
-                </div>
-                <button className="w-full bg-[#e72132] text-white py-8 text-4xl italic uppercase flex items-center justify-center gap-6 group hover:bg-black transition-all">
-                   SEND PING <ArrowRight className="group-hover:translate-x-4 transition-transform" />
-                </button>
-             </form>
+          <div className="bg-black text-white inline-block px-4 py-1 mb-6">
+            <p className="font-mono text-[10px] tracking-widest uppercase">Ique Ventures Industrial Intelligence</p>
           </div>
-
-          <div className="bg-black text-[#ffde17] p-10 md:p-20 flex flex-col justify-between">
-             <div className="space-y-16">
-                <DetailRow icon={<MapPin />} label="Target_Node" val="Koramangala 2nd Block" />
-                <DetailRow icon={<Globe />} label="Grid" val="Bengaluru, KA" />
-                <DetailRow icon={<Mail />} label="Secure" val="BLR.HQ@IQUE.VENTURES" />
-             </div>
-             
-             <div className="mt-20 p-8 border-4 border-[#ffde17] border-dashed">
-                <div className="flex items-center gap-4 mb-4">
-                   <HardHat className="text-white" />
-                   <p className="text-2xl italic text-white uppercase leading-none">Vetting Active</p>
-                </div>
-                <p className="text-xs font-mono opacity-60 uppercase">Startup Park operational hours: 24/7 Monitoring active for verified startups.</p>
-             </div>
-          </div>
+          <h1 className="text-[12vw] font-black uppercase leading-[0.7] tracking-tighter">
+            Startup <br /> <span className="text-white drop-shadow-[4px_4px_0px_rgba(0,0,0,1)]">Intel.</span>
+          </h1>
         </motion.div>
       </section>
 
-      {/* 3. UPDATED MAP SECTION: STARTUP PARK BENGALURU */}
-      <section className="h-screen sticky top-0 flex items-center justify-center p-6 bg-white overflow-hidden">
-        <motion.div 
-          style={{ rotateX: mapRotate, scale: useTransform(smoothProgress, [0, 0.4], [1, 0.9]) }}
-          className="relative w-full max-w-7xl h-[70vh] border-[15px] border-black bg-black overflow-hidden group shadow-[40px_40px_0px_#e72132]"
-        >
-          {/* LIVE GOOGLE MAP EMBED */}
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.632296541671!2d77.6186411!3d12.9312891!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae150058b75701%3A0xd3b7950ec31e6322!2sStartup%20Park%20By%20Ique%20Ventures!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
-            className="absolute inset-0 w-full h-full grayscale contrast-[1.2] invert opacity-70"
-            style={{ border: 0 }} 
-            allowFullScreen="" 
-            loading="lazy" 
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-
-          {/* Hazard Overlays */}
-          <div className="absolute inset-0 pointer-events-none border-[20px] border-black/10" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#e7213210_1px,transparent_1px),linear-gradient(to_bottom,#e7213210_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none" />
-
-          {/* Location Details Block */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none">
-             <div className="w-12 h-12 bg-[#e72132] rounded-full animate-ping mb-4" />
-             <h3 className="text-4xl italic uppercase bg-[#ffde17] text-black px-8 py-4 border-4 border-black shadow-[10px_10px_0px_#000]">
-                Startup_Park
-             </h3>
+      {/* 3. THE REPORT GRID */}
+      <section className="py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-black border-[10px] border-black">
+            {blogPosts.map((post) => (
+              <ReportCard key={post.id} post={post} />
+            ))}
           </div>
-
-          <div className="absolute bottom-10 left-10 p-6 border-l-8 border-[#ffde17] bg-black text-white z-10">
-             <p className="font-mono text-[10px] opacity-50 mb-1">GEOGRAPHIC_INTEL</p>
-             <p className="text-2xl font-black italic uppercase">12.9313° N // 77.6186° E</p>
-             <p className="text-sm font-mono text-[#ffde17]">KORAMANGALA_BLR</p>
-          </div>
-        </motion.div>
+        </div>
       </section>
 
-      {/* 4. FOOTER */}
-      <footer className="h-screen bg-white flex flex-col items-center justify-center text-center px-6 border-t-[20px] border-[#e72132]">
-         <Zap size={80} className="text-[#ffde17] fill-black mb-10" />
-         <h2 className="text-[12vw] leading-[0.7] italic uppercase tracking-tighter mb-10 text-black">
-           NODE <br /> <span className="text-[#e72132]">LOCKED.</span>
-         </h2>
-         <p className="font-mono text-xs font-black uppercase tracking-[1em] text-black/20">Ique Ventures Industrial Division</p>
+      {/* 4. EMERGENCY SUBSCRIPTION */}
+      <section className="py-40 bg-black text-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-4 bg-[#ffde17] animate-pulse" />
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <AlertTriangle size={60} className="text-[#ffde17] mx-auto mb-10" />
+          <h2 className="text-6xl md:text-8xl font-black uppercase leading-none mb-10">
+            Secure the <br /> <span className="text-[#ffde17]">Full Feed.</span>
+          </h2>
+          <div className="flex flex-col md:flex-row border-[6px] border-white">
+            <input 
+              type="email" 
+              placeholder="OPERATOR_EMAIL_ADDRESS" 
+              className="bg-transparent flex-grow p-6 text-2xl font-bold uppercase focus:outline-none placeholder:opacity-20"
+            />
+            <button className="bg-[#ffde17] text-black px-12 py-6 text-2xl font-black uppercase hover:bg-white transition-colors">
+              Authorize
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. INDUSTRIAL FOOTER */}
+      <footer className="bg-[#ffde17] py-20 border-t-[10px] border-white flex flex-col items-center">
+        <HardHat size={40} className="mb-4" />
+        <p className="font-mono text-[10px] font-bold tracking-[0.5em] text-black/40">24/7 MONITORING ACTIVE</p>
       </footer>
     </div>
   );
 };
 
-// HELPER COMPONENTS
-const HazardInput = ({ label, placeholder }) => (
-  <div className="relative">
-    <label className="font-mono text-[10px] font-black uppercase tracking-widest text-black/40 mb-4 block">{label}</label>
-    <input 
-      type="text" 
-      placeholder={placeholder}
-      className="w-full bg-transparent border-b-8 border-black py-4 text-4xl italic uppercase outline-none focus:border-[#e72132] transition-colors placeholder:text-black/5"
-    />
-  </div>
+// --- SUB-COMPONENTS ---
+
+const ReportCard = ({ post }) => (
+  <motion.div 
+    whileHover={{ backgroundColor: '#ffde17' }}
+    className="bg-white p-8 border-[1px] border-black flex flex-col h-full group transition-colors duration-300"
+  >
+    <div className="flex justify-between items-start mb-12">
+      <div className="bg-black text-white px-3 py-1 font-mono text-[10px] font-bold">
+        {post.id}
+      </div>
+      <div className="flex items-center gap-2 opacity-30 group-hover:opacity-100 transition-opacity">
+        <Activity size={16} />
+        <span className="font-mono text-[10px] font-bold">{post.level}</span>
+      </div>
+    </div>
+
+    <p className="font-mono text-[10px] text-black/40 font-bold uppercase mb-4 tracking-widest flex items-center gap-2">
+      <div className="w-2 h-2 bg-black rounded-full" /> {post.category}
+    </p>
+    
+    <h3 className="text-4xl font-black uppercase leading-none tracking-tighter mb-6 group-hover:translate-x-2 transition-transform">
+      {post.title}
+    </h3>
+    
+    <p className="text-black/60 font-medium uppercase text-sm mb-12 leading-tight">
+      {post.excerpt}
+    </p>
+
+    <div className="mt-auto flex items-end justify-between pt-8 border-t-4 border-black border-dashed">
+      <div>
+        <p className="font-mono text-[9px] font-bold opacity-30 uppercase">Authorized_By</p>
+        <p className="text-lg font-black uppercase tracking-tighter">{post.author}</p>
+        <p className="font-mono text-[10px] font-bold text-[#ffde17] bg-black inline-block px-1 mt-1">{post.date}</p>
+      </div>
+      <button className="p-4 bg-black text-white group-hover:bg-white group-hover:text-black transition-colors">
+        <ArrowUpRight size={24} />
+      </button>
+    </div>
+  </motion.div>
 );
 
-const DetailRow = ({ icon, label, val }) => (
-  <div className="flex items-center gap-8 group">
-    <div className="p-4 bg-white text-black group-hover:bg-[#e72132] group-hover:text-white transition-colors flex items-center justify-center">
-      {React.cloneElement(icon, { size: 32 })}
-    </div>
-    <div>
-      <p className="font-mono text-[9px] uppercase tracking-widest opacity-40 mb-1">{label}</p>
-      <p className="text-3xl italic uppercase leading-none tracking-tighter">{val}</p>
-    </div>
-  </div>
-);
-
-export default IndustrialHazardPortal;
+export default IndustrialBlogArchive;

@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { Newspaper, ChevronDown, Landmark, TrendingUp, ShieldCheck, ArrowUpRight, Globe, Zap, Cpu } from 'lucide-react';
+import { Newspaper, ChevronDown, Activity, TrendingUp, Globe, Terminal, BarChart3, PieChart } from 'lucide-react';
 
-const NewspaperOpening = ({ onNavbarShow }) => {
+const KineticExecutiveApp = () => {
   const containerRef = useRef(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -21,224 +21,231 @@ const NewspaperOpening = ({ onNavbarShow }) => {
 
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 40, damping: 20 });
 
-  useEffect(() => {
-    const unsubscribe = smoothProgress.on('change', (v) => {
-      if (v >= 0.3 && onNavbarShow) onNavbarShow(true);
-      else if (v < 0.3 && onNavbarShow) onNavbarShow(false);
-    });
-    return () => unsubscribe();
-  }, [smoothProgress, onNavbarShow]);
-
-  // Timing
-  const leftFold = useTransform(smoothProgress, [0, 0.45], [0, -125]);
-  const rightFold = useTransform(smoothProgress, [0, 0.45], [0, 125]);
-  const contentScale = useTransform(smoothProgress, [0.25, 0.6], [0.75, 1]);
-  const contentOpacity = useTransform(smoothProgress, [0.35, 0.55], [0, 1]);
-
-  // Parallax Factors
-  const cardX = useTransform(mouseX, [-0.5, 0.5], [20, -20]);
-  const cardY = useTransform(mouseY, [-0.5, 0.5], [20, -20]);
+  const leftFold = useTransform(smoothProgress, [0, 0.15], [0, -135]);
+  const rightFold = useTransform(smoothProgress, [0, 0.15], [0, 135]);
+  const contentScale = useTransform(smoothProgress, [0.05, 0.2], [0.8, 1]);
+  const contentOpacity = useTransform(smoothProgress, [0.12, 0.2], [0, 1]);
 
   return (
-    <div onMouseMove={handleMouseMove} className="bg-[#080a0b] text-white selection:bg-[#a5cb3a] selection:text-black">
+    <div ref={containerRef} onMouseMove={handleMouseMove} className="bg-[#080a0b] text-white selection:bg-[#ef6925]">
       
-      <section ref={containerRef} className="h-[400vh] relative perspective-2000">
+      <section className="h-[280vh] relative perspective-3000">
         <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
           
-          {/* THE ENHANCED WHITE SECTION */}
           <motion.div 
-            style={{ 
-              scale: contentScale, 
-              opacity: contentOpacity, 
-              transformStyle: "preserve-3d"
-            }}
-            className="absolute inset-0 flex flex-col items-center justify-center px-6 bg-[#fcfcfc] overflow-hidden"
+            style={{ scale: contentScale, opacity: contentOpacity }}
+            className="absolute inset-0 flex flex-col items-center justify-center px-6 bg-[#fcfcfc] text-black"
           >
-            {/* Animated Gradient Background Blobs */}
-            <motion.div 
-              animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0], opacity: [0.1, 0.2, 0.1] }}
-              transition={{ duration: 10, repeat: Infinity }}
-              className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full blur-[120px] bg-gradient-to-br from-[#f79e27] to-[#ef6925]"
-            />
-            <motion.div 
-              animate={{ scale: [1, 1.3, 1], rotate: [0, -45, 0], opacity: [0.1, 0.15, 0.1] }}
-              transition={{ duration: 15, repeat: Infinity }}
-              className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] rounded-full blur-[150px] bg-gradient-to-tr from-[#a5cb3a] to-[#43646b]"
-            />
-
-            {/* Interactive Grid Lines */}
-            <svg className="absolute inset-0 w-full h-full opacity-[0.05] pointer-events-none">
-              <defs>
-                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="black" strokeWidth="0.5"/>
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-            </svg>
-
-            <div className="max-w-7xl w-full relative z-10">
-              {/* Top Bar */}
-              <div className="flex justify-between items-start mb-12 border-b-4 border-black pb-6">
-                <div>
-                  <motion.div 
-                    animate={{ backgroundColor: ["#e72132", "#f79e27", "#a5cb3a", "#e72132"] }}
-                    transition={{ duration: 5, repeat: Infinity }}
-                    className="h-2 w-32 mb-4"
-                  />
-                  <h4 className="font-mono text-[10px] font-black tracking-[0.5em] uppercase text-black">
-                    Institutional Alpha Stream // 2026.4
-                  </h4>
-                </div>
-                <div className="text-right font-mono text-[10px] text-slate-400">
-                  <p>LATENCY: 0.002ms</p>
-                  <p className="text-[#a5cb3a] font-bold">ENCRYPTION: AES-512</p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-                <div className="lg:col-span-6">
-                  <motion.h2 
-                    className="text-7xl md:text-[120px] font-black italic uppercase leading-[0.75] tracking-tighter"
-                  >
-                    <span className="text-black">Pure</span><br /> 
-                    <motion.span 
-                      animate={{ color: ["#e72132", "#ef6925", "#f79e27", "#e72132"] }}
-                      transition={{ duration: 8, repeat: Infinity }}
-                    >
-                      Monetary
-                    </motion.span><br /> 
-                    <span className="text-[#43646b]">Clarity.</span>
-                  </motion.h2>
-                  
-                  {/* Executive Features */}
-                  <div className="mt-12 flex gap-6">
-                    <FeatureIcon icon={<Globe className="text-[#43646b]" />} label="Global Basis" />
-                    <FeatureIcon icon={<Zap className="text-[#f79e27]" />} label="High Frequency" />
-                    <FeatureIcon icon={<Cpu className="text-[#a5cb3a]" />} label="AI Governance" />
-                  </div>
-                </div>
-
-                {/* 3D Interactive Dashboard Area */}
-                <div className="lg:col-span-6 flex flex-col gap-6">
-                  <motion.div style={{ x: cardX, y: cardY }} className="grid grid-cols-2 gap-4">
-                     <QuickStat label="NET WORTH ALPHA" value="+18.4%" trend="up" />
-                     <QuickStat label="LIQUIDITY RATIO" value="0.94" trend="stable" />
-                  </motion.div>
-                  
-                  <InteractiveCard 
-                    icon={<Landmark size={28} className="text-[#a5cb3a]" />} 
-                    title="Asset Velocity" 
-                    desc="Real-time capital re-allocation engine."
-                    mouseX={mouseX} mouseY={mouseY}
-                  />
-                  <InteractiveCard 
-                    icon={<TrendingUp size={28} className="text-[#f79e27]" />} 
-                    title="Market Yield" 
-                    desc="Current optimized return: 9.42% APY."
-                    mouseX={mouseX} mouseY={mouseY}
-                    highlight
-                  />
-                </div>
-              </div>
+            <div className="max-w-7xl w-full">
+               <h2 className="text-[10vw] font-black italic uppercase leading-[0.75] tracking-tighter text-center">
+                Pure <br /> <span className="text-[#ef6925]">Monetary</span> <br /> Clarity.
+              </h2>
             </div>
           </motion.div>
 
-          {/* NEWSPAPER FOLDS (STAY SAME) */}
           <div className="relative w-full h-full flex z-20 pointer-events-none">
-            <motion.div style={{ rotateY: leftFold, originX: 0 }} className="w-1/2 h-full bg-[#111] border-r border-white/10 flex items-center justify-end pr-12 relative shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent" />
-              <h1 className="text-[15vw] font-black text-white/5 uppercase select-none leading-none">THE</h1>
+            
+            {/* LEFT PAGE: WORLD NEWS & HEADLINES */}
+            <motion.div 
+              style={{ rotateY: leftFold, originX: 0 }} 
+              className="w-1/2 h-full bg-[#e8e4d9] border-r-2 border-black/30 flex relative shadow-2xl overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-30" />
+              
+              <div className="relative w-full p-6 md:p-8 text-black flex flex-col">
+                <div className="border-b-[3px] border-black pb-1 mb-3">
+                  <div className="flex justify-between text-[7px] font-serif font-black uppercase mb-1 tracking-tighter">
+                    <span>Vol. XCII...No. 402</span>
+                    <span>Monday, January 27, 2026</span>
+                    <span>City Edition</span>
+                    <span>₹15.00</span>
+                  </div>
+                  <h1 className="font-serif text-6xl font-black tracking-tighter uppercase italic text-center border-y-4 border-double border-black py-1">
+                    The Founder's Gazette
+                  </h1>
+                </div>
+
+                <div className="flex-1 grid grid-cols-12 gap-3 overflow-hidden">
+                  <div className="col-span-3 border-r border-black/20 pr-2 text-[8px] font-serif">
+                    <div className="bg-black text-white p-1 text-center font-bold mb-2 uppercase tracking-tighter text-[9px]">Market Pulse</div>
+                    {['SENSEX: +1.42%', 'NIFTY: +0.94%', 'USD/INR: 83.10', 'GOLD: 72,400', 'OIL: -2.15%'].map(t => (
+                      <div key={t} className="border-b border-black/10 py-1 font-mono text-[7px]">{t}</div>
+                    ))}
+                    <h3 className="font-black mt-4 mb-1 border-b border-black text-[9px]">WORLD IN BRIEF</h3>
+                    <p className="mb-2 leading-tight text-justify font-bold italic">LONDON: Fintech merger blocked.</p>
+                    <p className="mb-2 leading-tight text-justify">TOKYO: Nikkei reaches 35-year high.</p>
+                    
+                    <div className="mt-auto pt-2 border-t border-black">
+                       <h4 className="font-black text-[8px] uppercase mb-1">Weather</h4>
+                       <p className="text-[7px]">BLR: 28°C / SFO: 14°C</p>
+                    </div>
+                  </div>
+
+                  <div className="col-span-9 flex flex-col">
+                    <h2 className="font-serif text-4xl font-black leading-[0.85] uppercase mb-2">Capital Velocity Surges as Founders Bypass Legacy Debt</h2>
+                    <div className="grid grid-cols-2 gap-3 flex-1 overflow-hidden">
+                      <div className="flex flex-col">
+                        <p className="font-serif text-[10px] leading-tight text-justify first-letter:text-4xl first-letter:font-black first-letter:mr-1 first-letter:float-left mb-2">
+                          The institutional landscape shifted violently this morning as the Ique Protocol went live. Over $4.2B in liquidity was re-routed through kinetic channels.
+                        </p>
+                        <div className="border-t-2 border-black pt-2">
+                           <h4 className="font-serif font-black text-xs uppercase mb-1">Energy Stocks Tumble</h4>
+                           <p className="font-serif text-[9px] leading-tight text-justify">Fusion breakthroughs in the global south have left traditional energy markets in flux.</p>
+                        </div>
+                        <div className="mt-auto border-t-4 border-double border-black pt-2">
+                           <h4 className="font-serif font-black text-sm italic uppercase mb-1">Opinion: The Algorithmic CEO</h4>
+                           <p className="font-serif text-[8px] leading-tight text-justify italic">"The transition to mechanical governance is nearing completion."</p>
+                        </div>
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <div className="border border-black p-1 bg-white">
+                          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=600&auto=format&fit=crop" className="grayscale contrast-125 mix-blend-multiply h-28 w-full object-cover" />
+                        </div>
+                        <div className="border border-black p-1 bg-white/40 grid grid-cols-8 h-20">
+                           {Array.from({length: 64}).map((_, i) => (
+                               <div key={i} className={`border-[0.5px] border-black/20 ${[2, 10, 45, 60].includes(i) ? 'bg-black' : ''}`} />
+                           ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
-            <motion.div style={{ rotateY: rightFold, originX: 1 }} className="w-1/2 h-full bg-[#111] border-l border-white/10 flex items-center justify-start pl-12 relative shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent" />
-              <h1 className="text-[15vw] font-black text-white/5 uppercase select-none leading-none">NEW.</h1>
-            </motion.div>
-            <motion.div style={{ opacity: useTransform(smoothProgress, [0, 0.15], [1, 0]) }} className="absolute inset-0 flex flex-col items-center justify-center pointer-events-auto">
-               <Newspaper size={48} className="mb-4 text-[#ef6925]" />
-               <p className="font-mono text-xs uppercase tracking-[0.6em]">Scroll to Unfold</p>
-               <ChevronDown className="mt-4 animate-bounce" />
+            
+            {/* RIGHT PAGE: BUSINESS & CLASSIFIEDS */}
+            <motion.div 
+              style={{ rotateY: rightFold, originX: 1 }} 
+              className="w-1/2 h-full bg-[#e8e4d9] border-l-2 border-black/30 flex relative shadow-2xl overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-30" />
+              
+              <div className="relative w-full p-6 md:p-8 text-black flex flex-col">
+                <div className="border-b-2 border-black flex justify-between items-end mb-3 pb-1">
+                  <h3 className="font-serif font-black text-xl uppercase italic">Business & Innovation</h3>
+                  <span className="font-serif text-[9px] font-black tracking-tighter uppercase">SECTION B // PAGE 12</span>
+                </div>
+
+                <div className="flex-1 grid grid-cols-12 gap-3 overflow-hidden">
+                  <div className="col-span-8 flex flex-col">
+                    <div className="columns-2 gap-3 border-b border-black/20 pb-3 mb-3">
+                       <h4 className="font-serif font-black text-xs uppercase leading-none mb-1">Death of the Term Sheet</h4>
+                       <p className="font-serif text-[8px] leading-tight text-justify">Automated smart contracts now handle 40% of seed deployments.</p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 mb-3">
+                       <div className="border border-black p-2 bg-white/60">
+                          <h5 className="font-serif font-black text-[9px] uppercase mb-1 underline">Innovation Hub</h5>
+                          <ul className="font-serif text-[7px] space-y-1 font-bold">
+                             <li>• AI Ethics: Final Ruling</li>
+                             <li>• Biotech Cluster: Pune</li>
+                          </ul>
+                       </div>
+                       <div className="bg-black text-white p-2 text-center flex flex-col justify-center">
+                          <p className="font-serif font-black text-sm italic uppercase leading-none tracking-tighter">"Precision over Luck."</p>
+                       </div>
+                    </div>
+
+                    <div className="flex-1 border-t border-black pt-2 flex flex-col overflow-hidden">
+                       <h4 className="font-serif font-black text-[10px] uppercase mb-1 border-b border-black pb-1">Founder's Digest</h4>
+                       <div className="grid grid-cols-3 gap-2 mb-2">
+                          {[{l: 'Yield', v: '12.4%'},{l: 'Lag', v: '0.00ms'},{l: 'Nodes', v: '890+'}].map(x => (
+                             <div key={x.l} className="border border-black p-1 text-center bg-white/30">
+                                <p className="font-mono text-[8px] font-black">{x.v}</p>
+                                <p className="text-[5px] uppercase font-bold">{x.l}</p>
+                             </div>
+                          ))}
+                       </div>
+                       
+                       <div className="mb-2">
+                          <h4 className="font-serif font-black text-[9px] uppercase mb-1">Corporate Ledger</h4>
+                          <div className="text-[7px] font-mono leading-[1.1] opacity-80">
+                             <p>• DIVIDEND: 4.2% PER UNIT.</p>
+                             <p>• ACQ: NODE-7 COMPLETE.</p>
+                          </div>
+                       </div>
+
+                       {/* SUDOKU SECTION - FILLING THE REMAINING SPACE */}
+                       <div className="mt-auto border-t-2 border-black pt-2 pb-1 bg-black/5 p-2">
+                          <div className="flex justify-between items-center mb-1">
+                             <h4 className="font-serif font-black text-[10px] uppercase italic">Executive Sudoku</h4>
+                             <span className="text-[6px] font-black uppercase tracking-tighter">Difficulty: Pro</span>
+                          </div>
+                          <div className="grid grid-cols-9 border-2 border-black bg-white w-full max-w-[180px] mx-auto">
+                            {Array.from({length: 81}).map((_, i) => {
+                                const row = Math.floor(i / 9);
+                                const col = i % 9;
+                                const isThickRight = (col + 1) % 3 === 0 && col !== 8;
+                                const isThickBottom = (row + 1) % 3 === 0 && row !== 8;
+                                const fixedNumbers = { 2: '5', 13: '1', 25: '9', 30: '4', 40: '2', 55: '7', 72: '8', 80: '3' };
+                                return (
+                                  <div key={i} className={`
+                                    h-4 md:h-5 flex items-center justify-center text-[8px] font-mono font-bold border-[0.5px] border-black/30
+                                    ${isThickRight ? 'border-r-2 border-r-black' : ''}
+                                    ${isThickBottom ? 'border-b-2 border-b-black' : ''}
+                                  `}>
+                                    {fixedNumbers[i] || ''}
+                                  </div>
+                                );
+                            })}
+                          </div>
+                          <p className="text-[5px] mt-1 italic text-center leading-none">Fill the grid so every row, column, and 3x3 box contains digits 1-9.</p>
+                       </div>
+                    </div>
+                  </div>
+
+                  <div className="col-span-4 border-l border-black/20 pl-3 flex flex-col overflow-hidden">
+                    <div className="bg-black text-white p-1 text-center font-bold text-[8px] uppercase mb-2">Classifieds</div>
+                    <div className="text-[7px] font-serif space-y-1 italic border-b border-black pb-2 mb-2">
+                       <p><strong>WANTED:</strong> Prompt Eng. 400LPA.</p>
+                       <p><strong>SALE:</strong> Bank Building. BLR.</p>
+                    </div>
+
+                    <div className="border-4 border-double border-black p-2 text-center bg-gray-50 flex-grow flex flex-col items-center justify-center mb-2">
+                       <h3 className="font-serif font-black text-lg italic uppercase leading-none">IQUE <br/> KINETIC</h3>
+                       <div className="mt-2 border border-black px-2 py-1 text-[7px] font-black uppercase bg-black text-white">Join</div>
+                    </div>
+
+                    <div className="border border-black p-1 bg-white text-center mt-auto">
+                        <p className="text-[6px] font-black uppercase">Verify ID</p>
+                        <div className="mt-1 h-3 bg-gray-200 flex items-center justify-center font-mono text-[7px]">****</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-auto border-t-2 border-black pt-1 flex justify-between text-[7px] font-black font-serif uppercase tracking-widest">
+                  <span>Bengaluru</span>
+                  <div className="flex gap-3">
+                     <span>Markets</span><span>Tech</span><span>Op-Ed</span>
+                  </div>
+                  <span>© 2026</span>
+                </div>
+              </div>
             </motion.div>
           </div>
+
+          <motion.div 
+            style={{ opacity: useTransform(smoothProgress, [0, 0.05], [1, 0]) }} 
+            className="absolute inset-0 flex flex-col items-center justify-center z-50 pointer-events-none"
+          >
+             <div className="bg-black text-white p-6 flex flex-col items-center border-2 border-white">
+                <Newspaper size={48} className="mb-4 text-[#ef6925]" />
+                <p className="font-mono text-xs uppercase tracking-[0.6em]">Scroll to Unfold</p>
+                <ChevronDown className="mt-4 animate-bounce" />
+             </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* REMAINDER OF SECTIONS (STAY SAME) */}
-      <section className="py-40 bg-[#ef6925] text-black">
-        <div className="max-w-5xl mx-auto px-6">
-          <h3 className="text-5xl md:text-8xl font-black italic uppercase leading-[0.9]">It’s not just a dashboard. It’s an engine.</h3>
-          <p className="mt-12 text-2xl font-bold max-w-xl opacity-80 leading-snug">Most apps show you numbers. We show you the logic behind the wealth.</p>
-        </div>
-      </section>
-
-      <section className="py-40 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border border-white/10">
-          <DetailTile title="01 / HYPER-SYNC" desc="Real-time fetching of all linked bank accounts and credit lines." />
-          <DetailTile title="02 / ANOMALY DETECTOR" desc="Instant alerts for hidden charges or unexpected surges." />
-          <DetailTile title="03 / LIQUID GOLD" desc="Physical gold backed by digital security, delivered in 24 hours." />
-          <DetailTile title="04 / TAX OPTIMIZER" desc="Automated harvest of tax-saving opportunities across portfolios." />
+      <section className="py-40 bg-[#fcfcfc] text-black border-t-[16px] border-black">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-8xl md:text-[10vw] font-black italic uppercase leading-[0.8] tracking-tighter">
+            Pure <br /> <span className="text-[#ef6925]">Monetary</span> <br /> Clarity.
+          </h2>
         </div>
       </section>
     </div>
   );
 };
 
-// --- NEW SUB-COMPONENTS FOR THE WHITE SECTION ---
-
-const FeatureIcon = ({ icon, label }) => (
-  <div className="flex items-center gap-2 group cursor-help">
-    <div className="p-2 rounded bg-white shadow-sm border border-slate-100 group-hover:scale-110 transition-transform">
-      {icon}
-    </div>
-    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">{label}</span>
-  </div>
-);
-
-const QuickStat = ({ label, value, trend }) => (
-  <div className="bg-white p-4 border border-slate-100 shadow-sm rounded-lg">
-    <p className="text-[9px] font-bold text-slate-400 mb-1">{label}</p>
-    <div className="flex items-end gap-2">
-      <span className="text-xl font-black italic text-black">{value}</span>
-      <span className={`text-[10px] font-bold ${trend === 'up' ? 'text-green-500' : 'text-slate-400'}`}>
-        {trend === 'up' ? '▲' : '●'}
-      </span>
-    </div>
-  </div>
-);
-
-const InteractiveCard = ({ icon, title, desc, mouseX, mouseY, highlight }) => {
-  const x = useTransform(mouseX, [-0.5, 0.5], [15, -15]);
-  const y = useTransform(mouseY, [-0.5, 0.5], [15, -15]);
-
-  return (
-    <motion.div
-      style={{ x, y, transformStyle: "preserve-3d" }}
-      whileHover={{ scale: 1.02, x: 0, y: 0 }}
-      className={`p-8 rounded-2xl border flex flex-col gap-4 relative overflow-hidden transition-all duration-500 ${
-        highlight 
-          ? 'bg-black text-white shadow-2xl' 
-          : 'bg-white text-black shadow-xl border-slate-100'
-      }`}
-    >
-      <div className="flex justify-between items-start">
-        <div className="p-3 bg-slate-50 rounded-lg text-black">{icon}</div>
-        <ArrowUpRight size={20} className={highlight ? "text-[#f79e27]" : "text-slate-300"} />
-      </div>
-      <div>
-        <h3 className="text-2xl font-black italic uppercase tracking-tighter">{title}</h3>
-        <p className={`text-sm mt-1 font-medium ${highlight ? 'text-slate-400' : 'text-slate-500'}`}>{desc}</p>
-      </div>
-      {/* Decorative Shine */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-    </motion.div>
-  );
-};
-
-const DetailTile = ({ title, desc }) => (
-  <div className="bg-[#080a0b] p-16 hover:bg-[#111] transition-colors group">
-    <h4 className="text-[#e72132] font-mono text-xs uppercase tracking-widest mb-6">{title}</h4>
-    <p className="text-3xl font-bold mb-4 uppercase italic leading-none">{desc.split(' ')[0]} {desc.split(' ')[1]}</p>
-    <p className="text-slate-500 max-w-xs">{desc}</p>
-  </div>
-);
-
-export default NewspaperOpening;
+export default KineticExecutiveApp;
