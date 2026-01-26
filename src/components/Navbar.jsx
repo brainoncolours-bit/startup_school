@@ -1,70 +1,113 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion, useScroll, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
+import { Command, Zap, Layers, Sparkles, Navigation, ChevronRight } from 'lucide-react';
 
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const Navbar = ({ show = true }) => {
+  const [hoveredPath, setHoveredPath] = useState(null);
   const location = useLocation();
+  const { scrollY } = useScroll();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  // Dynamic scaling based on scroll
+  const navWidth = useTransform(scrollY, [0, 100], ["100%", "90%"]);
+  const navPadding = useTransform(scrollY, [0, 100], ["12px 24px", "8px 16px"]);
 
-  const isActive = (path) => {
-    return location.pathname === path;
-  };
+  const navLinks = [
+    { name: 'Studio', path: '/', icon: <Command size={16} /> },
+    { name: 'Projects', path: '/projects', icon: <Layers size={16} /> },
+    { name: 'Insights', path: '/blog', icon: <Zap size={16} /> },
+    { name: 'Contact', path: '/contact', icon: <Navigation size={16} /> },
+  ];
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50 w-full">
-      <div className="max-w-7xl mx-auto px-5 flex justify-between items-center h-[70px]">
-        <Link to="/" className="text-2xl font-bold text-indigo-600 flex items-center transition-colors hover:text-indigo-700">
-          🚀 Startup School
+    <AnimatePresence>
+      {show && (
+        <motion.div 
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -100, opacity: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="fixed top-0 inset-x-0 z-[100] flex justify-center p-6 pointer-events-none"
+        >
+          <motion.nav
+            style={{ width: navWidth, padding: navPadding }}
+            className="pointer-events-auto flex items-center justify-between bg-white/40 backdrop-blur-2xl border border-white/30 shadow-[0_15px_35px_rgba(0,0,0,0.05)] rounded-[2rem] max-w-6xl transition-all duration-500 overflow-hidden"
+          >
+        {/* Animated Brand Logo */}
+        <Link to="/" className="flex items-center gap-2 group">
+          <motion.div 
+            whileHover={{ rotateY: 180 }}
+            transition={{ duration: 0.6 }}
+            className="w-10 h-10 bg-black rounded-2xl flex items-center justify-center text-white"
+          >
+            <Sparkles size={20} fill="currentColor" />
+          </motion.div>
+          <span className="font-black tracking-tighter text-xl text-black uppercase">Edge.</span>
         </Link>
 
-        <div className={`${isMenuOpen ? 'left-0' : '-left-full'} md:flex md:static md:flex-row md:gap-2.5 fixed left-[-100%] top-[70px] flex-col bg-white w-full text-center transition-all duration-300 shadow-lg md:shadow-none py-5 md:py-0 items-center`}>
-          <Link 
-            to="/" 
-            className={`${isActive('/') ? 'text-indigo-600 bg-indigo-50' : 'text-gray-800'} no-underline px-5 py-2.5 rounded-md font-medium transition-all hover:text-indigo-600 hover:bg-gray-100 w-full md:w-auto md:py-2.5`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Home
-          </Link>
-          <Link 
-            to="/about" 
-            className={`${isActive('/about') ? 'text-indigo-600 bg-indigo-50' : 'text-gray-800'} no-underline px-5 py-2.5 rounded-md font-medium transition-all hover:text-indigo-600 hover:bg-gray-100 w-full md:w-auto md:py-2.5`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            About
-          </Link>
-          <Link 
-            to="/courses" 
-            className={`${isActive('/courses') ? 'text-indigo-600 bg-indigo-50' : 'text-gray-800'} no-underline px-5 py-2.5 rounded-md font-medium transition-all hover:text-indigo-600 hover:bg-gray-100 w-full md:w-auto md:py-2.5`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Courses
-          </Link>
-          <Link 
-            to="/blog" 
-            className={`${isActive('/blog') ? 'text-indigo-600 bg-indigo-50' : 'text-gray-800'} no-underline px-5 py-2.5 rounded-md font-medium transition-all hover:text-indigo-600 hover:bg-gray-100 w-full md:w-auto md:py-2.5`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Blog
-          </Link>
-          <Link 
-            to="/contact" 
-            className={`${isActive('/contact') ? 'text-indigo-600 bg-indigo-50' : 'text-gray-800'} no-underline px-5 py-2.5 rounded-md font-medium transition-all hover:text-indigo-600 hover:bg-gray-100 w-full md:w-auto md:py-2.5`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Contact
-          </Link>
+        {/* Floating Link Pills */}
+        <div className="hidden md:flex items-center bg-gray-200/50 p-1.5 rounded-full relative">
+          {navLinks.map((link) => {
+            const isActive = location.pathname === link.path;
+            return (
+              <Link
+                key={link.path}
+                to={link.path}
+                onMouseEnter={() => setHoveredPath(link.path)}
+                onMouseLeave={() => setHoveredPath(null)}
+                className="relative px-6 py-2.5 flex items-center gap-2 text-sm font-bold transition-all z-10"
+              >
+                <span className={`flex items-center gap-2 transition-colors duration-300 ${
+                  isActive || hoveredPath === link.path ? 'text-black' : 'text-gray-500'
+                }`}>
+                  {link.icon}
+                  {link.name}
+                </span>
+
+                {/* The "Sliding Liquid" Highlighter */}
+                {hoveredPath === link.path && (
+                  <motion.div
+                    layoutId="nav-pill"
+                    className="absolute inset-0 bg-white shadow-sm rounded-full -z-10"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+                )}
+
+                {/* Active Indicator Dot */}
+                {isActive && (
+                  <motion.div 
+                    layoutId="active-dot"
+                    className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-black rounded-full"
+                  />
+                )}
+              </Link>
+            );
+          })}
         </div>
 
-        <div className="md:hidden flex flex-col cursor-pointer gap-1.5" onClick={toggleMenu}>
-          <span className="w-6 h-0.5 bg-gray-800 transition-all rounded"></span>
-          <span className="w-6 h-0.5 bg-gray-800 transition-all rounded"></span>
-          <span className="w-6 h-0.5 bg-gray-800 transition-all rounded"></span>
-        </div>
-      </div>
-    </nav>
+        {/* 3D Interactive Action Button */}
+        <motion.button
+          whileHover={{ 
+            scale: 1.02, 
+            rotateX: 10, 
+            rotateY: -10,
+            boxShadow: "0 20px 40px rgba(0,0,0,0.1)" 
+          }}
+          style={{ perspective: 1000 }}
+          className="bg-black text-white px-6 py-3 rounded-2xl font-bold text-sm flex items-center gap-2 group"
+        >
+          Get Started
+          <motion.span
+            animate={{ x: [0, 5, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+          >
+            <ChevronRight size={18} />
+          </motion.span>
+        </motion.button>
+      </motion.nav>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
