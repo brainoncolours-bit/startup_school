@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { Newspaper, ChevronDown, Activity, TrendingUp, Globe, Terminal, BarChart3, PieChart } from 'lucide-react';
+import { Newspaper, ChevronDown, Activity, TrendingUp, Globe, Terminal, BarChart3, PieChart, Zap, ShieldCheck, Cpu, ArrowRight, CheckCircle, Users } from 'lucide-react';
 
-const KineticExecutiveApp = () => {
+const KineticExecutiveApp = ({ onNavbarShow }) => {
   const containerRef = useRef(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -20,6 +20,15 @@ const KineticExecutiveApp = () => {
   });
 
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 40, damping: 20 });
+
+  // Show navbar after newspaper unfolds
+  useEffect(() => {
+    const unsubscribe = smoothProgress.on('change', (v) => {
+      if (v >= 0.2 && onNavbarShow) onNavbarShow(true);
+      else if (v < 0.2 && onNavbarShow) onNavbarShow(false);
+    });
+    return () => unsubscribe();
+  }, [smoothProgress, onNavbarShow]);
 
   const leftFold = useTransform(smoothProgress, [0, 0.15], [0, -135]);
   const rightFold = useTransform(smoothProgress, [0, 0.15], [0, 135]);
@@ -244,8 +253,182 @@ const KineticExecutiveApp = () => {
           </h2>
         </div>
       </section>
+
+      {/* SECTION 2: POWER GRID - FEATURES */}
+      <section className="py-40 bg-black text-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-end mb-32">
+            <h2 className="text-8xl md:text-[10vw] font-black italic uppercase leading-[0.8] tracking-tighter">
+              Build <br /> <span className="text-[#ef6925]">Wealth</span> <br /> Faster.
+            </h2>
+            <div className="border-l-8 border-[#ef6925] pl-8">
+              <p className="text-2xl font-bold leading-tight uppercase">High-frequency capital management for elite founders and institutional players.</p>
+              <button className="mt-8 bg-[#ef6925] text-black px-10 py-5 font-black uppercase italic hover:bg-white transition-all shadow-[10px_10px_0px_#fff]">
+                Initialize Protocol <ArrowRight className="inline ml-2" />
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#ef6925] border-4 border-[#ef6925]">
+            <FeatureTile icon={<Zap />} title="Hyper-Sync" desc="Real-time connection to global banking nodes and liquidity pools." />
+            <FeatureTile icon={<TrendingUp />} title="Alpha Yield" desc="Optimized return strategies achieving 12.4% annually on average." />
+            <FeatureTile icon={<ShieldCheck />} title="Tax Shield" desc="Automated tax-loss harvesting and compliance protection systems." />
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3: INDUSTRIAL DASHBOARD */}
+      <section className="py-40 bg-[#fcfcfc] text-black border-t-[16px] border-[#ef6925]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex justify-between items-end mb-24 border-b-4 border-black pb-10">
+            <h2 className="text-7xl font-black italic uppercase tracking-tighter">Command <span className="text-[#ef6925]">Center</span></h2>
+            <Terminal className="opacity-20" size={64} />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="border-4 border-black p-12 bg-white">
+              <Cpu className="mb-6 text-[#ef6925]" size={48} />
+              <h3 className="text-4xl font-black italic uppercase mb-4 tracking-tighter">Autonomous Operations</h3>
+              <p className="text-lg leading-relaxed mb-6">
+                Our AI-driven financial engine monitors 890+ data points simultaneously, executing microsecond-level decisions across global markets.
+              </p>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="text-[#ef6925] flex-shrink-0 mt-1" size={20} />
+                  <span className="font-bold">24/7 market surveillance and anomaly detection</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="text-[#ef6925] flex-shrink-0 mt-1" size={20} />
+                  <span className="font-bold">Automated rebalancing and risk mitigation</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="text-[#ef6925] flex-shrink-0 mt-1" size={20} />
+                  <span className="font-bold">Predictive analytics for market movements</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="border-4 border-black p-12 bg-black text-white">
+              <Activity className="mb-6 text-[#ef6925]" size={48} />
+              <h3 className="text-4xl font-black italic uppercase mb-4 tracking-tighter">Live Intelligence</h3>
+              <div className="space-y-6">
+                <div className="border-b border-white/20 pb-4">
+                  <div className="flex justify-between items-end mb-2">
+                    <span className="text-sm font-mono uppercase tracking-widest opacity-60">Capital Velocity</span>
+                    <span className="text-3xl font-black text-[#ef6925]">+47.2%</span>
+                  </div>
+                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div className="h-full w-[47%] bg-[#ef6925]" />
+                  </div>
+                </div>
+                <div className="border-b border-white/20 pb-4">
+                  <div className="flex justify-between items-end mb-2">
+                    <span className="text-sm font-mono uppercase tracking-widest opacity-60">Network Latency</span>
+                    <span className="text-3xl font-black text-[#ef6925]">0.002ms</span>
+                  </div>
+                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div className="h-full w-[98%] bg-[#ef6925]" />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex justify-between items-end mb-2">
+                    <span className="text-sm font-mono uppercase tracking-widest opacity-60">Risk Exposure</span>
+                    <span className="text-3xl font-black text-green-400">0.12%</span>
+                  </div>
+                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div className="h-full w-[12%] bg-green-400" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4: TESTIMONIALS / SOCIAL PROOF */}
+      <section className="py-40 bg-black text-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-7xl font-black italic uppercase tracking-tighter text-center mb-20">
+            Trusted by <span className="text-[#ef6925]">Builders</span>
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <TestimonialCard 
+              name="Priya Sharma"
+              role="Founder, FinTech Unicorn"
+              quote="The platform's AI-driven insights helped us optimize our burn rate and extend our runway by 18 months. Game-changing."
+            />
+            <TestimonialCard 
+              name="Vikram Reddy"
+              role="CEO, B2B SaaS"
+              quote="We went from manual spreadsheets to automated financial intelligence. The ROI was immediate and measurable."
+            />
+            <TestimonialCard 
+              name="Anjali Mehta"
+              role="Managing Partner, VC Fund"
+              quote="Every portfolio company now uses this. The transparency and real-time data flow is unprecedented in our industry."
+            />
+          </div>
+
+          <div className="mt-32 border-t border-white/10 pt-16 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+            <div>
+              <div className="text-6xl font-black text-[#ef6925] mb-2">890+</div>
+              <div className="text-sm font-mono uppercase tracking-widest opacity-60">Active Nodes</div>
+            </div>
+            <div>
+              <div className="text-6xl font-black text-[#ef6925] mb-2">$4.2B</div>
+              <div className="text-sm font-mono uppercase tracking-widest opacity-60">Assets Managed</div>
+            </div>
+            <div>
+              <div className="text-6xl font-black text-[#ef6925] mb-2">0.002ms</div>
+              <div className="text-sm font-mono uppercase tracking-widest opacity-60">Avg Latency</div>
+            </div>
+            <div>
+              <div className="text-6xl font-black text-[#ef6925] mb-2">247</div>
+              <div className="text-sm font-mono uppercase tracking-widest opacity-60">Startups Funded</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER SECTION */}
+      <footer className="py-60 bg-[#ef6925] text-black text-center">
+         <h2 className="text-8xl md:text-[12vw] font-black uppercase italic leading-[0.7] mb-12">
+           Access <br /> <span className="text-white">Granted.</span>
+         </h2>
+         <p className="font-mono text-xs font-bold uppercase tracking-[1em] opacity-40">Ique Ventures Kinetic Division</p>
+      </footer>
     </div>
   );
 };
+
+// --- HELPER COMPONENTS ---
+
+const FeatureTile = ({ icon, title, desc }) => (
+  <motion.div 
+    whileHover={{ backgroundColor: '#ffffff' }}
+    className="bg-black p-12 transition-colors cursor-pointer group h-full"
+  >
+    <div className="mb-8 group-hover:scale-110 transition-transform text-[#ef6925]">{React.cloneElement(icon, { size: 40 })}</div>
+    <h3 className="text-3xl font-black italic uppercase mb-2 tracking-tighter text-white group-hover:text-black">{title}</h3>
+    <p className="font-bold opacity-60 uppercase text-xs text-white group-hover:text-black">{desc}</p>
+  </motion.div>
+);
+
+const TestimonialCard = ({ name, role, quote }) => (
+  <motion.div 
+    whileHover={{ y: -10 }}
+    className="border-2 border-white/10 p-8 hover:border-[#ef6925] transition-all group cursor-pointer bg-[#0c0e10]"
+  >
+    <div className="mb-6">
+      <Users className="text-[#ef6925]" size={32} />
+    </div>
+    <p className="text-lg italic mb-6 leading-relaxed">"{quote}"</p>
+    <div className="border-t border-white/10 pt-4">
+      <p className="font-black text-xl">{name}</p>
+      <p className="text-sm opacity-60 font-mono uppercase tracking-wide">{role}</p>
+    </div>
+  </motion.div>
+);
 
 export default KineticExecutiveApp;
