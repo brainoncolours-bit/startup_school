@@ -17,31 +17,39 @@ const VibrantExecutiveAbout = () => {
   const rotateHero = useTransform(smoothScroll, [0, 0.2], [0, -5]);
 
   return (
-    <div ref={containerRef} className="bg-[#fcfcfc] text-black selection:bg-[#a5cb3a] selection:text-black overflow-x-hidden">
+    <div ref={containerRef} className="bg-[#f2e8d5] text-black selection:bg-[#ef6925] selection:text-white overflow-x-hidden">
       
-      {/* 1. THE VIBRANT IMPACT HERO */}
-      <section className="h-screen relative flex items-center justify-center overflow-hidden border-b-[12px] border-black">
-        {/* Animated Background Energy */}
-        <motion.div style={{ y: limeBlobY }} className="absolute -top-20 -left-20 w-[600px] h-[600px] bg-[#a5cb3a] rounded-full blur-[140px] opacity-40" />
-        <motion.div style={{ y: redBlobY }} className="absolute -bottom-20 -right-20 w-[600px] h-[600px] bg-[#e72132] rounded-full blur-[140px] opacity-30" />
+      {/* 1. THE VINTAGE NEWSPAPER HERO */}
+      <section className="h-screen relative flex items-center justify-center overflow-hidden border-b-4 border-black bg-[#f2e8d5]">
+        {/* Vintage Paper Texture (Center Spread Vibe) */}
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-60 mix-blend-multiply pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(160,82,45,0.08)_100%)] pointer-events-none mix-blend-multiply" />
+        <div className="absolute inset-0 bg-[#f2e8d5] opacity-20 mix-blend-color-burn pointer-events-none" />
+        
+        {/* Background Marquee Watermark */}
+         <div className="absolute top-20 left-0 flex whitespace-nowrap opacity-[0.03] pointer-events-none select-none mix-blend-color-burn">
+            {[...Array(5)].map((_, i) => (
+                <span key={i} className="text-[20vh] font-black mr-20 text-black">ABOUT_US // MISSION // VALUES //</span>
+            ))}
+         </div>
 
-        <motion.div style={{ rotate: rotateHero }} className="z-10 text-center px-6">
+        <motion.div style={{ rotate: rotateHero }} className="z-10 text-center px-6 grayscale-[0.1] sepia-[0.15]">
           <motion.div 
             initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", damping: 12 }}
-            className="inline-flex items-center gap-2 bg-black text-[#a5cb3a] px-6 py-2 rounded-full mb-10"
+            className="inline-flex items-center gap-2 bg-black text-[#f2e8d5] border border-black px-6 py-2 mb-10 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]"
           >
             <Terminal size={16} />
             <span className="font-mono text-xs font-black uppercase tracking-[0.3em]">System.Initialize(Legacy)</span>
           </motion.div>
           
-          <h1 className="text-[14vw] font-black italic uppercase leading-[0.7] tracking-tighter">
-            Pure <br /> <span className="text-[#e72132]">Kinetic</span> <br /> Power.
+          <h1 className="text-[14vw] font-black uppercase leading-[0.7] tracking-tighter text-[#1a1a1a]">
+            Pure <br /> <span className="text-[#ef6925] mix-blend-multiply italic">Kinetic</span> <br /> Power.
           </h1>
         </motion.div>
 
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
-          <div className="w-[2px] h-12 bg-black animate-bounce" />
-          <span className="font-mono text-[10px] font-bold uppercase tracking-widest">Protocol Start</span>
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
+          <div className="w-[1px] h-12 bg-black animate-bounce" />
+          <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#1a1a1a]">Protocol Start</span>
         </div>
       </section>
 

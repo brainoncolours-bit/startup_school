@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { Newspaper, ChevronDown, Activity, TrendingUp, Terminal, Zap, ShieldCheck, Cpu, ArrowRight, CheckCircle, Users } from 'lucide-react';
+import { Newspaper, ChevronDown, Activity, TrendingUp, Terminal, Zap, ShieldCheck, Cpu, ArrowRight, CheckCircle, Users, Play } from 'lucide-react';
 
 const KineticExecutiveApp = ({ onNavbarShow }) => {
   const containerRef = useRef(null);
@@ -42,12 +42,49 @@ const KineticExecutiveApp = ({ onNavbarShow }) => {
           
           <motion.div 
             style={{ scale: contentScale, opacity: contentOpacity }}
-            className="absolute inset-0 flex flex-col items-center justify-center px-6 bg-[#fcfcfc] text-black"
+            className="absolute inset-0 z-0 flex flex-col md:flex-row bg-[#f2e8d5] text-black overflow-hidden"
           >
-            <div className="max-w-7xl w-full">
-               <h2 className="text-[10vw] font-black italic uppercase leading-[0.75] tracking-tighter text-center">
-                Pure <br /> <span className="text-[#ef6925]">Monetary</span> <br /> Clarity.
+             {/* Vintage Paper Texture (Center Spread Vibe) */}
+             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-60 mix-blend-multiply pointer-events-none" />
+             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(160,82,45,0.08)_100%)] pointer-events-none mix-blend-multiply" />
+             <div className="absolute inset-0 bg-[#f2e8d5] opacity-20 mix-blend-color-burn pointer-events-none" />
+             
+             {/* Background Marquee Watermark */}
+             <div className="absolute top-20 left-0 flex whitespace-nowrap opacity-[0.03] pointer-events-none select-none mix-blend-color-burn">
+                {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-[20vh] font-black mr-20 text-black">STARTUP_SCHOOL // IQUE // DOJO //</span>
+                ))}
+             </div>
+
+            {/* LEFT HALF: VIDEO (Printed Look) */}
+            <div className="w-full md:w-1/2 h-full flex items-center justify-center p-8 md:p-12 relative z-10 border-b md:border-b-0 md:border-r border-black/20">
+               <div className="relative w-full aspect-video bg-black border-4 border-black shadow-[5px_5px_0px_rgba(0,0,0,0.2)] overflow-hidden group grayscale-[0.2] sepia-[0.1]">
+                    {/* Play Button Overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center z-20 transition-all duration-500 bg-black/10 group-hover:bg-transparent cursor-pointer">
+                        <div className="w-20 h-20 bg-[#ef6925] flex items-center justify-center border-2 border-black group-hover:bg-black group-hover:text-[#ef6925] transition-all duration-300 shadow-[4px_4px_0px_rgba(0,0,0,1)]">
+                            <Play size={32} className="ml-1 fill-current text-black group-hover:text-[#ef6925]" />
+                        </div>
+                    </div>
+                    {/* Video Placeholder */}
+                    <div className="w-full h-full flex items-center justify-center text-white/50 text-xs font-mono bg-black/90">
+                         <p className="tracking-widest uppercase">Video_Feed_Offline</p>
+                    </div>
+               </div>
+               <p className="absolute bottom-6 left-12 font-mono text-[9px] uppercase tracking-widest opacity-60">Fig 1.1: The Simulation</p>
+            </div>
+
+            {/* RIGHT HALF: HEADING (Typography on Paper) */}
+            <div className="w-full md:w-1/2 h-full flex flex-col items-start justify-center p-8 md:p-16 relative z-10">
+               <div className="flex items-center gap-3 mb-6 bg-black/5 px-4 py-1 border border-black/10 backdrop-blur-sm">
+                  <span className="w-2 h-2 rounded-full bg-[#ef6925] animate-pulse"></span>
+                  <span className="font-mono text-[10px] tracking-[0.2em] uppercase font-bold text-black/70">Live Transmission</span>
+               </div>
+               <h2 className="text-5xl md:text-7xl font-black uppercase leading-[0.8] tracking-tighter mb-6 text-[#1a1a1a] drop-shadow-none">
+                Pure <br /> <span className="text-[#ef6925] mix-blend-multiply">Monetary</span> <br /> Clarity.
               </h2>
+               <p className="font-serif text-black/80 font-medium text-lg max-w-md leading-relaxed border-l-4 border-[#ef6925] pl-4 italic">
+                  "Join the simulation. Build the future. The dojo awaits."
+               </p>
             </div>
           </motion.div>
 
@@ -56,11 +93,15 @@ const KineticExecutiveApp = ({ onNavbarShow }) => {
             {/* LEFT PAGE: WORLD NEWS & INTENSE MARKET DATA */}
             <motion.div 
               style={{ rotateY: leftFold, originX: 0 }} 
-              className="w-1/2 h-full bg-[#e8e4d9] border-r-2 border-black/30 flex relative shadow-2xl overflow-hidden"
+              className="w-1/2 h-full bg-[#f2e8d5] border-r border-black/10 flex relative shadow-[5px_5px_15px_rgba(0,0,0,0.2)] overflow-hidden"
             >
-              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-30" />
-              
-              <div className="relative w-full p-6 md:p-8 text-black flex flex-col">
+              {/* Vintage Paper Texture & Aging Gradients */}
+              <div className="absolute inset-0 z-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-60 mix-blend-multiply" />
+              <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(160,82,45,0.08)_100%)] mix-blend-multiply" />
+              <div className="absolute inset-y-0 right-0 w-8 z-10 pointer-events-none bg-gradient-to-l from-black/10 to-transparent" /> {/* Spine Shadow */}
+              <div className="absolute inset-0 z-10 pointer-events-none bg-[#f2e8d5] opacity-20 mix-blend-color-burn" /> {/* Warmth */}
+
+              <div className="relative w-full p-6 md:p-8 text-black flex flex-col grayscale-[0.1] sepia-[0.15]">
                 <div className="border-b-[3px] border-black pb-1 mb-3">
                   <div className="flex justify-between text-[7px] font-serif font-black uppercase mb-1 tracking-tighter">
                     <span>Vol. XCII...No. 402</span>
@@ -196,24 +237,24 @@ const KineticExecutiveApp = ({ onNavbarShow }) => {
 
                   {/* CENTER MAIN: HEADLINE & ANALYSIS */}
                   <div className="col-span-9 flex flex-col">
-                    <h2 className="font-serif text-5xl font-black leading-[0.85] uppercase mb-2">Liquidity Crisis Averted as Autonomous Nodes Stabilize FX</h2>
+                    <h2 className="font-serif text-5xl font-black leading-[0.85] uppercase mb-2">Startup School: The Founder's Dojo for Building Scalable Ventures</h2>
                     <div className="grid grid-cols-2 gap-3 flex-1 overflow-hidden">
                       <div className="flex flex-col">
                         <p className="font-serif text-[10px] leading-tight text-justify first-letter:text-4xl first-letter:font-black first-letter:mr-1 first-letter:float-left mb-2">
-                          The institutional landscape shifted violently this morning as the Ique Protocol went live. Over $4.2B in liquidity was re-routed through kinetic channels to avoid the impending credit squeeze in traditional banking sectors. Analysts at Goldman and BlackRock have signaled a "structural pivot" in how sovereign debt is collateralized. "It's not just a correction," notes one senior trader, "it's a rewrite of the settlement layer itself."
+                          Startup School by IQue Ventures is a transformative 90-day entrepreneurial program designed for aspiring founders, CEOs, and future business leaders who want to turn ideas into scalable ventures. We are fundamentally different: We’re not an MBA program, and we’re not a theory classroom.
                         </p>
                         <p className="font-serif text-[10px] leading-tight text-justify mb-2 indent-4">
-                          Market volatility indices dropped 40% immediately following the announcement, suggesting that the automated stabilizing agents are already dampening high-frequency noise.
+                          We are a dojo for founders, a hands-on space where you learn, build, fail fast, and rise stronger.
                         </p>
                         <div className="border-t-2 border-black pt-2">
-                           <h4 className="font-serif font-black text-xs uppercase mb-1">The End of Middlemen</h4>
-                           <p className="font-serif text-[9px] leading-tight text-justify mb-2">Decentralized executive suites are replacing traditional boardrooms as speed-to-market becomes the only viable currency in a post-AI economy. Smart contracts now execute 85% of supply chain decisions without human intervention.</p>
-                           <p className="font-serif text-[9px] leading-tight text-justify">Legacy firms holding onto manual approval chains are seeing their margins erode by 150 basis points quarter-over-quarter. The message is clear: Automate or abdicate.</p>
+                           <h4 className="font-serif font-black text-xs uppercase mb-1">Execution Over Theory</h4>
+                           <p className="font-serif text-[9px] leading-tight text-justify mb-2">Our focus is on the founder, your mindset, your leadership, and your ability to execute in the real world.</p>
+                           <p className="font-serif text-[9px] leading-tight text-justify">At Startup School, we prepare you for the real world of startups, the grind, the chaos, and the breakthroughs that follow.</p>
                         </div>
                         <div className="mt-3 bg-[#ef6925]/10 p-2 border-l-4 border-[#ef6925]">
-                            <h5 className="text-[9px] font-black uppercase italic">Editorial:</h5>
-                            <p className="text-[8px] leading-tight font-serif italic">"Adaptation is no longer optional; it is the baseline for survival in the 2026 fiscal environment."</p>
-                            <p className="text-[8px] leading-tight font-serif italic mt-1">"Those who cling to fiat certainty will find themselves holding dust."</p>
+                            <h5 className="text-[9px] font-black uppercase italic">The Mission:</h5>
+                            <p className="text-[8px] leading-tight font-serif italic">"We don't teach business history. We help you write the future."</p>
+                            <p className="text-[8px] leading-tight font-serif italic mt-1">"Fail fast, rise stronger, and build something that matters."</p>
                         </div>
                         
                          <div className="mt-3 border-t-2 border-black pt-2">
@@ -243,6 +284,21 @@ const KineticExecutiveApp = ({ onNavbarShow }) => {
                                 <span className="font-bold">12,000 ETH</span>
                             </div>
                             <p className="font-serif text-[8px] leading-tight italic">"Institutional accumulation detected in off-chain ledgers."</p>
+                        </div>
+
+                        <div className="mt-3 border-t-2 border-black pt-2">
+                            <h4 className="font-serif font-black text-xs uppercase mb-1">Sector Heatmap</h4>
+                            <div className="grid grid-cols-3 gap-1 mb-1">
+                                <div className="bg-black text-white p-1 text-center font-bold text-[7px]">AI: 45%</div>
+                                <div className="border border-black p-1 text-center font-bold text-[7px]">SaaS: 20%</div>
+                                <div className="border border-black p-1 text-center font-bold text-[7px]">Web3: 15%</div>
+                            </div>
+                             <div className="grid grid-cols-3 gap-1">
+                                <div className="border border-black p-1 text-center font-bold text-[7px]">Bio: 10%</div>
+                                <div className="border border-black p-1 text-center font-bold text-[7px]">Hard: 5%</div>
+                                <div className="border border-black p-1 text-center font-bold text-[7px]">Other: 5%</div>
+                            </div>
+                            <p className="font-serif text-[8px] leading-tight italic mt-1 font-bold">"Capital flows where innovation grows."</p>
                         </div>
 
                         <div className="mt-3 pt-2 border-t-2 border-black flex-grow flex flex-col justify-end">
@@ -325,11 +381,15 @@ const KineticExecutiveApp = ({ onNavbarShow }) => {
             {/* RIGHT PAGE: BUSINESS, ANALYTICS & CLASSIFIEDS */}
             <motion.div 
               style={{ rotateY: rightFold, originX: 1 }} 
-              className="w-1/2 h-full bg-[#e8e4d9] border-l-2 border-black/30 flex relative shadow-2xl overflow-hidden"
+              className="w-1/2 h-full bg-[#f2e8d5] border-l border-black/10 flex relative shadow-[5px_5px_15px_rgba(0,0,0,0.2)] overflow-hidden"
             >
-              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-30" />
+              {/* Vintage Paper Texture & Aging Gradients */}
+              <div className="absolute inset-0 z-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-60 mix-blend-multiply" />
+              <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(160,82,45,0.08)_100%)] mix-blend-multiply" />
+              <div className="absolute inset-y-0 left-0 w-8 z-10 pointer-events-none bg-gradient-to-r from-black/10 to-transparent" /> {/* Spine Shadow */}
+              <div className="absolute inset-0 z-10 pointer-events-none bg-[#f2e8d5] opacity-20 mix-blend-color-burn" /> {/* Warmth */}
               
-              <div className="relative w-full p-6 md:p-8 text-black flex flex-col">
+              <div className="relative w-full p-6 md:p-8 text-black flex flex-col grayscale-[0.1] sepia-[0.15]">
                 <div className="border-b-2 border-black flex justify-between items-end mb-3 pb-1">
                   <h3 className="font-serif font-black text-xl uppercase italic">Business & Innovation</h3>
                   <span className="font-serif text-[9px] font-black tracking-tighter uppercase">SECTION B // PAGE 12-24</span>
