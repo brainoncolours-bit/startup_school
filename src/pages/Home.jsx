@@ -1,13 +1,16 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, use } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'framer-motion';
 import { Star, ArrowUpRight, Zap, Plus, Rocket, Trophy, Activity, Cpu, AlertTriangle, Skull, Flame, Sparkles, Target, TrendingUp } from 'lucide-react';
 import Chatbot from '../components/Chatbot';
 import SnakeGame from '../components/SnakeGame';
 import ZeroToHeroLoader from '../components/Loader';
 import Pillars from '../components/Pillars';
+import { useNavigate } from 'react-router-dom';
+
 
 // --- 1. MAGNETIC WRAPPER ---
 const MagneticBox = ({ children, strength = 20 }) => {
+
   const ref = useRef(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -144,6 +147,7 @@ const MagneticBox = ({ children, strength = 20 }) => {
 
 // --- 3. MAIN SITE COMPONENT ---
 export default function NeoBrutalHome() {
+
   const [loading, setLoading] = useState(() => {
     // Only show loader on initial page load, not on route navigation
     if (typeof window !== 'undefined') {
@@ -156,6 +160,7 @@ export default function NeoBrutalHome() {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
+  const navigate = useNavigate();
   useEffect(() => {
     if (loading === false) {
       sessionStorage.setItem('loaderShown', 'true');
@@ -412,6 +417,7 @@ export default function NeoBrutalHome() {
               <button 
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
+                onClick={() => navigate('/contact')}
                 className="mt-8 sm:mt-12 bg-[#e72132] text-white px-6 sm:px-10 py-3 sm:py-5 text-lg sm:text-2xl font-black uppercase shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all border-2 sm:border-4 border-black"
               >
                 Enter the Void
@@ -465,12 +471,13 @@ export default function NeoBrutalHome() {
         <footer className="min-h-[60vh] sm:min-h-[70vh] md:h-[80vh] bg-[#1da89d] text-black flex flex-col items-center justify-center relative overflow-hidden px-4 py-12">
           <motion.h2 initial={{ scale: 0.5 }} whileInView={{ scale: 1 }} className="text-[25vw] sm:text-[20vw] font-black leading-none text-black text-center mb-8 sm:mb-12">READY?</motion.h2>
           <div className="flex flex-row items-center justify-center gap-4 sm:gap-6 w-full flex-wrap">
-            {['Instagram', 'Twitter', 'Dribbble'].map(link => (
+            {['Join Now'].map(link => (
               <motion.button
                 key={link}
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
                 className="border-2 sm:border-4 border-black bg-black text-white px-8 sm:px-12 py-4 font-bold hover:bg-white hover:text-black transition-all uppercase font-black w-40 sm:w-48 text-center"
+                onClick={() => navigate('/contact')}
               >
                 {link}
               </motion.button>
