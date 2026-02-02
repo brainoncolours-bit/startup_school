@@ -1,108 +1,160 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trophy, AlertTriangle } from 'lucide-react';
 
-const ZeroToHeroLoader = ({ onComplete }) => {
-  const [count, setCount] = useState(0);
-  const [isHero, setIsHero] = useState(false);
-  const chars = "ERROR_0101_HERO_VOID_99";
+const FunkyShatterHero = ({ onComplete }) => {
+  const colors = {
+    yellow: '#f9bb1a',
+    orange: '#f79e27',
+    deepOrange: '#ef6925',
+    red: '#e72132',
+    teal: '#1da89d',
+    lime: '#a5cb3a',
+    darkSlate: '#43646b'
+  };
+
+  const [phase, setPhase] = useState('initial');
 
   useEffect(() => {
-    let current = 0;
-    const interval = setInterval(() => {
-      const inc = current > 80 ? 1 : Math.floor(Math.random() * 14) + 6;
-      current = Math.min(current + inc, 100);
-      setCount(current);
-      if (current === 100) {
-        setIsHero(true);
-        clearInterval(interval);
-        setTimeout(onComplete, 2000);
-      }
-    }, 60);
-    return () => clearInterval(interval);
+    // Slower timing to appreciate the H coming down
+    const slamTimer = setTimeout(() => setPhase('slam'), 1200);
+    const shatterTimer = setTimeout(() => setPhase('shatter'), 3200);
+    const completeTimer = setTimeout(onComplete, 4500);
+
+    return () => {
+      clearTimeout(slamTimer);
+      clearTimeout(shatterTimer);
+      clearTimeout(completeTimer);
+    };
   }, [onComplete]);
 
-  return (
-    <motion.div
-      exit={{ y: "-100%", transition: { duration: 0.8, ease: [0.87, 0, 0.13, 1] } }}
-      // This wrapper adds the "Global Blink" when nearing 100%
-      className={`fixed inset-0 z-[1000] flex items-center justify-center overflow-hidden font-mono transition-colors duration-75 ${
-        count > 80 && count < 100 ? 'bg-[#e72132]' : 'bg-black'
-      } ${isHero ? 'animate-pulse bg-[#e72132]' : ''}`}
-    >
-      {/* Background Character Rain */}
-      <div className="absolute inset-0 opacity-20 flex flex-wrap gap-2 p-2 pointer-events-none break-all text-white">
-        {Array.from({ length: 60 }).map((_, i) => (
-          <motion.span 
-            key={i} 
-            animate={{ opacity: [0, 1, 0], color: count > 70 ? ["#fff", "#e72132", "#fff"] : "#fff" }} 
-            transition={{ repeat: Infinity, duration: 0.5 }}
-          >
-            {chars[Math.floor(Math.random() * chars.length)]}
-          </motion.span>
-        ))}
-      </div>
+  const textStyle = {
+    textShadow: `6px 6px 0px ${colors.darkSlate}`,
+    color: colors.yellow,
+    display: 'inline-block'
+  };
 
-      {/* Extreme Blink Overlay at Hero State */}
-      {isHero && (
-        <motion.div 
-          animate={{ opacity: [0, 1, 0] }}
-          transition={{ repeat: Infinity, duration: 0.1 }}
-          className="absolute inset-0 bg-white z-[60] pointer-events-none mix-blend-difference"
-        />
-      )}
-
-      {/* Pop-up Stickers */}
-      <AnimatePresence>
-        {count > 40 && (
-          <motion.div 
-            initial={{ scale: 0, rotate: -15 }} 
-            animate={{ scale: 1, x: [0, 5, -5, 0] }} 
-            transition={{ x: { repeat: Infinity, duration: 0.1 } }}
-            className="absolute top-10 left-10 bg-white p-4 border-4 border-black shadow-[8px_8px_0_#e72132] z-50"
-          >
-            <AlertTriangle className="text-[#e72132]" /> 
-            <p className="text-black font-black uppercase">Critical_Overload</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <div className="text-center z-50">
+  // Spark Component for the impact moment
+  const ImpactSpark = () => (
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      {[...Array(12)].map((_, i) => (
         <motion.div
-          animate={count > 80 ? { x: [-3, 3, -3], y: [2, -2, 2] } : {}}
-          transition={{ repeat: Infinity, duration: 0.05 }}
-        >
-          <h1 
-            className={`text-[28vw] font-[1000] leading-none transition-colors ${
-              isHero ? 'text-white' : count > 80 ? 'text-black' : 'text-[#e72132]'
-            }`}
-            style={{ textShadow: count > 90 ? "10px 10px 0px #fff" : "none" }}
-          >
-            {isHero ? "HERO" : `${count}%`}
-          </h1>
-        </motion.div>
-        
-        {isHero && (
-          <motion.div 
-            initial={{ scale: 0 }} 
-            animate={{ scale: [1, 1.5, 1], rotate: 360 }} 
-            transition={{ duration: 0.5 }}
-          >
-            <Trophy size={120} className="text-white mx-auto mt-4 drop-shadow-[0_0_30px_rgba(255,255,255,0.8)]" />
-          </motion.div>
-        )}
+          key={i}
+          initial={{ scale: 0, opacity: 1 }}
+          animate={{ 
+            scale: [0, 1.5, 0], 
+            x: Math.cos(i * 30) * 150, 
+            y: Math.sin(i * 30) * 150,
+            rotate: 45 
+          }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="absolute w-2 h-8 rounded-full"
+          style={{ backgroundColor: colors.yellow, boxShadow: `0 0 15px ${colors.yellow}` }}
+        />
+      ))}
+    </div>
+  );
+
+  return (
+    <div 
+      className="fixed inset-0 z-[1000] flex items-center justify-center overflow-hidden select-none"
+      style={{ backgroundColor: colors.red }}
+    >
+      {/* Background Elements */}
+      <div className="absolute inset-0 opacity-20">
+         {/* Simplified background for focus on main action */}
+         <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} 
+            className="absolute -top-20 -left-20 w-96 h-96 border-[40px] border-teal-500 rounded-full" />
       </div>
 
-      {/* Red Progress Bar Container */}
-      <div className="absolute bottom-0 left-0 w-full h-10 bg-black border-t-4 border-white overflow-hidden">
-        <motion.div 
-          className="h-full bg-[#e72132]"
-          initial={{ width: "0%" }}
-          animate={{ width: `${count}%` }}
-        />
+      <div className="relative flex items-center justify-center z-10">
+        <AnimatePresence>
+          {phase !== 'shatter' ? (
+            <motion.div key="word" className="flex items-center">
+              <div className="relative w-[15vw] h-[18vw] flex items-center justify-center">
+                
+                {/* Z - THE TARGET */}
+                <motion.span
+                  animate={phase === 'slam' ? { 
+                    y: 1000, 
+                    rotate: 45, 
+                    opacity: 0,
+                    filter: 'blur(5px)'
+                  } : { y: 0 }}
+                  transition={{ duration: 0.8, ease: [0.36, 0, 0.66, -0.56] }} // Accelerates away
+                  className="absolute text-[18vw] font-[1000] italic"
+                  style={textStyle}
+                >
+                  Z
+                </motion.span>
+
+                {/* H - THE SLAMMER */}
+                <motion.span
+                  initial={{ y: -1000, opacity: 0 }}
+                  animate={phase === 'slam' ? { 
+                    y: 0, 
+                    opacity: 1,
+                    scale: [1, 1, 0.9, 1], // Impact compression
+                  } : { y: -1000, opacity: 1 }}
+                  transition={{ 
+                    y: { duration: 1.2, ease: "easeIn" }, // Slower, weighted fall
+                    scale: { duration: 0.2, delay: 1.2 } 
+                  }}
+                  className="absolute text-[18vw] font-[1000] italic"
+                  style={textStyle}
+                >
+                  H
+                </motion.span>
+
+                {/* THE SPARK - Triggers on impact */}
+                {phase === 'slam' && <ImpactSpark />}
+              </div>
+
+              {/* ERO LETTERS - Jiggle on impact */}
+              <div className="flex -ml-4">
+                {"ERO".split("").map((letter, i) => (
+                  <motion.span
+                    key={i}
+                    animate={phase === 'slam' ? { 
+                        y: [0, -40, 0],
+                        rotate: [0, -5, 0] 
+                    } : {}}
+                    transition={{ delay: 1.2 + (i * 0.05), duration: 0.3 }}
+                    className="text-[18vw] font-[1000] italic"
+                    style={textStyle}
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
+          ) : (
+            /* SHATTER DEBRIS */
+            <div className="relative">
+              {Array.from({ length: 40 }).map((_, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ x: 0, y: 0, opacity: 1 }}
+                  animate={{
+                    x: (Math.random() - 0.5) * 1800,
+                    y: (Math.random() - 0.5) * 1200,
+                    rotate: Math.random() * 720,
+                    scale: 0,
+                    opacity: 0
+                  }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="absolute w-8 h-8"
+                  style={{ 
+                    backgroundColor: Object.values(colors)[i % 6],
+                    clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' // Shard shapes
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </AnimatePresence>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
-export default ZeroToHeroLoader;
+export default FunkyShatterHero;

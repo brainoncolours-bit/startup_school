@@ -7,7 +7,7 @@ const navItems = [
   { name: 'Home', path: '/', icon: <Home size={20} />, color: '#60A5FA' },
   { name: 'About', path: '/about', icon: <User size={20} />, color: '#A78BFA' },
   // { name: 'Gallery', path: '/courses', icon: <Images size={20} />, color: '#F472B6' },
-  { name: 'Blog', path: '/blog', icon: <Book size={20} />, color: '#FB923C' },
+  { name: 'Gallery', path: '/blog', icon: <Book size={20} />, color: '#FB923C' },
   { name: 'Contact', path: '/contact', icon: <Send size={20} />, color: '#34D399' },
 ];
 

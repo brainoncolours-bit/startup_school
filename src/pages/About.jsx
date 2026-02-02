@@ -1,6 +1,14 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'framer-motion';
 import { Zap, Target, Fingerprint, Activity, Terminal, Shield, Cpu, BarChart3, ArrowRight } from 'lucide-react';
+import { img } from 'framer-motion/client';
+import  img1 from '../../src/assets/MHD03615.JPG'
+import  img2 from '../../src/assets/MHD03642.JPG'
+import  img3 from '../../src/assets/MHD03664.JPG'
+import  img4 from '../../src/assets/MHD03684.JPG'
+import  img5 from '../../src/assets/MHD03706.JPG'
+// import  img6 from '../../src/assets/MHD03615.JPG'
+
 
 // --- 1. 3D INTERACTIVE CARD COMPONENT ---
 const TeamCard3D = ({ member }) => {
@@ -207,35 +215,35 @@ const VibrantExecutiveAbout = () => {
         id: "LEAD-01", num: "01", name: "Abdul Rahiman", 
         role: "Head of Startup School", 
         icon: <Target size={48}/>,
-        img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800",
+        img: img1,
         bio: "The guiding force behind the next generation of founders. Abdul architected the Startup School framework to turn raw ideas into market-ready ventures."
     },
     { 
         id: "STRAT-02", num: "02", name: "Priyankar Sengupta", 
         role: "Strategy", 
         icon: <BarChart3 size={48}/>,
-        img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800",
+        img: img2,
         bio: "Master of long-term vision and tactical maneuvering. Priyankar maps the trajectory of growth, ensuring every move is calculated for maximum impact."
     },
     { 
         id: "FIN-03", num: "03", name: "Eijaz Khan", 
         role: "Mentor Finance", 
         icon: <Shield size={48}/>,
-        img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=800",
+        img: img3,
         bio: "Ensuring fiscal resilience and capital optimization. Eijaz provides the financial backbone necessary for startups to scale without losing momentum."
     },
     { 
         id: "MKTG-04", num: "04", name: "Aly Sayyad", 
         role: "Mentor Sales & Marketing", 
         icon: <Zap size={48}/>,
-        img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800",
+        img: img4,
         bio: "The closer. Aly specializes in aggressive market entry and high-conversion sales psychological tactics to dominate the attention economy."
     },
     { 
         id: "TECH-05", num: "05", name: "Sikta Misra", 
         role: "Operations & Tech", 
         icon: <Cpu size={48}/>,
-        img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800",
+        img: img5,
         bio: "Bridging the gap between code and execution. Sikta oversees the operational systems and technical stacks that power our modern infrastructure."
     },
     { 
