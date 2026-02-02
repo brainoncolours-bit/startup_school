@@ -9,14 +9,14 @@ const Footer = () => {
     <footer className="relative bg-[#ef6925] text-black min-h-[90vh] flex flex-col justify-center items-center overflow-hidden py-20 font-sans">
       
       {/* 1. INDUSTRIAL BACKGROUND EFFECTS */}
-      <div className="absolute inset-0 z-0">
+      {/* <div className="absolute inset-0 z-0">
          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.1] brightness-100 pointer-events-none" />
          <div className="absolute top-20 left-0 flex whitespace-nowrap opacity-10 pointer-events-none select-none animate-pulse">
             {[...Array(5)].map((_, i) => (
                 <span key={i} className="text-[20vh] font-black mr-20 text-black">CONTACT // TRANSMISSION // ENDPOINT //</span>
             ))}
          </div>
-      </div>
+      </div> */}
 
       {/* 2. THE FLOATING PHYSICS ZONE */}
       <div ref={constraintsRef} className="absolute inset-0 z-10 overflow-hidden">
@@ -84,13 +84,13 @@ const Footer = () => {
           
           <div className="flex items-center gap-8">
             <div className="text-left">
-              <p className="text-[10px] font-mono text-black/50 uppercase tracking-[0.3em] font-bold">Protocol</p>
-              <p className="text-sm font-black text-black">Zenith_V4</p>
+              <p className="text-[10px] font-mono text-black/50 uppercase tracking-[0.3em] font-bold">JOIN</p>
+              <p className="text-sm font-black text-black">STARTUP SCHOOL</p>
             </div>
             <div className="h-8 w-1 bg-black" />
             <div className="text-left">
-              <p className="text-[10px] font-mono text-black/50 uppercase tracking-[0.3em] font-bold">Status</p>
-              <p className="text-sm font-black text-[#ef6925]">Atmospheric</p>
+              <p className="text-[10px] font-mono text-black/50 uppercase tracking-[0.3em] font-bold">NOT AN </p>
+              <p className="text-sm font-black text-[#ef6925]">MBA</p>
             </div>
           </div>
 
@@ -123,8 +123,8 @@ const Footer = () => {
       {/* Subtle Bottom Bar */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-10 text-[9px] font-mono text-black/40 uppercase tracking-[0.5em] font-bold">
         <span>©2026</span>
-        <span>Void Explorations</span>
-        <span>No Rights Reserved</span>
+        <span>startupschool</span>
+        <span>bigrip</span>
       </div>
     </footer>
   );

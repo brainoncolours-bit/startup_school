@@ -1,166 +1,144 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Terminal, Zap, ArrowUpRight, Newspaper, Hash, Timer, User } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, useSpring, useVelocity } from 'framer-motion';
+import { Terminal, Zap, Fingerprint, Eye, Command, Plus } from 'lucide-react';
 
-const KineticBlog = () => {
+const AcidBrutalistBlog = () => {
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  const smoothScroll = useSpring(scrollYProgress, { stiffness: 80, damping: 25 });
-
-  // Parallax Transforms for that "Vibrant Executive" feel
-  const limeBlobY = useTransform(smoothScroll, [0, 1], ["0%", "180%"]);
-  const redBlobY = useTransform(smoothScroll, [0, 1], ["0%", "-150%"]);
-  const rotateHero = useTransform(smoothScroll, [0, 0.2], [0, -4]);
-
-  const blogPosts = [
-    { id: 1, title: '10 Essential Tips for First-Time Founders', excerpt: 'Starting your first company is combat. Here are the lessons we learned in the trenches.', author: 'Sarah Johnson', date: 'JAN 20, 2026', category: 'STRATEGY', readTime: '5 MIN', color: '#a5cb3a' },
-    { id: 2, title: 'How to Validate Your Startup Idea', excerpt: 'Stop dreaming. Start testing. Learn how to verify market hunger before you bleed capital.', author: 'Michael Chen', date: 'JAN 18, 2026', category: 'PRODUCT', readTime: '7 MIN', color: '#e72132' },
-    { id: 3, title: 'The Art of Pitching to Investors', excerpt: 'Master the high-stakes psychology that turns a "maybe" into an immediate wire transfer.', author: 'David Rodriguez', date: 'JAN 15, 2026', category: 'CAPITAL', readTime: '8 MIN', color: '#f79e27' },
-    { id: 4, title: 'Building a Strong Company Culture', excerpt: 'Culture isn’t snacks; it’s shared DNA. Architect an environment where elite teams thrive.', author: 'Emily Watson', date: 'JAN 12, 2026', category: 'CULTURE', readTime: '6 MIN', color: '#a5cb3a' },
-    { id: 5, title: 'Growth Hacking Strategies That Work', excerpt: 'Forget traditional marketing. Use digital leverage to scale your reach exponentially.', author: 'Alex Turner', date: 'JAN 10, 2026', category: 'GROWTH', readTime: '10 MIN', color: '#e72132' },
-    { id: 6, title: 'From Idea to MVP in 30 Days', excerpt: 'Speed is your only advantage. Build, break, and ship your product in record time.', author: 'Rachel Green', date: 'JAN 8, 2026', category: 'VELOCITY', readTime: '9 MIN', color: '#f79e27' }
-  ];
+  const { scrollYProgress } = useScroll();
+  
+  // Create a velocity-based "stretch" for the whole page
+  const scrollVelocity = useVelocity(scrollYProgress);
+  const scaleY = useTransform(scrollVelocity, [-1, 1], [0.8, 1.2]);
+  const smoothScaleY = useSpring(scaleY, { stiffness: 300, damping: 30 });
 
   return (
-    <div ref={containerRef} className="bg-[#fcfcfc] text-black selection:bg-[#a5cb3a] selection:text-black overflow-x-hidden">
-      
-      {/* 1. KINETIC HERO SECTION */}
-      <section className="h-[90vh] relative flex items-center justify-center overflow-hidden border-b-[12px] border-black">
-        <motion.div style={{ y: limeBlobY }} className="absolute -top-20 -left-20 w-[600px] h-[600px] bg-[#a5cb3a] rounded-full blur-[140px] opacity-40" />
-        <motion.div style={{ y: redBlobY }} className="absolute -bottom-20 -right-20 w-[600px] h-[600px] bg-[#e72132] rounded-full blur-[140px] opacity-30" />
-
-        <motion.div style={{ rotate: rotateHero }} className="z-10 text-center px-6">
-          <motion.div 
-            initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", damping: 12 }}
-            className="inline-flex items-center gap-2 bg-black text-[#a5cb3a] px-6 py-2 rounded-full mb-10"
-          >
-            <Terminal size={14} />
-            <span className="font-mono text-[10px] font-black uppercase tracking-[0.3em]">Intel.Feed_v2.0</span>
-          </motion.div>
-          
-          <h1 className="text-[12vw] font-black italic uppercase leading-[0.75] tracking-tighter">
-            The <br /> <span className="text-[#e72132]">Founder</span> <br /> Feed.
-          </h1>
-        </motion.div>
-
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
-          <div className="w-[2px] h-12 bg-black animate-bounce" />
-          <span className="font-mono text-[10px] font-bold uppercase tracking-widest">Scroll to Extract</span>
-        </div>
-      </section>
-
-      {/* 2. THE MARQUEE (Momentum) */}
-      <div className="py-12 bg-black overflow-hidden border-y-4 border-black">
+    <div className="bg-[#e7ff00] min-h-screen overflow-x-hidden font-black selection:bg-black selection:text-[#e7ff00]">
+      {/* --- KINETIC BACKGROUND TEXT (MARQUEE) --- */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden opacity-10">
         <motion.div 
-          style={{ x: useTransform(smoothScroll, [0, 1], ["0%", "-40%"]) }}
-          className="flex gap-20 whitespace-nowrap"
+          style={{ x: useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]) }}
+          className="whitespace-nowrap text-[40vh] leading-none uppercase italic"
         >
-          {[...Array(5)].map((_, i) => (
-            <span key={i} className="text-6xl font-black italic uppercase text-white opacity-90">
-              • INSIGHT IS POWER • NO FLUFF • PURE ALPHA • 
-            </span>
-          ))}
+          FOUNDER_FEED_010101_FOUNDER_FEED_010101_
         </motion.div>
       </div>
 
-      {/* 3. THE INTEL GRID */}
-      <section className="py-40 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between items-end mb-32">
-            <div>
-              <h2 className="text-8xl font-black italic uppercase tracking-tighter leading-none">Latest <br /><span className="text-[#a5cb3a]">Intel.</span></h2>
-            </div>
-            <Newspaper size={80} className="text-black/5 hidden md:block" />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-24">
-            {blogPosts.map((post) => (
-              <BlogProtocolCard key={post.id} post={post} />
-            ))}
-          </div>
+      {/* --- THE VANDAL NAV --- */}
+      <nav className="fixed top-0 left-0 w-full p-6 flex justify-between items-center z-[100] mix-blend-difference text-white">
+        <div className="flex items-center gap-2">
+          <Terminal size={32} />
+          <span className="text-2xl tracking-tighter">RAW.INTEL</span>
         </div>
-      </section>
-
-      {/* 4. THE ULTIMATUM CTA */}
-      <section className="py-60 bg-black text-center relative overflow-hidden">
-        <motion.div 
-          animate={{ rotate: 360 }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0 opacity-5 border-[120px] border-dotted border-white rounded-full scale-150"
-        />
-
-        <div className="relative z-10 px-6">
-          <h2 className="text-6xl md:text-[8vw] font-black italic uppercase text-white mb-16 leading-none">
-            Get the <br /> <span className="text-[#e72132]">Manifesto.</span>
-          </h2>
-          <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
-            <input 
-              type="email" 
-              placeholder="YOUR_EMAIL_ADDRESS" 
-              className="bg-transparent border-b-4 border-white text-white text-2xl font-black p-4 w-full max-w-md focus:outline-none focus:border-[#a5cb3a] transition-colors"
-            />
-            <button className="bg-[#a5cb3a] text-black px-12 py-6 font-black italic uppercase tracking-[0.2em] text-xl hover:bg-white transition-all shadow-[10px_10px_0px_#e72132]">
-              Subscribe
-            </button>
-          </div>
+        <div className="flex gap-8 text-xs font-mono uppercase tracking-[0.4em]">
+          <span className="cursor-crosshair hover:line-through transition-all">Archive</span>
+          <span className="cursor-crosshair hover:line-through transition-all">Labs</span>
+          <span className="bg-white text-black px-2">Live_03</span>
         </div>
-      </section>
+      </nav>
+
+      <motion.main style={{ scaleY: smoothScaleY }} className="relative z-10">
+        {/* --- HERO: THE DISTORTION --- */}
+        <section className="h-[90vh] flex items-center justify-center p-6">
+          <motion.h1 
+            initial={{ letterSpacing: "-0.1em", opacity: 0 }}
+            animate={{ letterSpacing: "0em", opacity: 1 }}
+            transition={{ duration: 1, ease: "circOut" }}
+            className="text-[22vw] leading-[0.7] uppercase italic text-black"
+          >
+           the <br /> <span className="bg-black text-[#e7ff00] px-4"> unseen</span>
+          </motion.h1>
+        </section>
+
+        {/* --- THE LIQUID FEED --- */}
+        <section className="px-6 pb-40 space-y-40">
+          {blogPosts.map((post, i) => (
+            <AcidCard key={post.id} post={post} index={i} />
+          ))}
+        </section>
+      </motion.main>
+
+      {/* --- FOOTER: GLITCH OUT --- */}
+      <footer className="h-screen bg-black text-[#e7ff00] flex flex-col items-center justify-center p-6 text-center">
+        <div className="text-[10vw] leading-none mb-10">WANT THE <br /> TRUTH?</div>
+        <motion.button 
+          whileHover={{ scale: 0.9, rotate: 5 }}
+          className="border-4 border-[#e7ff00] px-12 py-6 text-4xl hover:bg-[#e7ff00] hover:text-black transition-colors"
+        >
+          JOIN THE SYNDICATE
+        </motion.button>
+      </footer>
     </div>
   );
 };
 
-// --- SUB-COMPONENTS ---
+const AcidCard = ({ post, index }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const isEven = index % 2 === 0;
 
-const BlogProtocolCard = ({ post }) => (
-  <motion.article 
-    initial={{ y: 50, opacity: 0 }}
-    whileInView={{ y: 0, opacity: 1 }}
-    viewport={{ once: true }}
-    className="group cursor-pointer"
-  >
-    <div className="relative aspect-[16/10] bg-slate-100 mb-8 overflow-hidden border-2 border-black transition-all duration-500 group-hover:shadow-[15px_15px_0px_#000]">
-      {/* Decorative Grid Overlay */}
-      <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/asfalt-light.png')]" />
-      
-      {/* Color Wash */}
+  return (
+    <motion.div 
+      className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12`}
+      initial={{ x: isEven ? -100 : 100, opacity: 0 }}
+      whileInView={{ x: 0, opacity: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+    >
+      {/* THE IMAGE WITH CLIP-PATH DISTORTION */}
       <div 
-        className="absolute inset-0 opacity-0 group-hover:opacity-60 transition-opacity duration-500 flex items-center justify-center"
-        style={{ backgroundColor: post.color }}
+        className="relative w-full md:w-1/2 aspect-square overflow-hidden bg-black cursor-none"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        <Zap size={60} fill="black" />
+        <motion.img 
+          animate={{ 
+            scale: isHovered ? 1.1 : 1,
+            filter: isHovered ? "contrast(1.5) grayscale(0)" : "contrast(1) grayscale(1)"
+          }}
+          src={post.img} 
+          className="w-full h-full object-cover opacity-80 transition-all duration-700"
+        />
+        
+        {/* Custom Card Cursor */}
+        <motion.div 
+          animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0 }}
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        >
+          <div className="bg-[#e7ff00] text-black px-6 py-3 font-black text-xl rotate-[-10deg] shadow-[10px_10px_0px_#000]">
+            VIEW_INTEL
+          </div>
+        </motion.div>
       </div>
 
-      <div className="absolute top-4 left-4 flex gap-2">
-        <div className="bg-black text-white px-3 py-1 text-[10px] font-black tracking-widest flex items-center gap-2">
-          <Hash size={10} /> {post.category}
+      {/* THE TEXT */}
+      <div className="w-full md:w-1/2 space-y-6">
+        <div className="flex items-center gap-4 text-sm font-mono">
+          <Fingerprint size={20} />
+          <span>REF_{post.id}X</span>
+          <div className="h-[1px] flex-grow bg-black" />
+          <span>{post.category}</span>
+        </div>
+        
+        <h3 className="text-7xl md:text-8xl leading-[0.85] uppercase tracking-tighter hover:italic transition-all">
+          {post.title}
+        </h3>
+        
+        <p className="text-xl font-medium leading-tight max-w-md">
+          {post.excerpt}
+        </p>
+
+        <div className="flex gap-4">
+          <Plus size={40} className="hover:rotate-90 transition-transform cursor-pointer bg-black text-white p-2" />
+          <div className="h-10 w-full border-b-4 border-black self-end" />
         </div>
       </div>
-    </div>
+    </motion.div>
+  );
+};
 
-    <div className="flex items-start justify-between gap-4 mb-4">
-      <h3 className="text-3xl font-black italic uppercase tracking-tighter leading-none group-hover:text-[#e72132] transition-colors">
-        {post.title}
-      </h3>
-      <ArrowUpRight className="shrink-0 transition-transform group-hover:translate-x-2 group-hover:-translate-y-2" size={32} />
-    </div>
+const blogPosts = [
+  { id: 1, title: "Black Box Wealth", excerpt: "The untraceable methods high-frequency founders use to offshore their leverage.", category: "FINANCE", img: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800" },
+  { id: 2, title: "Social Engineering", excerpt: "How to manipulate the algorithm before it manipulates your customer base.", category: "PSYCH", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800" },
+  { id: 3, title: "Vaporware Ops", excerpt: "Sell the future, build the present. The ethics of pre-product market fit.", category: "STRATEGY", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800" },
+  { id: 4, title: "Hyper Leverage", excerpt: "Using AI agents to replace your entire middle-management layer.", category: "TECH", img: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=800" }
+];
 
-    <p className="text-slate-500 font-bold leading-snug mb-8 line-clamp-2">
-      {post.excerpt}
-    </p>
-
-    <div className="flex items-center gap-6 pt-6 border-t border-slate-200 font-mono text-[10px] font-black uppercase tracking-widest opacity-60">
-      <div className="flex items-center gap-2">
-        <User size={12} /> {post.author}
-      </div>
-      <div className="flex items-center gap-2">
-        <Timer size={12} /> {post.readTime}
-      </div>
-    </div>
-  </motion.article>
-);
-
-export default KineticBlog;
+export default AcidBrutalistBlog;
