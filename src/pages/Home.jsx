@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePres
 import { Star, ArrowUpRight, Zap, Plus, Rocket, Trophy, Activity, Cpu, AlertTriangle, Skull, Flame, Sparkles, Target, TrendingUp } from 'lucide-react';
 import Chatbot from '../components/Chatbot';
 import SnakeGame from '../components/SnakeGame';
-import ZeroToHeroLoader from '../components/loader';
+import ZeroToHeroLoader from '../components/Loader';
 
 // --- 1. MAGNETIC WRAPPER ---
 const MagneticBox = ({ children, strength = 20 }) => {
