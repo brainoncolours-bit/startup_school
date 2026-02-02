@@ -157,12 +157,12 @@ const ManifestoSection = () => {
                 We are not an MBA. We are not theory-heavy. We are not passive learning.
             </p>
             
-            <div className="grid gap-4">
+            <div className="grid gap-5 spave-y-5">
               {['Live Startup Park', 'Hands-on Chaos', 'Real Outcomes'].map((item, i) => (
                 <motion.div 
                   key={i}
                   whileHover={{ x: 15 }}
-                  className="flex items-center gap-4 p-4 border-2 border-black bg-white group cursor-default"
+                  className="flex items-center gap-4 p-2 border-2 border-black bg-white group cursor-default"
                 >
                   <div className="w-8 h-8 bg-black text-white flex items-center justify-center font-bold">{i+1}</div>
                   <span className="font-black italic uppercase text-xl group-hover:text-[#ef6925] transition-colors">{item}</span>
@@ -171,7 +171,7 @@ const ManifestoSection = () => {
             </div>
           </div>
 
-          <motion.div style={{ y: y2 }} className="space-y-12">
+          <motion.div style={{  }} className="space-y-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="bg-[#a5cb3a] p-8 border-4 border-black shadow-[8px_8px_0px_#000]">
                 <h4 className="text-3xl font-black italic uppercase mb-4 leading-none">No Age Limit.</h4>
