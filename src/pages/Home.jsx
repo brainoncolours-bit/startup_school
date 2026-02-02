@@ -144,10 +144,23 @@ const MagneticBox = ({ children, strength = 20 }) => {
 
 // --- 3. MAIN SITE COMPONENT ---
 export default function NeoBrutalHome() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => {
+    // Only show loader on initial page load, not on route navigation
+    if (typeof window !== 'undefined') {
+      const hasShownLoader = sessionStorage.getItem('loaderShown');
+      return !hasShownLoader;
+    }
+    return true;
+  });
   const { scrollYProgress } = useScroll();
   const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    if (loading === false) {
+      sessionStorage.setItem('loaderShown', 'true');
+    }
+  }, [loading]);
 
   useEffect(() => {
     const updateMouse = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
