@@ -79,7 +79,7 @@ const IndustrialContactPortal = () => {
 </section>
 
       {/* 3. THE TRANSMISSION FORM */}
-     <section className="bg-[#1da89d] py-12 sm:py-16 md:py-24 px-4 sm:px-6">
+   <section className="bg-[#1da89d] py-12 sm:py-16 md:py-24 px-4 sm:px-6">
   <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12">
     
     {/* Left Side: Info */}
@@ -101,39 +101,45 @@ const IndustrialContactPortal = () => {
       </div>
     </div>
 
-    {/* Right Side: Form */}
-    <div className="lg:col-span-8 bg-black p-1 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] sm:shadow-[20px_20px_0px_0px_rgba(0,0,0,1)]">
-      <form className="bg-black p-6 sm:p-10 border border-white/20 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-        
-        <div className="md:col-span-1 flex flex-col">
-          <label className="font-mono text-[10px] font-black mb-2 text-[#a5cb3a] tracking-widest">OPERATOR_NAME</label>
-          <input type="text" className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#a5cb3a] outline-none transition-all font-bold uppercase placeholder:text-white/20" placeholder="REQUIRED*" />
-        </div>
+    {/* Right Side: Form with #f9bb1a Shadow Lift */}
+    <div className="lg:col-span-8 relative group">
+      {/* THE SHADOW LAYER - Changed to #f9bb1a */}
+      <div className="absolute inset-0 bg-[#f9bb1a] translate-x-3 translate-y-3 sm:translate-x-5 sm:translate-y-5 transition-transform duration-300 group-hover:translate-x-3 group-hover:translate-y-3" />
+      
+      {/* THE MAIN FORM */}
+      <div className="relative bg-black p-1 border-2 border-black group-hover:-translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">
+        <form className="bg-black p-6 sm:p-10 border border-white/20 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          
+          <div className="md:col-span-1 flex flex-col">
+            <label className="font-mono text-[10px] font-black mb-2 text-[#1da89d] tracking-widest">OPERATOR_NAME</label>
+            <input type="text" className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#1da89d] outline-none transition-all font-bold uppercase placeholder:text-white/20" placeholder="REQUIRED*" />
+          </div>
 
-        <div className="md:col-span-1 flex flex-col">
-          <label className="font-mono text-[10px] font-black mb-2 text-[#a5cb3a] tracking-widest">CONTACT_UPLINK</label>
-          <input type="email" className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#a5cb3a] outline-none transition-all font-bold uppercase placeholder:text-white/20" placeholder="EMAIL_ADDRESS*" />
-        </div>
+          <div className="md:col-span-1 flex flex-col">
+            <label className="font-mono text-[10px] font-black mb-2 text-[#1da89d] tracking-widest">CONTACT_UPLINK</label>
+            <input type="email" className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#1da89d] outline-none transition-all font-bold uppercase placeholder:text-white/20" placeholder="EMAIL_ADDRESS*" />
+          </div>
 
-        <div className="md:col-span-2 flex flex-col">
-          <label className="font-mono text-[10px] font-black mb-2 text-[#a5cb3a] tracking-widest">SUBJECT_PROTOCOL</label>
-          <select className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#a5cb3a] outline-none transition-all font-bold uppercase">
-            <option className="bg-black text-white">General Inquiry</option>
-            <option className="bg-black text-white">System Access</option>
-            <option className="bg-black text-white">Partnership</option>
-          </select>
-        </div>
+          <div className="md:col-span-2 flex flex-col">
+            <label className="font-mono text-[10px] font-black mb-2 text-[#1da89d] tracking-widest">SUBJECT_PROTOCOL</label>
+            <select className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#1da89d] outline-none transition-all font-bold uppercase">
+              <option className="bg-black text-white">General Inquiry</option>
+              <option className="bg-black text-white">System Access</option>
+              <option className="bg-black text-white">Partnership</option>
+            </select>
+          </div>
 
-        <div className="md:col-span-2 flex flex-col">
-          <label className="font-mono text-[10px] font-black mb-2 text-[#a5cb3a] tracking-widest">ENCRYPTED_MESSAGE</label>
-          <textarea rows="4" className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#a5cb3a] outline-none transition-all font-bold uppercase placeholder:text-white/20" placeholder="ENTER DATA..."></textarea>
-        </div>
+          <div className="md:col-span-2 flex flex-col">
+            <label className="font-mono text-[10px] font-black mb-2 text-[#1da89d] tracking-widest">ENCRYPTED_MESSAGE</label>
+            <textarea rows="4" className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#1da89d] outline-none transition-all font-bold uppercase placeholder:text-white/20" placeholder="ENTER DATA..."></textarea>
+          </div>
 
-        <button className="md:col-span-2 bg-[#a5cb3a] text-black font-[1000] py-6 flex items-center justify-center gap-4 hover:bg-white transition-all uppercase italic text-xl group border-2 border-[#a5cb3a]">
-          Initialise Transmission 
-          <Send size={24} className="group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
-        </button>
-      </form>
+          <button className="md:col-span-2 bg-[#1da89d] text-black font-[1000] py-6 flex items-center justify-center gap-4 hover:bg-[#f9bb1a] transition-all uppercase italic text-xl group border-2 border-[#1da89d]">
+            Initialise Transmission 
+            <Send size={24} className="group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </section>
