@@ -400,7 +400,7 @@ export default function NeoBrutalHome() {
         </motion.div>
 
         {/* HERO SECTION */}
-        <section className="h-screen flex items-center justify-center relative overflow-hidden bg-[#f9bb1a]">
+        <section className="h-screen flex items-center justify-center relative overflow-hidden bg-[#f9bb1a] w-full ">
           <motion.div style={{ rotate: heroRotate, scale: heroScale }} className="z-10 text-center px-4">
             <motion.div initial={{ y: 100, opacity: 0 }} animate={!loading ? { y: 0, opacity: 1 } : {}} transition={{ duration: 0.8, delay: 0.2 }}>
               <h1 className="text-[18vw] sm:text-[14vw] font-[950] leading-[0.8] text-black uppercase -tracking-[0.08em]">
@@ -427,7 +427,7 @@ export default function NeoBrutalHome() {
         </section>
 
         {/* MARQUEE */}
-        <div className="bg-[#e72132] border-y-2 sm:border-y-4 border-black py-4 sm:py-8 overflow-hidden flex whitespace-nowrap rotate-[-1deg] scale-105 z-20 relative">
+        <div className="bg-[#e72132] border-y-2 sm:border-y-4 border-black py-4 sm:py-8 overflow-hidden flex whitespace-nowrap rotate-[-1deg] z-20 relative w-full">
           <motion.div 
             animate={{ x: ["0%", "-50%"] }}
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
@@ -436,8 +436,8 @@ export default function NeoBrutalHome() {
             {[...Array(6)].map((_, i) => (
               <React.Fragment key={i}>
                 <span>We are not an MBA.
-not theory-heavy.
-not passive learning.</span> <Zap className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16" fill="black" />
+                      not theory-heavy.
+                       not passive learning.</span> <Zap className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16" fill="black" />
                 
               </React.Fragment>
             ))}
