@@ -1,26 +1,38 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Orbit, Globe, Sparkles, Command, Ghost, ArrowRight, Github, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { 
+  Globe, 
+  Sparkles, 
+  Command, 
+  Ghost, 
+  ArrowRight, 
+  Youtube, // Changed from Github
+  Facebook, // Changed from Twitter
+  Instagram, 
+  Linkedin 
+} from 'lucide-react';
 
 const Footer = () => {
   const constraintsRef = useRef(null);
 
+  // Social Media Data Array for cleaner mapping
+  const socialLinks = [
+    { icon: Linkedin, url: 'https://www.linkedin.com/company/mystartup-school' },
+    { icon: Facebook, url: 'https://www.facebook.com/mystartupschool' },
+    { icon: Instagram, url: 'https://www.instagram.com/mystartup_school/' },
+    { icon: Youtube, url: 'https://www.youtube.com/@mystartupschool' },
+  ];
+
   return (
     <footer className="relative bg-[#ef6925] text-black min-h-[90vh] flex flex-col justify-center items-center overflow-hidden py-20 pb-32 font-sans">
       
-      {/* 1. INDUSTRIAL BACKGROUND EFFECTS */}
-      {/* <div className="absolute inset-0 z-0">
+      {/* 1. INDUSTRIAL BACKGROUND EFFECTS (Kept as is) */}
+      <div className="absolute inset-0 z-0">
          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.1] brightness-100 pointer-events-none" />
-         <div className="absolute top-20 left-0 flex whitespace-nowrap opacity-10 pointer-events-none select-none animate-pulse">
-            {[...Array(5)].map((_, i) => (
-                <span key={i} className="text-[20vh] font-black mr-20 text-black">CONTACT // TRANSMISSION // ENDPOINT //</span>
-            ))}
-         </div>
-      </div> */}
+      </div>
 
       {/* 2. THE FLOATING PHYSICS ZONE */}
       <div ref={constraintsRef} className="absolute inset-0 z-10 overflow-hidden">
-        {/* These items are "draggable" and float around */}
         {[
           { Icon: Globe, top: '20%', left: '15%', color: '#000' },
           { Icon: Sparkles, top: '60%', left: '10%', color: '#000' },
@@ -63,7 +75,7 @@ const Footer = () => {
               Final Destination
             </span>
           </div>
-          <h2 className="text-7xl md:text-[10rem] font-black tracking-[ -0.05em] leading-[0.8] uppercase drop-shadow-[4px_4px_0px_rgba(255,255,255,0.4)]">
+          <h2 className="text-7xl md:text-[10rem] font-black tracking-[-0.05em] leading-[0.8] uppercase drop-shadow-[4px_4px_0px_rgba(255,255,255,0.4)]">
             Beyond<br/>
             <span className="text-white drop-shadow-[5px_5px_0px_rgba(0,0,0,1)] italic font-serif lowercase px-4">the</span>
             Horizon
@@ -85,7 +97,7 @@ const Footer = () => {
           <div className="flex items-center gap-8">
             <div className="text-left">
               <p className="text-[10px] font-mono text-black/50 uppercase tracking-[0.3em] font-bold">JOIN</p>
-              <p className="text-sm font-black text-black">STARTUP SCHOOL</p>
+              <p className="text-sm font-black text-black uppercase">Startup School</p>
             </div>
             <div className="h-8 w-1 bg-black" />
             <div className="text-left">
@@ -94,28 +106,29 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="flex gap-12 text-[11px] font-black uppercase tracking-[0.2em]">
+          {/* <div className="flex gap-12 text-[11px] font-black uppercase tracking-[0.2em]">
             {['Laboratory', 'Vessels', 'Logbook', 'Signal'].map((link) => (
               <a key={link} href="#" className="hover:text-[#ef6925] transition-colors flex items-center gap-2 group decoration-2 underline-offset-4 hover:underline decoration-black">
                 {link}
                 <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-black" />
               </a>
             ))}
-          </div>
+          </div> */}
 
+          {/* SOCIAL MEDIA ICONS WITH LINKS */}
           <div className="flex gap-4">
-            <motion.div whileHover={{ rotate: 180 }} className="p-3 bg-black text-white border-2 border-black rounded-none cursor-pointer transition-colors hover:bg-white hover:text-black shadow-[4px_4px_0px_rgba(0,0,0,0.2)]">
-              <Github size={18} />
-            </motion.div>
-            <motion.div whileHover={{ rotate: 180 }} className="p-3 bg-black text-white border-2 border-black rounded-none cursor-pointer transition-colors hover:bg-white hover:text-black shadow-[4px_4px_0px_rgba(0,0,0,0.2)]">
-              <Twitter size={18} />
-            </motion.div>
-            <motion.div whileHover={{ rotate: 180 }} className="p-3 bg-black text-white border-2 border-black rounded-none cursor-pointer transition-colors hover:bg-white hover:text-black shadow-[4px_4px_0px_rgba(0,0,0,0.2)]">
-              <Instagram size={18} />
-            </motion.div>
-            <motion.div whileHover={{ rotate: 180 }} className="p-3 bg-black text-white border-2 border-black rounded-none cursor-pointer transition-colors hover:bg-white hover:text-black shadow-[4px_4px_0px_rgba(0,0,0,0.2)]">
-              <Linkedin size={18} />
-            </motion.div>
+            {socialLinks.map((social, index) => (
+              <motion.a
+                key={index}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ rotate: 180 }}
+                className="p-3 bg-black text-white border-2 border-black rounded-none cursor-pointer transition-colors hover:bg-white hover:text-black shadow-[4px_4px_0px_rgba(0,0,0,0.2)]"
+              >
+                <social.icon size={18} />
+              </motion.a>
+            ))}
           </div>
         </div>
       </div>
