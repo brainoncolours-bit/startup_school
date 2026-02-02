@@ -445,7 +445,7 @@ export default function NeoBrutalHome() {
         </div>
 
         {/* BENTO GRID */}
-        <section className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-10 bg-[#f1f1f1]">
+        {/* <section className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-10 bg-[#f1f1f1]">
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-8">
             <motion.div whileHover={{ y: -10 }} className="md:col-span-8 bg-[#1da89d] p-6 sm:p-8 md:p-12 border-2 sm:border-4 border-black shadow-[8px_8px_0px_0px_#43646b] sm:shadow-[15px_15px_0px_0px_#43646b]">
               <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-black mb-4 sm:mb-6 uppercase">Strategy</h2>
@@ -457,7 +457,7 @@ export default function NeoBrutalHome() {
               <ArrowUpRight className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36" strokeWidth={3} />
             </motion.div>
           </div>
-        </section>
+        </section> */}
 
         {/*  SECTION - FOUNDATION OF GREATNESS */}
       <Pillars />

@@ -1,119 +1,114 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Layers, Scan, Database, MoveRight } from 'lucide-react';
+import { Layers, Scan, Database, Maximize2, Terminal } from 'lucide-react';
 
-const BrutalistArchive = () => {
+const BrutalistGallery = () => {
   const containerRef = useRef(null);
   
   return (
-    /* BG: Crimson #e72132 */
-    <div ref={containerRef} className="bg-[#e72132] min-h-screen text-[#eee] selection:bg-black selection:text-[#f9bb1a]">
+    <div ref={containerRef} className="bg-[#e72132] min-h-screen text-[#eee] selection:bg-black selection:text-[#f9bb1a] overflow-x-hidden">
       
-      {/* --- SIDEBAR LOGS --- */}
-      <aside className="fixed right-6 top-1/2 -translate-y-1/2 flex-col gap-10 hidden lg:flex z-50">
-        <div className="rotate-90 origin-center flex items-center gap-4 text-[10px] font-mono tracking-[0.5em] text-black font-bold">
-          <Scan size={14} />
-          <span>CURRENT_BUFFER: 04_STK</span>
+      {/* --- HUD NAVIGATION --- */}
+      <nav className="fixed top-0 w-full p-6 flex justify-between items-center z-[100] border-b-4 border-black bg-[#e72132]">
+        <div className="flex items-center gap-2 text-black">
+          <Layers className="text-black" />
+          <span className="font-black text-2xl uppercase italic tracking-tighter">GALLERY.SYS</span>
         </div>
-      </aside>
-
-      {/* --- TOP HUD --- */}
-      <nav className="fixed top-0 w-full p-6 flex justify-between items-start z-[100] border-b border-black/10 bg-[#e72132]/90 backdrop-blur-md">
-        <div className="flex flex-col text-black">
-          <div className="flex items-center gap-2">
-            <Layers className="text-black" />
-            <span className="font-black text-2xl uppercase italic tracking-tighter">ARCHIVE.OS</span>
-          </div>
-          <p className="text-[9px] font-mono opacity-60 ml-8 font-bold">ENCRYPTION: AES-256 // LEVEL_04</p>
-        </div>
-        <div className="bg-black text-[#f9bb1a] px-4 py-2 font-black text-xs uppercase tracking-widest flex items-center gap-2 shadow-xl border border-[#f9bb1a]/20">
-          <Database size={14} /> System_Vault
+        <div className="flex gap-4 items-center">
+            <span className="hidden md:block font-mono text-[10px] text-black font-bold">STATUS: SECTOR_GRID_ACTIVE</span>
+            <div className="bg-black text-[#f9bb1a] px-4 py-2 font-black text-xs uppercase tracking-widest flex items-center gap-2">
+                <Database size={14} /> 84_ASSETS
+            </div>
         </div>
       </nav>
 
-      <main className="pt-32 pb-40">
-        <div className="px-4 md:px-10 lg:px-20">
-          {blogPosts.map((post, i) => (
-            <ArchiveSection key={post.id} post={post} index={i} />
+      <main className="pt-32 pb-20 px-6 md:px-12">
+        {/* --- GRID LAYOUT --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {galleryItems.map((item, i) => (
+            <GalleryCard key={item.id} item={item} index={i} />
           ))}
         </div>
       </main>
+
+      {/* --- FOOTER STATUS --- */}
+      <footer className="fixed bottom-0 w-full bg-black text-[#e72132] p-2 flex justify-between font-mono text-[9px] z-[100]">
+        <span>CORE_OS_V.2.0.6</span>
+        <span className="animate-pulse">● SYSTEM_RUNNING</span>
+        <span>COORD: 40.7128° N, 74.0060° W</span>
+      </footer>
     </div>
   );
 };
 
-const ArchiveSection = ({ post, index }) => {
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"]
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.65]);
-
+const GalleryCard = ({ item, index }) => {
   return (
-    <motion.section 
-      ref={sectionRef}
-      style={{ scale, opacity }}
-      /* CARD COLOR: Warning Yellow #f9bb1a */
-      className="sticky top-32 mb-24 md:mb-48 bg-[#f9bb1a] border-4 border-black rounded-none overflow-hidden shadow-[25px_25px_0px_rgba(0,0,0,1)]"
+    <motion.div 
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      className="group relative bg-[#f9bb1a] border-4 border-black shadow-[12px_12px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[6px] hover:translate-y-[6px] transition-all duration-200"
     >
-      <div className="flex flex-col lg:flex-row min-h-[60vh]">
-        {/* CONTENT - Changed text-black to text-[#e72132] */}
-        <div className="flex-1 p-8 md:p-16 flex flex-col justify-between order-2 lg:order-1 text-[#e72132]">
-          <div className="space-y-6">
-            <div className="flex items-center gap-4 font-mono text-xs">
-              {/* ID Badge keeps black bg for legibility, but internal text is red */}
-              <span className="bg-black text-[#e72132] px-2 py-0.5 font-bold uppercase">DATA_REF_{post.id}</span>
-              <span className="opacity-40 text-black">/ /</span>
-              <span className="uppercase tracking-widest font-black text-[10px] text-black">
-                {post.category}
-              </span>
-            </div>
-            
-            {/* Main Title in Brand Red */}
-            <h2 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-[0.8] tracking-tighter drop-shadow-sm">
-              {post.title}
-            </h2>
-            
-            {/* Excerpt in Brand Red */}
-            <p className="max-w-xl text-lg md:text-xl font-bold leading-tight">
-              {post.excerpt}
-            </p>
-          </div>
-
-          {/* CTA Section - Changed to Red Theme */}
-          <div className="mt-12 flex items-center gap-6 group cursor-pointer w-fit">
-            <div className="w-16 h-16 rounded-none border-4 border-[#e72132] flex items-center justify-center group-hover:bg-[#e72132] transition-all duration-300">
-              <MoveRight className="text-[#e72132] group-hover:text-[#f9bb1a] transition-colors" size={32} />
-            </div>
-            <span className="font-black uppercase text-xl tracking-widest group-hover:tracking-[0.2em] transition-all text-[#e72132]">
-              Download_Module
+      {/* IMAGE CONTAINER */}
+      <div className="relative h-[400px] overflow-hidden border-b-4 border-black bg-black">
+        <img 
+          src={item.img} 
+          alt={item.title}
+          className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 opacity-80"
+        />
+        <div className="absolute inset-0 bg-[#e72132]/30 mix-blend-multiply group-hover:bg-transparent transition-colors" />
+        
+        {/* OVERLAY TAGS */}
+        <div className="absolute top-4 left-4 flex flex-col gap-2">
+            <span className="bg-black text-[#f9bb1a] text-[10px] font-black px-2 py-1 w-fit">
+              {item.id}
             </span>
-          </div>
+            <span className="bg-[#e72132] text-black text-[10px] font-black px-2 py-1 w-fit">
+              {item.res}
+            </span>
         </div>
 
-        {/* IMAGE SECTION */}
-        <div className="lg:w-2/5 relative bg-black order-1 lg:order-2 overflow-hidden border-l-4 border-black">
-          <img 
-            src={post.img} 
-            className="w-full h-full object-cover opacity-80 grayscale contrast-150 hover:grayscale-0 transition-all duration-700"
-            alt={post.title}
-          />
-          {/* Red mix-blend overlay instead of yellow to tie into the new font color */}
-          <div className="absolute inset-0 bg-[#e72132]/20 mix-blend-multiply pointer-events-none" />
+        <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="bg-[#f9bb1a] p-2 border-2 border-black">
+                <Maximize2 size={20} className="text-black" />
+            </div>
         </div>
       </div>
-    </motion.section>
+
+      {/* TEXT CONTENT */}
+      <div className="p-6 text-[#e72132]">
+        <div className="flex justify-between items-start mb-4">
+            <h3 className="text-3xl font-black uppercase leading-none tracking-tighter">
+                {item.title}
+            </h3>
+            <Terminal size={18} className="mt-1" />
+        </div>
+        
+        <p className="text-sm font-bold leading-tight mb-6 text-black opacity-80">
+          {item.description}
+        </p>
+
+        <div className="flex items-center justify-between border-t-2 border-black/10 pt-4">
+            <span className="font-mono text-[10px] font-black uppercase text-black">
+                TAG // {item.tag}
+            </span>
+            <button className="text-[10px] font-black underline uppercase hover:text-black transition-colors">
+                View_Data
+            </button>
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
-const blogPosts = [
-  { id: 101, title: "Neural Mesh", excerpt: "Decentralized cognition through peer-to-peer brain-computer interfaces.", category: "BIOTECH", img: "https://images.unsplash.com/photo-1620712943543-bcc4628c9757?q=80&w=800" },
-  { id: 102, title: "Static Cities", excerpt: "The rise of architecture designed specifically for non-human habitation.", category: "URBAN", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" },
-  { id: 103, title: "Deep Trace", excerpt: "How to survive in a world where metadata is more valuable than money.", category: "PRIVACY", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800" },
-  { id: 104, title: "Hyper-Fuel", excerpt: "Synthetic energy sources harvested from the thermal decay of data centers.", category: "ENERGY", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800" }
+const galleryItems = [
+  { id: "IMG_001", title: "Void_Structure", description: "Monolithic remains of the silicon era.", tag: "ARCHITECTURE", res: "4K_RAW", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" },
+  { id: "IMG_002", title: "Neural_Link", description: "Sub-dermal connectivity mapping.", tag: "BIOTECH", res: "8K_SCAN", img: "https://images.unsplash.com/photo-1620712943543-bcc4628c9757?q=80&w=800" },
+  { id: "IMG_003", title: "Data_Stream", description: "Visualizing the flow of packet loss.", tag: "INFRA", res: "VEC_02", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800" },
+  { id: "IMG_004", title: "Heavy_Metal", description: "Industrial decay in the outer rim.", tag: "WASTE", res: "RAW_EXP", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800" },
+  { id: "IMG_005", title: "Neon_Ghost", description: "Light pollution captured at 0.5Hz.", tag: "OPTICS", res: "ISO_900", img: "https://images.unsplash.com/photo-1510511459019-5dee99ccddf6?q=80&w=800" },
+  { id: "IMG_006", title: "Cyber_Relic", description: "First generation hardware encryption.", tag: "HARDWARE", res: "MACRO_01", img: "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?q=80&w=800" },
 ];
 
-export default BrutalistArchive;
+export default BrutalistGallery;
