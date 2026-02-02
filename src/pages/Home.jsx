@@ -604,7 +604,7 @@ not passive learning.</span> <Zap className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:
                   { 
                     number: "05",
                     icon: <Trophy size={48} />,
-                    title: 'R&D (RESEARCH &DEVELOPMENT)',
+                    title: 'R&D RESEARCH & DEVELOPMENT',
                     subtitle: 'Only First Place Matters',
                     desc: 'Innovate continuously. Learn to adapt,test, and evolve your product to sta',
                     color: '#a5cb3a',
@@ -849,14 +849,14 @@ not passive learning.</span> <Zap className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:
         </section>
 
         <footer className="min-h-[60vh] sm:min-h-[70vh] md:h-[80vh] bg-[#1da89d] text-black flex flex-col items-center justify-center relative overflow-hidden px-4 py-12">
-          <motion.h2 initial={{ scale: 0.5 }} whileInView={{ scale: 1 }} className="text-[25vw] sm:text-[20vw] font-black leading-none text-black text-center">READY?</motion.h2>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-8 w-full max-w-md sm:max-w-none px-4">
+          <motion.h2 initial={{ scale: 0.5 }} whileInView={{ scale: 1 }} className="text-[25vw] sm:text-[20vw] font-black leading-none text-black text-center mb-8 sm:mb-12">READY?</motion.h2>
+          <div className="flex flex-row items-center justify-center gap-4 sm:gap-6 w-full flex-wrap">
             {['Instagram', 'Twitter', 'Dribbble'].map(link => (
-              <motion.button 
-                key={link} 
+              <motion.button
+                key={link}
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
-                className="border-2 sm:border-4 border-black bg-black text-white px-6 sm:px-8 py-3 font-bold hover:bg-white hover:text-black transition-all uppercase font-black w-full sm:w-auto"
+                className="border-2 sm:border-4 border-black bg-black text-white px-8 sm:px-12 py-4 font-bold hover:bg-white hover:text-black transition-all uppercase font-black w-40 sm:w-48 text-center"
               >
                 {link}
               </motion.button>

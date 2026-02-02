@@ -6,7 +6,7 @@ const Footer = () => {
   const constraintsRef = useRef(null);
 
   return (
-    <footer className="relative bg-[#ef6925] text-black min-h-[90vh] flex flex-col justify-center items-center overflow-hidden py-20 font-sans">
+    <footer className="relative bg-[#ef6925] text-black min-h-[90vh] flex flex-col justify-center items-center overflow-hidden py-20 pb-32 font-sans">
       
       {/* 1. INDUSTRIAL BACKGROUND EFFECTS */}
       {/* <div className="absolute inset-0 z-0">
@@ -79,7 +79,7 @@ const Footer = () => {
       </div>
 
       {/* 4. THE INDUSTRIAL GRID BAR */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-40 px-4">
+      <div className="absolute bottom-32 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-40 px-4">
         <div className="p-8 bg-white border-4 border-black border-double shadow-[8px_8px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row justify-between items-center gap-10">
           
           <div className="flex items-center gap-8">
@@ -121,7 +121,7 @@ const Footer = () => {
       </div>
 
       {/* Subtle Bottom Bar */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-10 text-[9px] font-mono text-black/40 uppercase tracking-[0.5em] font-bold">
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-10 text-[9px] font-mono text-black/40 uppercase tracking-[0.5em] font-bold">
         <span>©2026</span>
         <span>startupschool</span>
         <span>bigrip</span>
