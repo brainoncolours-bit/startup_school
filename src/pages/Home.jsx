@@ -405,7 +405,7 @@ export default function NeoBrutalHome() {
         </motion.div>
 
         {/* HERO SECTION */}
-        <section className="h-screen flex items-center justify-center relative overflow-hidden bg-[#f9bb1a] w-full ">
+        <section className="h-screen flex items-center justify-center relative overflow-hidden bg-[#f9bb1a] w-full z-10 ">
           <motion.div style={{ rotate: heroRotate, scale: heroScale }} className="z-10 text-center px-4">
             <motion.div initial={{ y: 100, opacity: 0 }} animate={!loading ? { y: 0, opacity: 1 } : {}} transition={{ duration: 0.8, delay: 0.2 }}>
               <h1 className="text-[18vw] sm:text-[14vw] font-[950] leading-[0.8] text-black uppercase -tracking-[0.08em]">

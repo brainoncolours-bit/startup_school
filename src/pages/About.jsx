@@ -7,6 +7,7 @@ import  img2 from '../../src/assets/MHD03642.JPG'
 import  img3 from '../../src/assets/MHD03664.JPG'
 import  img4 from '../../src/assets/MHD03684.JPG'
 import  img5 from '../../src/assets/MHD03706.JPG'
+import { useNavigate } from 'react-router-dom';
 // import  img6 from '../../src/assets/MHD03615.JPG'
 
 
@@ -195,6 +196,7 @@ const ManifestoSection = () => {
 
 // --- 3. MAIN COMPONENT ---
 const VibrantExecutiveAbout = () => {
+  const navigate = useNavigate();
   const containerRef = useRef(null);
   const horizontalSectionRef = useRef(null);
 
@@ -335,6 +337,7 @@ const VibrantExecutiveAbout = () => {
           whileHover={{ scale: 1.1, rotate: 2 }}
           whileTap={{ scale: 0.9 }}
           className="mt-10 md:mt-0 relative group"
+          onClick={()=>navigate('/contact')}
         >
           <div className="absolute inset-0 bg-black rounded-full translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform" />
           <div className="relative bg-white border-4 border-black rounded-full w-40 h-40 flex items-center justify-center text-center p-4">

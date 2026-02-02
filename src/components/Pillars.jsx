@@ -82,7 +82,7 @@ const Pillars = () => {
           style={{ y: bgY }}
           className="absolute -right-20 top-0 text-[40vw] font-[1000] text-black/[0.04] leading-none flex flex-col"
         >
-          {pillars.map(p => <span key={p.id}>{p.id}</span>)}
+          {pillars.map(p => <></> )}
         </motion.div>
 
         {/* Vertical Data Ticker */}
