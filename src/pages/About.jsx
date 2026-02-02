@@ -74,7 +74,7 @@ const TeamCard3D = ({ member }) => {
                     <img 
                       src={member.img} 
                       alt={member.name}
-                      className="w-full h-full object-cover grayscale contrast-125 mix-blend-luminosity hover:grayscale-0 transition-all duration-700"
+                      className="w-full h-120 object-cover grayscale contrast-125 mix-blend-luminosity hover:grayscale-0 transition-all duration-700"
                     />
                     <div className="absolute top-4 left-4 z-20 bg-[#a5cb3a] text-black text-[10px] font-bold px-2 py-1">
                         LIVE_FEED // 0{member.num}
