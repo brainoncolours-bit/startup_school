@@ -23,37 +23,37 @@ const KineticPillar = ({ pillar, index }) => {
   const scale = useTransform(scrollYProgress, [0, 0.8, 1], [0.8, 1.05, 1]);
 
   return (
-    <div ref={container} className="h-screen sticky top-0 flex items-center justify-center overflow-hidden pointer-events-none">
+    <div ref={container} className="h-screen sticky top-0 flex items-center justify-center overflow-hidden pointer-events-none px-2 sm:px-4">
       <motion.div 
         style={{ x, rotate, scale }}
-        className="pointer-events-auto relative w-full max-w-4xl h-[480px] bg-white text-black shadow-[30px_30px_0px_0px_#000] border-4 border-black flex"
+        className="pointer-events-auto relative w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl h-9/12 sm:h-[440px] md:h-[480px] lg:h-[520px] bg-white text-black shadow-[15px_15px_0px_0px_#000] sm:shadow-[25px_25px_0px_0px_#000] lg:shadow-[30px_30px_0px_0px_#000] border-2 sm:border-3 lg:border-4 border-black flex "
       >
         {/* Clean Sidebar */}
-        <div className="w-20 flex flex-col items-center justify-between py-8 border-r-4 border-black" style={{ backgroundColor: pillar.color }}>
-          <span className="font-black text-2xl rotate-180 [writing-mode:vertical-lr] tracking-tighter">PILLAR_{pillar.id}</span>
-          <div className="p-2 border-2 border-black bg-white shadow-[4px_4px_0px_0px_#000]">
-            {React.cloneElement(pillar.icon, { size: 28, strokeWidth: 3 })}
+        <div className="w-12 sm:w-14 lg:w-20 flex flex-col items-center justify-between py-4 sm:py-6 lg:py-8 border-r-2 sm:border-r-3 lg:border-r-4 border-black" style={{ backgroundColor: pillar.color }}>
+          <span className="font-black text-[10px] sm:text-sm lg:text-2xl rotate-180 [writing-mode:vertical-lr] tracking-tighter">PILLAR_{pillar.id}</span>
+          <div className="p-1 sm:p-1.5 lg:p-2 border border-black sm:border-1.5 lg:border-2 bg-white shadow-[2px_2px_0px_0px_#000] sm:shadow-[3px_3px_0px_0px_#000] lg:shadow-[4px_4px_0px_0px_#000]">
+            {React.cloneElement(pillar.icon, { size: 18, strokeWidth: 2, className: "sm:w-5 sm:h-5 lg:w-7 lg:h-7" })}
           </div>
         </div>
 
         {/* Content Area */}
-        <div className="flex-grow p-10 flex flex-col justify-between">
+        <div className="flex-grow p-3 sm:p-5 lg:p-10 flex flex-col justify-between">
           <div className="relative">
-            <div className="flex items-center gap-2 mb-4">
-               <div className="w-2 h-2 bg-black animate-square-pulse" />
-               <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em]">Protocol_Loaded</span>
+            <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-4">
+               <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 lg:w-2 lg:h-2 bg-black animate-square-pulse" />
+               <span className="font-mono text-[7px] sm:text-[8px] lg:text-[10px] font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] lg:tracking-[0.3em]">Protocol_Loaded</span>
             </div>
-            <h2 className="text-7xl md:text-9xl font-[1000] uppercase tracking-tighter leading-[0.8]">
+            <h2 className="text-6xl sm:text-5xl md:text-7xl lg:text-8xl font-[1000] uppercase tracking-tighter leading-[0.8]">
               {pillar.title}
             </h2>
           </div>
 
           <div>
-            <p className="text-xl md:text-2xl font-black uppercase leading-tight max-w-md border-l-8 border-black pl-6">
+            <p className="text-4xl sm:text-xs md:text-base lg:text-2xl font-black uppercase leading-tight max-w-md border-l-4 sm:border-l-6 lg:border-l-8 border-black pl-2 sm:pl-4 lg:pl-6">
               {pillar.desc}
             </p>
-            <div className="mt-8 flex items-center gap-4">
-              <button className="bg-black text-white px-8 py-3 font-black uppercase text-xs hover:bg-[#e72132] transition-colors">
+            <div className="mt-3 sm:mt-5 lg:mt-8 flex items-center gap-2 sm:gap-3 lg:gap-4">
+              <button className="bg-black text-white px-3 sm:px-6 lg:px-8 py-1.5 sm:py-2 lg:py-3 font-black uppercase text-[8px] sm:text-[9px] lg:text-xs hover:bg-[#e72132] transition-colors">
                 View Specs
               </button>
               <div className="flex-grow border-b-2 border-black/10" />
@@ -105,21 +105,21 @@ const Pillars = () => {
       </div>
 
       {/* --- INTRO --- */}
-      <section className="h-screen flex items-center justify-center bg-black relative z-10">
-        <div className="absolute top-10 w-full overflow-hidden flex whitespace-nowrap border-y border-white/10 py-3">
+      <section className="h-screen flex items-center justify-center bg-black relative z-10 px-4">
+        <div className="absolute top-6 sm:top-10 w-full overflow-hidden flex whitespace-nowrap border-y border-white/10 py-2 sm:py-3">
           {[...Array(8)].map((_, i) => (
             <motion.span 
               key={i}
               animate={{ x: [0, -1000] }}
               transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              className="text-white font-mono text-xs px-12 tracking-[0.5em] uppercase"
+              className="text-white font-mono text-[7px] sm:text-[9px] lg:text-xs px-6 sm:px-10 lg:px-12 tracking-[0.3em] sm:tracking-[0.4em] lg:tracking-[0.5em] uppercase"
             >
               March Batch Enrollment Open // Limited Slots
             </motion.span>
           ))}
         </div>
         <motion.div className="text-center">
-          <h1 className="text-[18vw] font-[1000] text-white leading-none uppercase -tracking-widest">
+          <h1 className="text-[12vw] sm:text-[15vw] lg:text-[18vw] font-[1000] text-white leading-none uppercase -tracking-widest">
             CORE<br/><span className="text-[#e72132]">06</span>
           </h1>
         </motion.div>
@@ -133,13 +133,13 @@ const Pillars = () => {
       </div>
 
       {/* --- OUTRO --- */}
-      <section className="h-screen flex items-center justify-center bg-[#e72132] p-6 relative z-20">
+      <section className="h-screen flex items-center justify-center bg-[#e72132] p-3 sm:p-6 relative z-20">
         <motion.div 
           initial={{ y: 100, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          className="w-full max-w-6xl border-8 border-black bg-white p-16 md:p-32 text-center shadow-[40px_40px_0px_0px_#000]"
+          className="w-full max-w-2xl sm:max-w-4xl lg:max-w-6xl border-4 sm:border-6 lg:border-8 border-black bg-white p-6 sm:p-12 lg:p-32 text-center shadow-[15px_15px_0px_0px_#000] sm:shadow-[25px_25px_0px_0px_#000] lg:shadow-[40px_40px_0px_0px_#000] h-1/2 md:h-auto "
         >
-          <h2 className="text-6xl md:text-[11rem] font-[1000] text-black uppercase leading-[0.7] mb-12 tracking-tighter">
+          <h2 className="text-8xl pt-15 sm:text-6xl md:text-8xl lg:text-[11rem] font-[1000] text-black uppercase leading-[0.7] mb-6 sm:mb-12 tracking-tighter">
             ZERO.<br/>LIMITS.
           </h2>
           {/* <motion.button 
