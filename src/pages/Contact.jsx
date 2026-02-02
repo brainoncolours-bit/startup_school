@@ -30,77 +30,113 @@ const IndustrialContactPortal = () => {
       </div>
 
       {/* 2. KINETIC HEADER */}
-      <section className="h-[60vh] sm:h-[70vh] flex flex-col items-center justify-center relative border-b-[12px] sm:border-b-[20px] border-black pt-16 sm:pt-20 overflow-hidden">
-        <motion.div 
-          style={{ x: bgTextX }} 
-          className="absolute top-10 sm:top-20 left-0 flex whitespace-nowrap opacity-20 pointer-events-none"
-        >
-          {[...Array(3)].map((_, i) => (
-            <span key={i} className="text-[12vh] sm:text-[15vh] md:text-[20vh] font-black mr-10 sm:mr-20 text-white">ESTABLISH_CONNECTION // UPLINK //</span>
-          ))}
-        </motion.div>
+  <section className="h-[60vh] sm:h-[70vh] flex flex-col items-center justify-center relative border-b-[12px] sm:border-b-[20px] border-black pt-16 sm:pt-20 overflow-hidden bg-[#a5cb3a]">
+  
+  {/* Moving Background Text - Low Opacity White for Depth */}
+  <motion.div 
+    style={{ x: bgTextX }} 
+    className="absolute top-10 sm:top-20 left-0 flex whitespace-nowrap opacity-20 pointer-events-none"
+  >
+    {[...Array(3)].map((_, i) => (
+      <span key={i} className="text-[12vh] sm:text-[15vh] md:text-[20vh] font-black mr-10 sm:mr-20 text-white">
+        ESTABLISH_CONNECTION // UPLINK //
+      </span>
+    ))}
+  </motion.div>
 
-        <motion.div 
-          initial={{ y: 30, opacity: 0 }} 
-          animate={{ y: 0, opacity: 1 }}
-          className="z-10 text-center px-4"
-        >
-          <div className="bg-black text-[#e1ff00] inline-block px-3 sm:px-4 py-1 mb-4 sm:mb-6 skew-x-[-12deg]">
-            <p className="font-mono text-[8px] sm:text-[10px] tracking-widest uppercase font-bold">Direct Transmission Protocol</p>
-          </div>
-          <h1 className="text-[18vw] sm:text-[16vw] md:text-[14vw] font-black uppercase leading-[0.8] tracking-tighter italic">
-            Contact <br /> 
-            <span className="text-white drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] sm:drop-shadow-[8px_8px_0px_rgba(0,0,0,1)] not-italic">US</span>
-            <span className="text-[#e1ff00]">.</span>
-          </h1>
-        </motion.div>
-      </section>
+  <motion.div 
+    initial={{ y: 30, opacity: 0 }} 
+    animate={{ y: 0, opacity: 1 }}
+    className="z-10 text-center px-4"
+  >
+    {/* The iQue-Green Tag */}
+    <div className="bg-black text-[#a5cb3a] inline-block px-4 py-1 mb-4 sm:mb-6 skew-x-[-12deg] shadow-[6px_6px_0px_rgba(0,0,0,0.15)]">
+      <p className="font-mono text-[9px] sm:text-[11px] tracking-[0.2em] uppercase font-black px-2">
+        Direct Transmission Protocol
+      </p>
+    </div>
+
+    {/* Main Title Section */}
+    <h1 className="text-[18vw] sm:text-[16vw] md:text-[14vw] font-[1000] uppercase leading-[0.75] tracking-tighter italic text-black">
+      Contact <br /> 
+      <span className="text-white drop-shadow-[4px_4px_0px_#000] sm:drop-shadow-[10px_10px_0px_#000] not-italic">
+        US
+      </span>
+      <span className="text-black">.</span>
+    </h1>
+
+    {/* Location Context - Minimalist & Premium */}
+    <div className="mt-10 flex flex-col items-center">
+      <div className="h-[4px] w-20 bg-black mb-4" />
+      <p className="font-mono text-[10px] sm:text-xs uppercase font-black text-black tracking-[0.3em] leading-none">
+        NGEF Layout // Bennigana Halli
+      </p>
+      <p className="font-mono text-[9px] uppercase text-black/60 mt-2">
+        Tr4 3rd Floor, 180, Bengaluru
+      </p>
+    </div>
+  </motion.div>
+</section>
 
       {/* 3. THE TRANSMISSION FORM */}
-      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12">
-        <div className="lg:col-span-4 space-y-6 sm:space-y-8">
-          <div className="border-l-4 sm:border-l-8 border-black pl-4 sm:pl-6">
-            <h2 className="text-4xl sm:text-5xl font-black uppercase mb-3 sm:mb-4 leading-none">Priority <br/><span className="text-white">Comms</span></h2>
-            <p className="font-mono text-xs sm:text-sm font-bold opacity-80 leading-tight">
-              ESTABLISH DIRECT UPLINK FOR PARTNERSHIP INQUIRIES, OPERATIONAL SUPPORT, OR SYSTEM ACCESS.
-            </p>
-          </div>
+     <section className="bg-[#1da89d] py-12 sm:py-16 md:py-24 px-4 sm:px-6">
+  <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12">
+    
+    {/* Left Side: Info */}
+    <div className="lg:col-span-4 space-y-6 sm:space-y-8">
+      <div className="border-l-4 sm:border-l-[12px] border-black pl-4 sm:pl-6">
+        <h2 className="text-5xl sm:text-6xl font-[1000] uppercase mb-3 sm:mb-4 leading-[0.8] tracking-tighter text-black">
+          Priority <br/>
+          <span className="text-white drop-shadow-[4px_4px_0px_#000]">Comms</span>
+        </h2>
+        <p className="font-mono text-xs sm:text-sm font-black text-black leading-tight mt-6 uppercase">
+          Establish direct uplink for partnership inquiries, operational support, or system access.
+        </p>
+      </div>
 
-          <div className="space-y-2">
-            <ContactDetail icon={<Phone size={20}/>} label="VOICE_LINE" value="+91-9036354727" color="#e1ff00" />
-            <ContactDetail icon={<Mail size={20}/>} label="ENCRYPTED_MAIL" value="info@mystartupschool.com" color="#ffffff" />
-            <ContactDetail icon={<Globe size={20}/>} label="GLOBAL_NODE" value="BENGALURU" color="#e1ff00" />
-          </div>
+      <div className="space-y-3">
+        <ContactDetail icon={<Phone size={20}/>} label="VOICE_LINE" value="+91-9036354727" color="#000000" />
+        <ContactDetail icon={<Mail size={20}/>} label="ENCRYPTED_MAIL" value="info@mystartupschool.com" color="#ffffff" />
+        <ContactDetail icon={<Globe size={20}/>} label="GLOBAL_NODE" value="BENGALURU" color="#000000" />
+      </div>
+    </div>
+
+    {/* Right Side: Form */}
+    <div className="lg:col-span-8 bg-black p-1 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] sm:shadow-[20px_20px_0px_0px_rgba(0,0,0,1)]">
+      <form className="bg-black p-6 sm:p-10 border border-white/20 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        
+        <div className="md:col-span-1 flex flex-col">
+          <label className="font-mono text-[10px] font-black mb-2 text-[#a5cb3a] tracking-widest">OPERATOR_NAME</label>
+          <input type="text" className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#a5cb3a] outline-none transition-all font-bold uppercase placeholder:text-white/20" placeholder="REQUIRED*" />
         </div>
 
-        <div className="lg:col-span-8 bg-black p-1 shadow-[8px_8px_0px_0px_rgba(225,255,0,1)] sm:shadow-[15px_15px_0px_0px_rgba(225,255,0,1)]">
-          <form className="bg-black p-6 sm:p-8 border-2 border-white/10 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            <div className="md:col-span-1 flex flex-col">
-              <label className="font-mono text-[10px] mb-2 text-[#e1ff00]">OPERATOR_NAME</label>
-              <input type="text" className="bg-white/5 border-b-2 border-[#ef6925] p-3 text-white focus:border-[#e1ff00] outline-none transition-all font-bold uppercase" placeholder="REQUIRED*" />
-            </div>
-            <div className="md:col-span-1 flex flex-col">
-              <label className="font-mono text-[10px] mb-2 text-[#e1ff00]">CONTACT_UPLINK</label>
-              <input type="email" className="bg-white/5 border-b-2 border-[#ef6925] p-3 text-white focus:border-[#e1ff00] outline-none transition-all font-bold uppercase" placeholder="EMAIL_ADDRESS*" />
-            </div>
-            <div className="md:col-span-2 flex flex-col">
-              <label className="font-mono text-[10px] mb-2 text-[#e1ff00]">SUBJECT_PROTOCOL</label>
-              <select className="bg-white/5 border-b-2 border-[#ef6925] p-3 text-white focus:border-[#e1ff00] outline-none transition-all font-bold">
-                <option className="bg-black text-white">A</option>
-                <option className="bg-black text-white">B</option>
-                <option className="bg-black text-white">C</option>
-              </select>
-            </div>
-            <div className="md:col-span-2 flex flex-col">
-              <label className="font-mono text-[10px] mb-2 text-[#e1ff00]">ENCRYPTED_MESSAGE</label>
-              <textarea rows="4" className="bg-white/5 border-b-2 border-[#ef6925] p-3 text-white focus:border-[#e1ff00] outline-none transition-all font-bold uppercase" placeholder="ENTER DATA..."></textarea>
-            </div>
-            <button className="md:col-span-2 bg-[#e1ff00] text-black font-black py-5 flex items-center justify-center gap-4 hover:bg-[#ef6925] hover:text-white transition-all uppercase group">
-              Initialise Transmission <Send size={20} className="group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
-            </button>
-          </form>
+        <div className="md:col-span-1 flex flex-col">
+          <label className="font-mono text-[10px] font-black mb-2 text-[#a5cb3a] tracking-widest">CONTACT_UPLINK</label>
+          <input type="email" className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#a5cb3a] outline-none transition-all font-bold uppercase placeholder:text-white/20" placeholder="EMAIL_ADDRESS*" />
         </div>
-      </section>
+
+        <div className="md:col-span-2 flex flex-col">
+          <label className="font-mono text-[10px] font-black mb-2 text-[#a5cb3a] tracking-widest">SUBJECT_PROTOCOL</label>
+          <select className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#a5cb3a] outline-none transition-all font-bold uppercase">
+            <option className="bg-black text-white">General Inquiry</option>
+            <option className="bg-black text-white">System Access</option>
+            <option className="bg-black text-white">Partnership</option>
+          </select>
+        </div>
+
+        <div className="md:col-span-2 flex flex-col">
+          <label className="font-mono text-[10px] font-black mb-2 text-[#a5cb3a] tracking-widest">ENCRYPTED_MESSAGE</label>
+          <textarea rows="4" className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#a5cb3a] outline-none transition-all font-bold uppercase placeholder:text-white/20" placeholder="ENTER DATA..."></textarea>
+        </div>
+
+        <button className="md:col-span-2 bg-[#a5cb3a] text-black font-[1000] py-6 flex items-center justify-center gap-4 hover:bg-white transition-all uppercase italic text-xl group border-2 border-[#a5cb3a]">
+          Initialise Transmission 
+          <Send size={24} className="group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
 
       {/* 4. GEOSPATIAL MAPPING */}
       <section className="py-24 border-t-[20px] border-black bg-white relative">
