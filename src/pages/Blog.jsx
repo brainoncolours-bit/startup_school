@@ -1,114 +1,117 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Layers, Scan, Database, Maximize2, Terminal } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Crosshair, Zap, Activity, ChevronRight, Binary } from 'lucide-react';
 
-const BrutalistGallery = () => {
-  const containerRef = useRef(null);
-  
+const BluePrintGallery = () => {
+  const [hoveredId, setHoveredId] = useState(null);
+
   return (
-    <div ref={containerRef} className="bg-[#e72132] min-h-screen text-[#eee] selection:bg-black selection:text-[#f9bb1a] overflow-x-hidden">
+    <div className="min-h-screen bg-[#000814] text-[#00f2ff] font-mono p-4 md:p-12 overflow-hidden selection:bg-[#00f2ff] selection:text-black">
       
-      {/* --- HUD NAVIGATION --- */}
-      <nav className="fixed top-0 w-full p-6 flex justify-between items-center z-[100] border-b-4 border-black bg-[#e72132]">
-        <div className="flex items-center gap-2 text-black">
-          <Layers className="text-black" />
-          <span className="font-black text-2xl uppercase italic tracking-tighter">GALLERY.SYS</span>
+      {/* --- GRID OVERLAY --- */}
+      <div className="fixed inset-0 pointer-events-none opacity-20" 
+           style={{ backgroundImage: `linear-gradient(#00f2ff 1px, transparent 1px), linear-gradient(90deg, #00f2ff 1px, transparent 1px)`, size: '40px 40px', backgroundSize: '40px 40px' }} />
+
+      {/* --- HEADER --- */}
+      <header className="relative z-10 flex justify-between items-start border-b border-[#00f2ff]/30 pb-6 mb-12">
+        <div>
+          <h1 className="text-4xl font-light tracking-[0.2em] uppercase">Specimen_Library</h1>
+          <div className="flex gap-4 mt-2 text-[10px] opacity-60">
+            <span className="flex items-center gap-1"><Activity size={12}/> SENSOR_ACTIVE</span>
+            <span className="flex items-center gap-1"><Binary size={12}/> DB_CONNECTED</span>
+          </div>
         </div>
-        <div className="flex gap-4 items-center">
-            <span className="hidden md:block font-mono text-[10px] text-black font-bold">STATUS: SECTOR_GRID_ACTIVE</span>
-            <div className="bg-black text-[#f9bb1a] px-4 py-2 font-black text-xs uppercase tracking-widest flex items-center gap-2">
-                <Database size={14} /> 84_ASSETS
+        <div className="text-right">
+          <div className="text-2xl font-bold italic underline">V.09-ALPHA</div>
+          <div className="text-[10px] opacity-40">LOC: 51.5074° N, 0.1278° W</div>
+        </div>
+      </header>
+
+      {/* --- GALLERY GRID --- */}
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-4 gap-1">
+        {specimens.map((specimen) => (
+          <div 
+            key={specimen.id}
+            onMouseEnter={() => setHoveredId(specimen.id)}
+            onMouseLeave={() => setHoveredId(null)}
+            className="relative border border-[#00f2ff]/20 bg-[#000814]/80 backdrop-blur-sm p-4 h-[450px] transition-all hover:border-[#00f2ff] cursor-crosshair group"
+          >
+            {/* CORNER BRACKETS */}
+            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f2ff]" />
+            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f2ff]" />
+
+            <div className="flex justify-between items-center mb-4 opacity-50 group-hover:opacity-100">
+              <span className="text-[10px] tracking-tighter">REF_{specimen.id}</span>
+              <Crosshair size={14} className="animate-spin-slow" />
             </div>
-        </div>
-      </nav>
 
-      <main className="pt-32 pb-20 px-6 md:px-12">
-        {/* --- GRID LAYOUT --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {galleryItems.map((item, i) => (
-            <GalleryCard key={item.id} item={item} index={i} />
-          ))}
-        </div>
-      </main>
+            {/* IMAGE AREA */}
+            <div className="relative h-2/3 overflow-hidden bg-black border border-[#00f2ff]/10">
+              <img 
+                src={specimen.img} 
+                className="w-full h-full object-cover opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100"
+                alt={specimen.title}
+              />
+              <div className="absolute inset-0 bg-[#00f2ff]/10 group-hover:bg-transparent transition-colors" />
+              
+              {/* SCANLINE EFFECT */}
+              <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,242,255,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[length:100%_2px,3px_100%]" />
+            </div>
 
-      {/* --- FOOTER STATUS --- */}
-      <footer className="fixed bottom-0 w-full bg-black text-[#e72132] p-2 flex justify-between font-mono text-[9px] z-[100]">
-        <span>CORE_OS_V.2.0.6</span>
-        <span className="animate-pulse">● SYSTEM_RUNNING</span>
-        <span>COORD: 40.7128° N, 74.0060° W</span>
+            {/* DESCRIPTION */}
+            <div className="mt-6">
+              <h3 className="text-lg font-bold uppercase mb-2 group-hover:text-white transition-colors">
+                {specimen.title}
+              </h3>
+              <p className="text-[10px] leading-relaxed opacity-60 group-hover:opacity-100 line-clamp-3">
+                {specimen.data}
+              </p>
+            </div>
+
+            {/* ACTIVE FOOTER */}
+            <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center overflow-hidden">
+                <AnimatePresence>
+                  {hoveredId === specimen.id && (
+                    <motion.div 
+                      initial={{ x: -100 }} 
+                      animate={{ x: 0 }} 
+                      exit={{ x: -100 }}
+                      className="flex items-center gap-2 text-[10px] font-black"
+                    >
+                      <Zap size={10} fill="#00f2ff" /> ANALYZING_CORE...
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* --- FOOTER HUD --- */}
+      <footer className="fixed bottom-0 left-0 w-full p-6 z-20 flex justify-between items-center border-t border-[#00f2ff]/10 bg-[#000814]">
+        <div className="text-[9px] flex gap-8 italic">
+          <span>O2_LEVELS: 98%</span>
+          <span>TEMP: -42°C</span>
+          <span className="animate-pulse text-red-500">WARNING: MEMORY_LEAK_IN_SECTOR_7</span>
+        </div>
+        <div className="h-2 w-32 bg-[#00f2ff]/20">
+          <motion.div 
+            animate={{ width: ["0%", "100%", "0%"] }}
+            transition={{ duration: 4, repeat: Infinity }}
+            className="h-full bg-[#00f2ff]" 
+          />
+        </div>
       </footer>
     </div>
   );
 };
 
-const GalleryCard = ({ item, index }) => {
-  return (
-    <motion.div 
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      className="group relative bg-[#f9bb1a] border-4 border-black shadow-[12px_12px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[6px] hover:translate-y-[6px] transition-all duration-200"
-    >
-      {/* IMAGE CONTAINER */}
-      <div className="relative h-[400px] overflow-hidden border-b-4 border-black bg-black">
-        <img 
-          src={item.img} 
-          alt={item.title}
-          className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 opacity-80"
-        />
-        <div className="absolute inset-0 bg-[#e72132]/30 mix-blend-multiply group-hover:bg-transparent transition-colors" />
-        
-        {/* OVERLAY TAGS */}
-        <div className="absolute top-4 left-4 flex flex-col gap-2">
-            <span className="bg-black text-[#f9bb1a] text-[10px] font-black px-2 py-1 w-fit">
-              {item.id}
-            </span>
-            <span className="bg-[#e72132] text-black text-[10px] font-black px-2 py-1 w-fit">
-              {item.res}
-            </span>
-        </div>
-
-        <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-            <div className="bg-[#f9bb1a] p-2 border-2 border-black">
-                <Maximize2 size={20} className="text-black" />
-            </div>
-        </div>
-      </div>
-
-      {/* TEXT CONTENT */}
-      <div className="p-6 text-[#e72132]">
-        <div className="flex justify-between items-start mb-4">
-            <h3 className="text-3xl font-black uppercase leading-none tracking-tighter">
-                {item.title}
-            </h3>
-            <Terminal size={18} className="mt-1" />
-        </div>
-        
-        <p className="text-sm font-bold leading-tight mb-6 text-black opacity-80">
-          {item.description}
-        </p>
-
-        <div className="flex items-center justify-between border-t-2 border-black/10 pt-4">
-            <span className="font-mono text-[10px] font-black uppercase text-black">
-                TAG // {item.tag}
-            </span>
-            <button className="text-[10px] font-black underline uppercase hover:text-black transition-colors">
-                View_Data
-            </button>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-const galleryItems = [
-  { id: "IMG_001", title: "Void_Structure", description: "Monolithic remains of the silicon era.", tag: "ARCHITECTURE", res: "4K_RAW", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" },
-  { id: "IMG_002", title: "Neural_Link", description: "Sub-dermal connectivity mapping.", tag: "BIOTECH", res: "8K_SCAN", img: "https://images.unsplash.com/photo-1620712943543-bcc4628c9757?q=80&w=800" },
-  { id: "IMG_003", title: "Data_Stream", description: "Visualizing the flow of packet loss.", tag: "INFRA", res: "VEC_02", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800" },
-  { id: "IMG_004", title: "Heavy_Metal", description: "Industrial decay in the outer rim.", tag: "WASTE", res: "RAW_EXP", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800" },
-  { id: "IMG_005", title: "Neon_Ghost", description: "Light pollution captured at 0.5Hz.", tag: "OPTICS", res: "ISO_900", img: "https://images.unsplash.com/photo-1510511459019-5dee99ccddf6?q=80&w=800" },
-  { id: "IMG_006", title: "Cyber_Relic", description: "First generation hardware encryption.", tag: "HARDWARE", res: "MACRO_01", img: "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?q=80&w=800" },
+const specimens = [
+  { id: "A-01", title: "Carbon_Core", data: "Detected anomalous structural density within the main shaft of the reactor housing.", img: "https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?q=80&w=800" },
+  { id: "B-22", title: "Synthetic_Eye", data: "Optical sensors calibrated to infra-red spectrum. Retinal patterns unidentified.", img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800" },
+  { id: "C-09", title: "Void_Link", data: "Signal latency suggests the presence of a localized singularity within the network.", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800" },
+  { id: "D-14", title: "Plasma_Grid", data: "Energy containment failure imminent. Recommend immediate venting of primary cells.", img: "https://images.unsplash.com/photo-1461747541859-467369165dd0?q=80&w=800" },
 ];
 
-export default BrutalistGallery;
+export default BluePrintGallery;
