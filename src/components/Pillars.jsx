@@ -44,7 +44,7 @@ const KineticPillar = ({ pillar, index }) => {
                <div className="w-1 h-1 sm:w-2 sm:h-2 bg-black animate-square-pulse" />
                <span className="font-mono text-[8px] sm:text-[10px] font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em]">Protocol_Loaded</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl md:text-7xl lg:text-9xl font-[1000] uppercase tracking-tighter leading-[0.8]">
+            <h2 className="text-5xl sm:text-5xl md:text-7xl lg:text-8xl font-[1000] uppercase tracking-tighter leading-[0.8]">
               {pillar.title}
             </h2>
           </div>
