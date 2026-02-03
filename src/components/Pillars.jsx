@@ -115,7 +115,7 @@ const Pillars = () => {
               key={i}
               animate={{ x: [0, -1000] }}
               transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              className="text-white font-mono text-[10px] sm:text-xs px-6 sm:px-12 tracking-[0.3em] sm:tracking-[0.5em] uppercase"
+              className="text-yellow-300 font-mono text-[10px] sm:text-xs px-6 sm:px-12 tracking-[0.3em] sm:tracking-[0.5em] uppercase"
             >
               March Batch Enrollment Open // Limited Slots
             </motion.span>
