@@ -54,7 +54,7 @@ const KineticPillar = ({ pillar, index }) => {
             </p>
             <div className="mt-3 sm:mt-5 lg:mt-8 flex items-center gap-2 sm:gap-3 lg:gap-4">
               <button className="bg-black text-white px-3 sm:px-6 lg:px-8 py-1.5 sm:py-2 lg:py-3 font-black uppercase text-[8px] sm:text-[9px] lg:text-xs hover:bg-[#e72132] transition-colors">
-                View Specs
+                
               </button>
               <div className="flex-grow border-b-2 border-black/10" />
             </div>
@@ -94,7 +94,7 @@ const Pillars = () => {
           >
             {[...Array(15)].map((_, i) => (
               <span key={i} className="font-mono text-[9px] text-black/20 -rotate-90 origin-left whitespace-nowrap uppercase tracking-widest">
-                System_Node_0x{i}66 // Kinetic_Flow_Status: Optimal
+                Startup School
               </span>
             ))}
           </motion.div>
@@ -107,16 +107,7 @@ const Pillars = () => {
       {/* --- INTRO --- */}
       <section className="h-screen flex items-center justify-center bg-black relative z-10 px-4">
         <div className="absolute top-6 sm:top-10 w-full overflow-hidden flex whitespace-nowrap border-y border-white/10 py-2 sm:py-3">
-          {[...Array(8)].map((_, i) => (
-            <motion.span 
-              key={i}
-              animate={{ x: [0, -1000] }}
-              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              className="text-white font-mono text-[7px] sm:text-[9px] lg:text-xs px-6 sm:px-10 lg:px-12 tracking-[0.3em] sm:tracking-[0.4em] lg:tracking-[0.5em] uppercase"
-            >
-              March Batch Enrollment Open // Limited Slots
-            </motion.span>
-          ))}
+          
         </div>
         <motion.div className="text-center">
           <h1 className="text-[12vw] sm:text-[15vw] lg:text-[18vw] font-[1000] text-white leading-none uppercase -tracking-widest">
@@ -137,7 +128,7 @@ const Pillars = () => {
         <motion.div 
           initial={{ y: 100, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          className="w-full max-w-2xl sm:max-w-4xl lg:max-w-6xl border-4 sm:border-6 lg:border-8 border-black bg-white p-6 sm:p-12 lg:p-32 text-center shadow-[15px_15px_0px_0px_#000] sm:shadow-[25px_25px_0px_0px_#000] lg:shadow-[40px_40px_0px_0px_#000] h-1/2 md:h-auto "
+          className="w-full max-w-2xl sm:max-w-4xl lg:max-w-6xl border-4 sm:border-6 lg:border-8 border-black bg-white p-6 sm:p-12 lg:p-32 text-center shadow-[15px_15px_0px_0px_#000] sm:shadow-[25px_25px_0px_0px_#000] lg:shadow-[40px_40px_0px_0px_#000] h-1/2 md:h-auto"
         >
           <h2 className="text-8xl pt-15 sm:text-6xl md:text-8xl lg:text-[11rem] font-[1000] text-black uppercase leading-[0.7] mb-6 sm:mb-12 tracking-tighter">
             ZERO.<br/>LIMITS.

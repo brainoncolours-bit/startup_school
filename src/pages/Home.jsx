@@ -476,7 +476,7 @@ export default function NeoBrutalHome() {
                 key={link}
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
-                className="border-2 sm:border-4 border-black bg-black text-white px-8 sm:px-12 py-4 font-bold hover:bg-white hover:text-black transition-all uppercase font-black w-40 sm:w-48 text-center"
+                className="border-2 sm:border-4 border-black bg-black text-white px-8 sm:px-12 py-4 font-bold hover:bg-white hover:text-black transition-all uppercase w-80 sm:w-88 text-center"
                 onClick={() => navigate('/contact')}
               >
                 {link}

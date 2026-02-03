@@ -381,7 +381,8 @@ const VibrantExecutiveAbout = () => {
           <h2 className="text-4xl sm:text-6xl md:text-9xl font-black italic uppercase text-white mb-8 sm:mb-12 md:mb-16 leading-none px-4">
             Build Something <br /> <span className="text-[#a5cb3a]">Real.</span>
           </h2>
-          <button className="bg-[#e72132] text-white px-8 sm:px-12 md:px-20 py-4 sm:py-6 md:py-8 font-black italic uppercase tracking-[0.2em] sm:tracking-[0.4em] text-base sm:text-xl md:text-2xl hover:bg-white hover:text-black transition-all shadow-[10px_10px_0px_#a5cb3a] sm:shadow-[20px_20px_0px_#a5cb3a]">
+          <button className="bg-[#e72132] text-white px-8 sm:px-12 md:px-20 py-4 sm:py-6 md:py-8 font-black italic uppercase tracking-[0.2em] sm:tracking-[0.4em] text-base sm:text-xl md:text-2xl hover:bg-white hover:text-black transition-all shadow-[10px_10px_0px_#a5cb3a] sm:shadow-[20px_20px_0px_#a5cb3a]"
+          onClick={()=>navigate("/contact")}>
             Join the Dojo
           </button>
         </div>

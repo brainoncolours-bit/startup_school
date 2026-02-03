@@ -4,6 +4,13 @@ import { Terminal, Send, Phone, Mail, Globe, AlertCircle, HardHat, Crosshair, Za
 
 const IndustrialContactPortal = () => {
   const containerRef = useRef(null);
+  const formRef = useRef(null);
+  const nameRef = useRef(null);
+  const phoneRef = useRef(null);
+  const emailRef = useRef(null);
+  const subjectRef = useRef(null);
+  const messageRef = useRef(null);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
@@ -11,6 +18,43 @@ const IndustrialContactPortal = () => {
 
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 80, damping: 25 });
   const bgTextX = useTransform(smoothProgress, [0, 1], ["0%", "-20%"]);
+
+ const handleSubmit = (e) => {
+  e.preventDefault();
+
+  const name = nameRef.current.value;
+  const phone = phoneRef.current.value;
+  const email = emailRef.current.value;
+  const subject = subjectRef.current.value;
+  const message = messageRef.current.value;
+
+  const subjectText = `Startup School Inquiry: ${subject}`;
+  const bodyText = `Name: ${name}
+Phone: ${phone}
+Email: ${email}
+
+Message:
+${message}`;
+
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    // 📱 MOBILE → keep current behavior
+    const mailtoLink = `mailto:info@mystartupschool.com?subject=${encodeURIComponent(
+      subjectText
+    )}&body=${encodeURIComponent(bodyText)}`;
+
+    window.location.href = mailtoLink;
+  } else {
+    // 💻 DESKTOP/LAPTOP → open Gmail website
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@mystartupschool.com&su=${encodeURIComponent(
+      subjectText
+    )}&body=${encodeURIComponent(bodyText)}`;
+
+    window.open(gmailUrl, "_blank");
+  }
+};
+
 
   return (
     <div ref={containerRef} className="bg-[#ef6925] text-black font-sans selection:bg-[#e1ff00] selection:text-black overflow-x-hidden min-h-screen">
@@ -95,30 +139,30 @@ const IndustrialContactPortal = () => {
             <div className="absolute inset-0 bg-[#f9bb1a] translate-x-3 translate-y-3 sm:translate-x-5 sm:translate-y-5 transition-transform duration-300 group-hover:translate-x-3 group-hover:translate-y-3" />
             
             <div className="relative bg-black p-1 border-2 border-black group-hover:-translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">
-              <form className="bg-black p-6 sm:p-10 border border-white/20 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-                
+              <form ref={formRef} onSubmit={handleSubmit} className="bg-black p-6 sm:p-10 border border-white/20 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+
                 {/* NAME */}
                 <div className="md:col-span-1 flex flex-col">
                   <label className="font-mono text-[10px] font-black mb-2 text-[#1da89d] tracking-widest uppercase">Name</label>
-                  <input type="text" required className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#e1ff00] outline-none transition-all font-bold uppercase placeholder:text-white/10" placeholder="IDENTIFY SELF..." />
+                  <input ref={nameRef} type="text" required className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#e1ff00] outline-none transition-all font-bold uppercase placeholder:text-white/10" placeholder="IDENTIFY SELF..." />
                 </div>
 
                 {/* NUMBER */}
                 <div className="md:col-span-1 flex flex-col">
                   <label className="font-mono text-[10px] font-black mb-2 text-[#1da89d] tracking-widest uppercase">Phone</label>
-                  <input type="tel" required className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#e1ff00] outline-none transition-all font-bold uppercase placeholder:text-white/10" placeholder="+00 000 000 000" />
+                  <input ref={phoneRef} type="tel" required className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#e1ff00] outline-none transition-all font-bold uppercase placeholder:text-white/10" placeholder="+00 000 000 000" />
                 </div>
 
                 {/* EMAIL */}
                 <div className="md:col-span-1 flex flex-col">
                   <label className="font-mono text-[10px] font-black mb-2 text-[#1da89d] tracking-widest uppercase">Email</label>
-                  <input type="email" required className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#e1ff00] outline-none transition-all font-bold uppercase placeholder:text-white/10" placeholder="UPLINK@DOMAIN.COM" />
+                  <input ref={emailRef} type="email" required className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#e1ff00] outline-none transition-all font-bold uppercase placeholder:text-white/10" placeholder="UPLINK@DOMAIN.COM" />
                 </div>
 
                 {/* SUBJECT */}
                 <div className="md:col-span-1 flex flex-col">
                   <label className="font-mono text-[10px] font-black mb-2 text-[#1da89d] tracking-widest uppercase">Subject_Protocol</label>
-                  <select className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#e1ff00] outline-none transition-all font-bold uppercase cursor-pointer">
+                  <select ref={subjectRef} className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#e1ff00] outline-none transition-all font-bold uppercase cursor-pointer">
                     <option className="bg-black text-white">General Inquiry</option>
                     <option className="bg-black text-white">Joinee</option>
                     <option className="bg-black text-white">Partnership</option>
@@ -129,11 +173,12 @@ const IndustrialContactPortal = () => {
                 {/* MESSAGE */}
                 <div className="md:col-span-2 flex flex-col">
                   <label className="font-mono text-[10px] font-black mb-2 text-[#1da89d] tracking-widest uppercase">Message</label>
-                  <textarea rows="4" className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#e1ff00] outline-none transition-all font-bold uppercase placeholder:text-white/10" placeholder="ENTER DATA STREAM..."></textarea>
+                  <textarea ref={messageRef} rows="4" className="bg-white/5 border-b-2 border-white/20 p-3 text-white focus:border-[#e1ff00] outline-none transition-all font-bold uppercase placeholder:text-white/10" placeholder="ENTER DATA STREAM..."></textarea>
                 </div>
 
                 {/* SUBMIT */}
                 <button type="submit" className="md:col-span-2 bg-[#1da89d] text-black font-[1000] py-6 flex items-center justify-center gap-4 hover:bg-[#e1ff00] transition-all uppercase italic text-xl group border-2 border-[#1da89d]">
+                  
                   Submit 
                   <Send size={24} className="group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
                 </button>

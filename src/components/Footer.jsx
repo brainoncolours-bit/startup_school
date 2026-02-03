@@ -23,7 +23,7 @@ const Footer = () => {
     { icon: Youtube, url: 'https://www.youtube.com/@mystartupschool' },
   ];
 
-  return (
+  return ( 
     <footer className="relative bg-[#ef6925] text-black min-h-[90vh] flex flex-col justify-center items-center overflow-hidden py-20 pb-32 font-sans">
       
       {/* 1. INDUSTRIAL BACKGROUND EFFECTS (Kept as is) */}
@@ -100,20 +100,10 @@ const Footer = () => {
               <p className="text-sm font-black text-black uppercase">Startup School</p>
             </div>
             <div className="h-8 w-1 bg-black" />
-            <div className="text-left">
-              <p className="text-[10px] font-mono text-black/50 uppercase tracking-[0.3em] font-bold">NOT AN </p>
-              <p className="text-sm font-black text-[#ef6925]">MBA</p>
-            </div>
+            
           </div>
 
-          {/* <div className="flex gap-12 text-[11px] font-black uppercase tracking-[0.2em]">
-            {['Laboratory', 'Vessels', 'Logbook', 'Signal'].map((link) => (
-              <a key={link} href="#" className="hover:text-[#ef6925] transition-colors flex items-center gap-2 group decoration-2 underline-offset-4 hover:underline decoration-black">
-                {link}
-                <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-black" />
-              </a>
-            ))}
-          </div> */}
+        
 
           {/* SOCIAL MEDIA ICONS WITH LINKS */}
           <div className="flex gap-4">
@@ -130,6 +120,16 @@ const Footer = () => {
               </motion.a>
             ))}
           </div>
+          
+          <div className="text-left flex items-center gap-4">
+             <div className="h-8 w-1 bg-black" />
+             <div>
+
+              <p className="text-[10px] font-mono text-black/50 uppercase tracking-[0.3em] font-bold">NOT AN </p>
+              <p className="text-lg font-black text-[#ef6925]">MBA</p>
+             </div>
+
+            </div>
         </div>
       </div>
 
