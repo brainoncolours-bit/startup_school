@@ -6,7 +6,7 @@ import SnakeGame from '../components/SnakeGame';
 import ZeroToHeroLoader from '../components/Loader';
 import Pillars from '../components/Pillars';
 import { useNavigate } from 'react-router-dom';
-
+import logo from "../assets/Startupschool.png";
 
 // --- 1. MAGNETIC WRAPPER ---
 const MagneticBox = ({ children, strength = 20 }) => {
@@ -425,10 +425,27 @@ export default function NeoBrutalHome() {
             </MagneticBox>
           </motion.div>
 
-          <motion.div style={{ y: useTransform(smoothProgress, [0, 1], [0, -500]) }} className="hidden lg:block absolute top-20 left-[10%]">
-            <div className="bg-[#a5cb3a] p-4 border-4 border-black shadow-[10px_10px_0px_0px_#000]">
-              <Star size={80} fill="currentColor" className="text-black" />
-            </div>
+          <motion.div 
+            style={{ y: useTransform(smoothProgress, [0, 1], [0, -150]) }} 
+            className="hidden xl:block absolute top-16 left-[5%]"
+            whileHover={{ scale: 1.05 }}
+            initial={{ x: -200, opacity: 0, rotate: -180, scale: 0.8 }}
+            animate={{ x: 0, opacity: 1, rotate: 0, scale: [0.8, 1.3, 1] }}
+            transition={{ 
+              duration: 1.6, 
+              type: "spring", 
+              stiffness: 60, 
+              damping: 12,
+              scale: { duration: 1.6, ease: "easeInOut" }
+            }}
+          >
+            <motion.div 
+              className="bg-[#F6F1E7] p-6 sm:p-8 border-4 rounded-4xl border-black shadow-[12px_12px_0px_0px_#000] hover:shadow-[8px_8px_0px_0px_#000] transition-all"
+              whileHover={{ rotate: 5 }}
+              transition={{ duration: 0.3 }}
+            >
+              <img src={logo} alt="Startup School" className="w-24 h-24 sm:w-32 sm:h-32 object-cover" />
+            </motion.div>
           </motion.div>
         </section>
 
