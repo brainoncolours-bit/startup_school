@@ -58,10 +58,10 @@ const IndustrialContactPortal = () => {
           <div className="mt-10 flex flex-col items-center">
             <div className="h-[4px] w-20 bg-black mb-4" />
             <p className="font-mono text-[10px] sm:text-xs uppercase font-black text-black tracking-[0.3em] leading-none">
-              NGEF Layout // Bennigana Halli
+              STARTUP PARK |  BENGALURU
             </p>
             <p className="font-mono text-[9px] uppercase text-black/60 mt-2">
-              Tr4 3rd Floor, 180, Bengaluru
+             3rd Floor
             </p>
           </div>
         </motion.div>
@@ -79,7 +79,7 @@ const IndustrialContactPortal = () => {
                 <span className="text-white drop-shadow-[4px_4px_0px_#000]">Comms</span>
               </h2>
               <p className="font-mono text-xs sm:text-sm font-black text-black leading-tight mt-6 uppercase">
-                Establish direct uplink for partnership inquiries, operational support, or system access.
+               Have a question or just want to say hello? Drop us a line and our team will get back to you within 24 hours.
               </p>
             </div>
 
@@ -162,7 +162,7 @@ const IndustrialContactPortal = () => {
       
       <iframe 
         title="Location Map"
-        src="https://www.google.com/maps/place/Startup+Park+By+Ique+Ventures/@20.7574802,72.1125325,5z/data=!4m10!1m2!2m1!1sstartup+park!3m6!1s0x3bae150058b75f01:0xd3b7950ec31e6322!8m2!3d12.9218575!4d77.6201801!15sCgxzdGFydHVwIHBhcmuSARBjb3Jwb3JhdGVfY2FtcHVz4AEA!16s%2Fg%2F11ylts96tf?hl=en-GB&entry=ttu&g_ep=EgoyMDI2MDEyOC4wIKXMDSoASAFQAw%3D%3D"
+        src='<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.7799881108012!2d77.6201801!3d12.9218575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae150058b75f01%3A0xd3b7950ec31e6322!2sStartup%20Park%20By%20Ique%20Ventures!5e0!3m2!1sen!2sin!4v1770039402212!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.7799881108012!2d77.6201801!3d12.9218575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae150058b75f01%3A0xd3b7950ec31e6322!2sStartup%20Park%20By%20Ique%20Ventures!5e0!3m2!1sen!2sin!4v1770039402212!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
         height="100%" 
         style={{ border: 0 }} 
         allowFullScreen="" 
@@ -183,7 +183,7 @@ const IndustrialContactPortal = () => {
         >
             {[...Array(10)].map((_, i) => (
                 <span key={i} className="flex items-center gap-6">
-                    <AlertCircle className="text-[#ef6925]" /> SYSTEM ACTIVE <span className="text-white">//</span> NO UNAUTHORIZED ACCESS <span className="text-[#ef6925]">//</span> 24/7 MONITORING
+                    <AlertCircle className="text-[#ef6925]" /> ADMISSIONS  <span className="text-white">STARTED</span>  <span className="text-[#ef6925]">//</span> JOIN NOW
                 </span>
             ))}
         </motion.div>
@@ -194,7 +194,7 @@ const IndustrialContactPortal = () => {
             <HardHat size={50} className="text-white -skew-x-12" />
         </div>
         <p className="font-mono text-[11px] font-bold tracking-[0.6em] text-[#e1ff00] text-center px-6 uppercase">
-          Designated Secure Channel <span className="text-white">|</span> All Metadata Logged
+          THANKYOU <span className="text-white"></span> 
         </p>
         <div className="mt-8 flex gap-2">
             <div className="w-8 h-2 bg-[#ef6925]"></div>
