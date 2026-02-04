@@ -1,9 +1,9 @@
-import React, { useRef, useState, useEffect, use } from 'react';
+import React, { useRef, useState, useEffect } from 'react'; // Fixed typo here
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'framer-motion';
 import { Star, ArrowUpRight, Zap, Plus, Rocket, Trophy, Activity, Cpu, AlertTriangle, Skull, Flame, Sparkles, Target, TrendingUp } from 'lucide-react';
 import Chatbot from '../components/Chatbot';
 import SnakeGame from '../components/SnakeGame';
-import Loader from '../components/Loader';
+import Loader from '../components/Loader'; // Points to src/components/Loader.jsx
 import Pillars from '../components/Pillars';
 import { useNavigate } from 'react-router-dom';
 import logo from "../assets/Startupschool.png";
