@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const FunkyShatterHero = ({ onComplete }) => {
+const ZeroToHeroLoader = ({ onComplete }) => {
   const colors = {
     yellow: '#f9bb1a',
     orange: '#f79e27',
@@ -157,4 +157,4 @@ const FunkyShatterHero = ({ onComplete }) => {
   );
 };
 
-export default FunkyShatterHero;
+export default ZeroToHeroLoader;

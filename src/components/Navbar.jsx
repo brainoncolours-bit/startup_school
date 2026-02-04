@@ -1,179 +1,112 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence, useSpring, useTransform, useMotionValue } from 'framer-motion';
-import { Home, User, Images, Book, Send, Sparkles, Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Home, User, Layers, Mail, Sparkles, BookOpenText  } from 'lucide-react';
 
+import Chatbot from './Chatbot'
+import SnakeGame from './SnakeGame';
 const navItems = [
-  { name: 'Home', path: '/', icon: <Home size={20} />, color: '#60A5FA' },
-  { name: 'About', path: '/about', icon: <User size={20} />, color: '#A78BFA' },
-  // { name: 'Gallery', path: '/courses', icon: <Images size={20} />, color: '#F472B6' },
-  { name: 'Gallery', path: '/blog', icon: <Book size={20} />, color: '#FB923C' },
-  { name: 'Contact', path: '/contact', icon: <Send size={20} />, color: '#34D399' },
+  { name: 'Home', path: '/', icon: Home, color: 'from-fuchsia-500 to-purple-600', shadow: 'shadow-fuchsia-500/40' },
+
+  { name: 'About', path: '/about', icon: BookOpenText, color: 'from-orange-400 to-red-500', shadow: 'shadow-orange-500/40' },
+    { name: 'Gallery', path: '/blog', icon: Layers, color: 'from-cyan-400 to-blue-500', shadow: 'shadow-cyan-500/40' },
+  { name: 'Contact', path: '/contact', icon: Mail, color: 'from-emerald-400 to-teal-500', shadow: 'shadow-emerald-500/40' },
 ];
 
-const MagneticButton = ({ children, isActive, color }) => {
-  const ref = useRef(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const springConfig = { damping: 15, stiffness: 150 };
-  const mouseX = useSpring(x, springConfig);
-  const mouseY = useSpring(y, springConfig);
-
-  const handleMouseMove = (e) => {
-    const { clientX, clientY } = e;
-    const { height, width, left, top } = ref.current.getBoundingClientRect();
-    const middleX = clientX - (left + width / 2);
-    const middleY = clientY - (top + height / 2);
-    x.set(middleX * 0.4);
-    y.set(middleY * 0.4);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ x: mouseX, y: mouseY }}
-      className="relative flex items-center justify-center"
-    >
-      {children}
-      {isActive && (
-        <motion.div
-          layoutId="glow"
-          className="absolute -inset-2 blur-xl opacity-20 rounded-full"
-          style={{ backgroundColor: color }}
-        />
-      )}
-    </motion.div>
-  );
-};
-
-const KineticNav = () => {
+const VibrantAdaptiveNav = ({ isLightBg = true }) => {
   const [hovered, setHovered] = useState(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
+  // Theme logic based on background color
+  const navBg = isLightBg ? 'bg-zinc-900/90' : 'bg-white/10';
+  const borderColor = isLightBg ? 'border-white/10' : 'border-white/20';
+  const inactiveIcon = isLightBg ? 'text-zinc-500' : 'text-white/40';
+
   return (
-    <>
-      {/* Mobile Menu Button */}
-      <motion.button
-        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        className="md:hidden fixed top-6 right-6 z-[101] w-12 h-12 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white"
-        whileTap={{ scale: 0.9 }}
-      >
-        {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-      </motion.button>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden fixed top-0 left-0 right-0 z-[100] bg-black/95 backdrop-blur-xl border-b border-white/10 p-6"
-          >
-            <div className="flex flex-col gap-3 pt-16">
-              {navItems.map((item) => {
-                const isActive = location.pathname === item.path;
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center gap-4 p-4 rounded-xl transition-colors ${
-                      isActive ? 'bg-white text-black' : 'bg-white/5 text-white'
-                    }`}
-                  >
-                    {item.icon}
-                    <span className="font-bold uppercase tracking-wider">{item.name}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Desktop Navigation */}
-      <nav className="hidden md:block fixed bottom-8 left-1/2 -translate-x-1/2 z-[100]">
+    <nav className="fixed right-8 top-1/2 -translate-y-1/2 z-[100] hidden lg:block">
       <motion.div 
-        className="flex items-end gap-3 p-3 bg-black/40 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ type: 'spring', damping: 20, stiffness: 100 }}
+        animate={{ backgroundColor: isLightBg ? 'rgba(24, 24, 27, 0.9)' : 'rgba(255, 255, 255, 0.1)' }}
+        className={`relative flex flex-col gap-3 p-4 rounded-[2.5rem] backdrop-blur-3xl border ${borderColor} shadow-2xl transition-colors duration-500`}
       >
+        
+        {/* Animated Background Blob */}
+        <AnimatePresence>
+          {hovered !== null && (
+            <motion.div
+              layoutId="vibrant-blob"
+              className={`absolute left-2.5 right-2.5 z-0 rounded-2xl bg-gradient-to-br shadow-lg ${navItems[hovered].color} ${navItems[hovered].shadow}`}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ type: "spring", stiffness: 400, damping: 28 }}
+              style={{
+                height: '52px',
+                top: hovered * 68 + 16,
+              }}
+            />
+          )}
+        </AnimatePresence>
+
         {navItems.map((item, idx) => {
           const isActive = location.pathname === item.path;
+          const Icon = item.icon;
           const isHovered = hovered === idx;
 
           return (
-            <Link key={item.name} to={item.path} className="relative">
-              <MagneticButton isActive={isActive} color={item.color}>
-                <motion.div
-                  onMouseEnter={() => setHovered(idx)}
-                  onMouseLeave={() => setHovered(null)}
-                  whileTap={{ scale: 0.9 }}
-                  className={`
-                    relative group flex flex-col items-center justify-center
-                    w-14 h-14 rounded-2xl transition-colors duration-500
-                    ${isActive ? 'bg-white text-black' : 'bg-white/5 text-white hover:bg-white/10'}
-                  `}
-                >
-                  <motion.div 
-                    animate={{ y: isHovered || isActive ? -2 : 0 }}
-                    className="z-10"
+            <Link
+              key={item.name}
+              to={item.path}
+              onMouseEnter={() => setHovered(idx)}
+              onMouseLeave={() => setHovered(null)}
+              className="relative z-10 w-13 h-13 flex items-center justify-center"
+            >
+              <motion.div
+                animate={{ 
+                  scale: isHovered || isActive ? 1.15 : 1,
+                  color: (isHovered || isActive) ? "#ffffff" : (isLightBg ? "#71717a" : "#ffffff66")
+                }}
+              >
+                <Icon size={22} strokeWidth={isActive ? 2.5 : 2} />
+              </motion.div>
+              
+              {/* Tooltip */}
+              <AnimatePresence>
+                {isHovered && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: -25 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    className={`absolute right-full mr-6 px-4 py-2 rounded-xl bg-zinc-900 text-white text-[10px] font-black uppercase tracking-widest shadow-2xl border border-white/10 whitespace-nowrap`}
                   >
-                    {item.icon}
+                    <span className={`bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>
+                      {item.name}
+                    </span>
                   </motion.div>
+                )}
+              </AnimatePresence>
 
-                  <AnimatePresence>
-                    {(isHovered || isActive) && (
-                      <motion.span
-                        initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.8 }}
-                        className={`absolute -top-10 px-3 py-1 rounded-lg text-[10px] font-bold tracking-widest uppercase border border-white/10 backdrop-blur-md
-                          ${isActive ? 'bg-white text-black' : 'bg-zinc-900 text-white'}
-                        `}
-                      >
-                        {item.name}
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-
-                  {/* Dot Indicator */}
-                  {isActive && (
-                    <motion.div 
-                      layoutId="dot"
-                      className="absolute -bottom-1 w-1 h-1 rounded-full bg-white"
-                    />
-                  )}
-                </motion.div>
-              </MagneticButton>
+              {/* Active Indicator */}
+              {isActive && (
+                <motion.div 
+                  layoutId="active-indicator"
+                  className={`absolute -right-1.5 w-1.5 h-6 rounded-full bg-gradient-to-b ${item.color}`}
+                />
+              )}
             </Link>
           );
         })}
-        
-        <div className="w-[1px] h-8 bg-white/10 mx-2 self-center" />
 
-        <motion.button
-          whileHover={{ scale: 1.1, rotate: 5 }}
-          whileTap={{ scale: 0.9 }}
-          className="w-14 h-14 rounded-2xl bg-indigo-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/40"
-        >
-          <Sparkles size={20} />
-        </motion.button>
+        <div className={`h-[1px] w-8 mx-auto my-1 rounded-full ${isLightBg ? 'bg-white/10' : 'bg-white/20'}`} />
+
+      
+
+            <Chatbot />
+
+             <SnakeGame />
+
       </motion.div>
     </nav>
-    </>
   );
 };
 
-export default KineticNav;
+export default VibrantAdaptiveNav;

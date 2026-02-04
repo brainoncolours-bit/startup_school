@@ -50,15 +50,15 @@ const IndustrialChatbot = () => {
       {/* 1. CIRCULAR AI TRIGGER */}
       <motion.button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-[#e1ff00] border-4 border-black rounded-full flex items-center justify-center text-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
+        className=" bottom-6 right-6 z-50 w-16 h-16 bg-[#e1ff00] border-4 border-black rounded-full flex items-center justify-center text-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
         initial={{ x: 100 }}
         animate={{ x: isOpen ? 200 : 0 }}
         whileHover={{ scale: 1.1, rotate: 5 }}
       >
         <Bot size={32} strokeWidth={2.5} />
-        <div className="absolute top-0 right-0 bg-[#ef6925] text-white text-[10px] font-black px-1.5 py-0.5 border-2 border-black rounded-sm">
+        {/* <div className="fixed top-0 right-0 bg-[#ef6925] text-white text-[10px] font-black px-1.5 py-0.5 border-2 border-black rounded-sm">
           LIVE
-        </div>
+        </div> */}
       </motion.button>
 
       {/* 2. CHAT INTERFACE */}
@@ -68,7 +68,7 @@ const IndustrialChatbot = () => {
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.9 }}
-            className="fixed bottom-0 right-0 md:bottom-8 md:right-8 z-[100] w-full md:w-[400px] h-full md:h-[600px] bg-black border-[6px] border-black flex flex-col shadow-[20px_20px_0px_0px_rgba(239,105,37,1)]"
+            className=" bottom-0 right-0 md:bottom-8 md:right-8 z-[100] w-full md:w-[400px] h-full md:h-[600px] bg-black border-[6px] border-black flex flex-col shadow-[20px_20px_0px_0px_rgba(239,105,37,1)]"
           >
             {/* HEADER */}
             <div className="bg-[#ef6925] p-4 flex items-center justify-between border-b-4 border-black">

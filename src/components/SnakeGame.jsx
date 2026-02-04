@@ -116,7 +116,7 @@ const SnakeGame = () => {
       {/* Game Button */}
       <motion.button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 right-20 md:bottom-8 md:right-28 z-50 w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-[#ef6925] to-[#e1ff00] rounded-full flex items-center justify-center text-black shadow-2xl shadow-orange-500/50 border-2 border-black"
+        className="bottom-4 right-20 md:bottom-8 md:right-28 z-50 w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-[#ef6925] to-[#e1ff00] rounded-full flex items-center justify-center text-black shadow-2xl shadow-orange-500/50 border-2 border-black"
         whileHover={{ scale: 1.1, rotate: -5 }}
         whileTap={{ scale: 0.9 }}
         initial={{ scale: 0 }}
@@ -138,7 +138,7 @@ const SnakeGame = () => {
             initial={{ opacity: 0, y: 100, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
-            className="fixed inset-0 md:inset-auto md:bottom-8 md:right-28 z-50 bg-black border-0 md:border-4 border-[#ef6925] md:shadow-[15px_15px_0px_0px_rgba(239,105,37,1)] overflow-hidden"
+            className=" inset-0 md:inset-auto md:bottom-8 md:right-28 z-50 bg-black border-0 md:border-4 border-[#ef6925] md:shadow-[15px_15px_0px_0px_rgba(239,105,37,1)] overflow-hidden"
             style={{ width: typeof window !== 'undefined' && window.innerWidth < 768 ? '100vw' : GRID_SIZE * CELL_SIZE + 40, height: typeof window !== 'undefined' && window.innerWidth < 768 ? '100vh' : GRID_SIZE * CELL_SIZE + 180 }}
           >
             {/* Header */}

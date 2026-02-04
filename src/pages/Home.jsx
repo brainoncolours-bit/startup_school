@@ -504,10 +504,10 @@ export default function NeoBrutalHome() {
       </div>
       
       {/* Chatbot */}
-      <Chatbot />
+      {/* <Chatbot /> */}
       
       {/* Snake Game */}
-      <SnakeGame />
+      {/* <SnakeGame /> */}
     </>
   );
 }

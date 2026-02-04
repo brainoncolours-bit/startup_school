@@ -1,155 +1,139 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Shield, Eye, AlertTriangle, Crosshair, ChevronRight, Activity } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { useNavigate} from 'react-router-dom'
+const images = [
+  { url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe', title: 'VOID' },
+  { url: 'https://images.unsplash.com/photo-1614850523296-d8c1af93d400', title: 'CHROMA' },
+  { url: 'https://images.unsplash.com/photo-1633167606207-d840b5070fc2', title: 'PRISM' },
+  { url: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead', title: 'NEON' },
+];
 
-const TerminalGallery = () => {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const containerRef = useRef(null);
+export default function PerspectiveGallery() {
+  const naviagte = useNavigate();
+  const [captures, setCaptures] = useState([]);
+  const [flash, setFlash] = useState(false);
 
-  // Track mouse for 3D tilt effect
-  const handleMouseMove = (e) => {
-    const { clientX, clientY } = e;
-    const { innerWidth, innerHeight } = window;
-    const x = (clientX / innerWidth - 0.5) * 20;
-    const y = (clientY / innerHeight - 0.5) * -20;
-    setMousePos({ x, y });
+  const handleCapture = (e) => {
+    // 1. Trigger Flash
+    setFlash(true);
+    setTimeout(() => setFlash(false), 150);
+
+    // 2. Add new photo at click location
+    const newPhoto = {
+      id: Date.now(),
+      x: e.clientX,
+      y: e.clientY,
+      // Pick a random image from our list
+      url: images[Math.floor(Math.random() * images.length)].url,
+      rotate: Math.random() * 40 - 20, // Random rotation between -20 and 20deg
+    };
+
+    setCaptures((prev) => [...prev, newPhoto]);
   };
 
-  const { scrollYProgress } = useScroll();
-  const scaleProgress = useSpring(useTransform(scrollYProgress, [0, 1], [1, 0.8]), { stiffness: 100, damping: 30 });
-
   return (
-    <div 
-      onMouseMove={handleMouseMove}
-      className="bg-[#050505] min-h-[200vh] text-[#00ff41] font-mono overflow-hidden selection:bg-[#00ff41] selection:text-black"
-    >
-      {/* --- SCANLINE & NOISE OVERLAY --- */}
-      <div className="fixed inset-0 pointer-events-none z-[999] opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-      <div className="fixed inset-0 pointer-events-none z-[999] scanlines opacity-20" />
+    <main className="bg-red-600 text-yellow-400 overflow-x-hidden relative">
+      {/* Flash Overlay */}
+      <AnimatePresence>
+        {flash && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-white z-[100] pointer-events-none"
+          />
+        )}
+      </AnimatePresence>
 
-      {/* --- 3D BACKGROUND GRID --- */}
-      <div className="fixed inset-0 perspective-[1000px] z-0">
-        <motion.div 
-          style={{ 
-            rotateX: mousePos.y, 
-            rotateY: mousePos.x,
-          }}
-          className="absolute inset-[-10%] border-[#00ff41]/20 border-[1px] grid-bg"
-        />
-      </div>
-
-      {/* --- FLOATING UI ELEMENTS --- */}
-      <div className="fixed top-10 left-10 z-50 mix-blend-difference">
-        <div className="flex items-center gap-4 bg-black border border-[#00ff41] p-4">
-          <Activity className="animate-pulse" />
-          <div>
-            <div className="text-[10px] leading-none">THREAT_LEVEL: LOW</div>
-            <div className="text-xl font-black italic uppercase">Sector_9_Gallery</div>
-          </div>
-        </div>
-      </div>
-
-      {/* --- MAIN CONTENT --- */}
-      <motion.main 
-        style={{ scale: scaleProgress }}
-        className="relative z-10 pt-48 pb-64 px-10 max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12"
+      {/* Hero Section */}
+      <section 
+        onClick={handleCapture}
+        className="h-screen flex flex-col items-start justify-end p-10 border-b border-yellow-400/20 relative overflow-hidden cursor-crosshair"
       >
-        {relicData.map((relic, idx) => (
-          <RelicCard key={relic.id} relic={relic} index={idx} />
-        ))}
-      </motion.main>
+        {/* Render Captured Photos */}
+        <AnimatePresence>
+          {captures.map((photo) => (
+            <motion.div
+              key={photo.id}
+              initial={{ scale: 2, opacity: 0, x: photo.x - 100, y: photo.y - 100 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="absolute w-40 h-48 bg-white p-2 shadow-2xl z-10 pointer-events-none"
+              style={{ 
+                left: 0, 
+                top: 0, 
+                rotate: photo.rotate,
+                x: photo.x - 80, // Center the photo on click
+                y: photo.y - 100 
+              }}
+            >
+              <img src={photo.url} className="w-full h-32 object-cover bg-gray-200" alt="captured" />
+              <div className="mt-2 h-8 bg-gray-100 flex items-center px-1">
+                <span className="text-[10px] text-black font-mono">CAPTURED_0{photo.id.toString().slice(-2)}</span>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
 
-      {/* --- FOOTER HUD --- */}
-      <div className="fixed bottom-0 w-full p-6 flex justify-between items-end z-50 pointer-events-none">
-        <div className="pointer-events-auto bg-[#00ff41] text-black px-4 py-2 font-black uppercase text-sm flex items-center gap-3">
-          <Shield size={18} /> OS_ENCRYPTED_V4.2
+        <h1 className="text-[20vw] font-black uppercase leading-[0.8] mb-10 select-none">
+          The <br /> <span className="text-outline">Vault</span>
+        </h1>
+        <div className="flex justify-between w-full font-mono text-sm uppercase tracking-widest text-yellow-200/70 z-20">
+          <span>Perspective Grid // 04</span>
+          <span>Click to Capture / Scroll to Unlock</span>
         </div>
-        <div className="text-right text-[10px] opacity-50">
-          <div>COORD: {mousePos.x.toFixed(2)} / {mousePos.y.toFixed(2)}</div>
-          <div>TIMESTAMP: {new Date().toISOString()}</div>
-        </div>
-      </div>
+      </section>
+
+      {/* Grid Content */}
+      <section className="py-20 px-4">
+        {images.map((img, i) => (
+          <PerspectiveCard key={i} {...img} />
+        ))}
+      </section>
+
+      <footer className="h-[50vh] flex items-center justify-center">
+        <h2 className="text-5xl font-light tracking-[1em] uppercase opacity-40">Finis</h2> <br />
+
+        <button onClick={()=>{naviagte("/gallery")}}>
+          View moreaaa
+        </button>
+      </footer>
 
       <style jsx>{`
-        .grid-bg {
-          background-image: 
-            linear-gradient(to right, #00ff41 1px, transparent 1px),
-            linear-gradient(to bottom, #00ff41 1px, transparent 1px);
-          background-size: 50px 50px;
-          mask-image: radial-gradient(circle, black, transparent 80%);
-        }
-        .scanlines {
-          background: linear-gradient(
-            to bottom,
-            transparent 50%,
-            rgba(0, 255, 65, 0.05) 51%,
-            transparent 51%
-          );
-          background-size: 100% 4px;
+        .text-outline {
+          -webkit-text-stroke: 2px #facc15;
+          color: transparent;
         }
       `}</style>
+    </main>
+
+  );
+}
+
+// Sub-component for the scrolling cards
+const PerspectiveCard = ({ url, title }) => {
+  const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start end", "end start"]
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
+  const rotateX = useTransform(scrollYProgress, [0, 0.5], [45, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+
+  return (
+    <div ref={container} className="h-[80vh] flex items-center justify-center perspective-[1000px]">
+      <motion.div 
+        style={{ scale, rotateX, opacity }}
+        className="relative w-full max-w-4xl h-[500px] rounded-2xl overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] bg-red-900"
+      >
+        <img src={url} alt={title} className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-red-900/80 via-transparent to-transparent flex items-end p-12">
+          <h2 className="text-[10vw] font-black text-yellow-400 italic tracking-tighter leading-[0.7]">
+            {title}
+          </h2>
+        </div>
+      </motion.div>
     </div>
   );
 };
-
-const RelicCard = ({ relic, index }) => {
-  // Random staggered layout logic
-  const colSpan = [ "md:col-span-6", "md:col-span-4", "md:col-span-8", "md:col-span-5" ][index % 4];
-  const marginTop = index % 2 === 0 ? "mt-0" : "mt-24";
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: (index % 3) * 0.1 }}
-      className={`${colSpan} ${marginTop} group relative`}
-    >
-      {/* Decoration lines */}
-      <div className="absolute -top-4 -left-4 w-8 h-8 border-t-2 border-l-2 border-[#00ff41] group-hover:scale-125 transition-transform" />
-      
-      <div className="relative overflow-hidden border border-[#00ff41]/30 bg-black p-2 hover:border-[#00ff41] transition-colors">
-        <div className="relative aspect-video overflow-hidden">
-          <motion.img 
-            whileHover={{ scale: 1.05 }}
-            src={relic.url} 
-            className="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500"
-          />
-          <div className="absolute inset-0 bg-[#00ff41]/10 mix-blend-color group-hover:bg-transparent" />
-          
-          {/* Lock-on UI */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-            <Crosshair className="text-[#00ff41] scale-[3] animate-spin-slow" />
-          </div>
-        </div>
-
-        <div className="mt-4 p-4 border-t border-[#00ff41]/20">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-[10px] bg-[#00ff41] text-black px-2 font-bold uppercase">{relic.tag}</span>
-            <span className="text-[10px] opacity-50">REF_{relic.id}</span>
-          </div>
-          <h3 className="text-2xl font-black uppercase tracking-widest mb-2 group-hover:translate-x-2 transition-transform">
-            {relic.title}
-          </h3>
-          <p className="text-xs opacity-70 leading-relaxed mb-6">
-            {relic.desc}
-          </p>
-          <button className="flex items-center gap-2 text-[10px] font-bold hover:underline">
-            <Eye size={14} /> DECRYPT_DATA <ChevronRight size={12} />
-          </button>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-const relicData = [
-  { id: "RX-90", title: "Neon_Avenue", tag: "LOC_DATA", desc: "Thermal signature detected in sector 7 sub-levels.", url: "https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=800" },
-  { id: "RX-91", title: "Neural_Link", tag: "BIO_HAZARD", desc: "Direct interface with the synthetic cortex established.", url: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?q=80&w=800" },
-  { id: "RX-92", title: "Void_Tower", tag: "STRUCT_FAIL", desc: "Structural integrity at 14% following the uplink.", url: "https://images.unsplash.com/photo-1470723710355-95304d8aece4?q=80&w=800" },
-  { id: "RX-93", title: "Ghost_Code", tag: "ENCRYPT", desc: "Fragmented packets found in the liquid-coolant pipes.", url: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800" },
-  { id: "RX-94", title: "Pulse_Mod", tag: "SIGNAL_LOW", desc: "Awaiting handshake from orbital relay Alpha-6.", url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800" },
-  { id: "RX-95", title: "Static_Flow", tag: "DATA_LOSS", desc: "Corrupted visual feeds from the deep-sea cable.", url: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800" },
-];
-
-export default TerminalGallery;
