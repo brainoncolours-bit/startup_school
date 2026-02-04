@@ -157,4 +157,4 @@ const Loader = ({ onComplete }) => {
   );
 };
 
-export default ZeroToHeroLoader;
+export default Loader;
