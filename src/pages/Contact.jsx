@@ -204,17 +204,15 @@ ${message}`;
     <div className="h-[500px] w-full bg-slate-900 border-[15px] border-black relative grayscale hover:grayscale-0 transition-all duration-700 overflow-hidden group">
       {/* Overlay to maintain the "Industrial" look until hovered */}
       <div className="absolute inset-0 bg-[#e1ff00]/10 pointer-events-none group-hover:bg-transparent transition-colors z-10" />
-      
-      <iframe 
-        title="Location Map"
-        src='<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.7799881108012!2d77.6201801!3d12.9218575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae150058b75f01%3A0xd3b7950ec31e6322!2sStartup%20Park%20By%20Ique%20Ventures!5e0!3m2!1sen!2sin!4v1770039402212!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.7799881108012!2d77.6201801!3d12.9218575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae150058b75f01%3A0xd3b7950ec31e6322!2sStartup%20Park%20By%20Ique%20Ventures!5e0!3m2!1sen!2sin!4v1770039402212!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
-        height="100%" 
-        style={{ border: 0 }} 
-        allowFullScreen="" 
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-        className="relative z-0"
-      />
+          <iframe 
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62220.47980977282!2d77.54396244863277!3d12.921857500000014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae150058b75f01%3A0xd3b7950ec31e6322!2sStartup%20Park%20By%20Ique%20Ventures!5e0!3m2!1sen!2sin!4v1770189678232!5m2!1sen!2sin" // Ensure this is a valid Embed URL
+  className="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700"
+  style={{ border: 0 }} // Corrected: Must be an object
+  allowFullScreen // Corrected: CamelCase
+  loading="lazy" 
+  referrerPolicy="no-referrer-when-downgrade" // Corrected: CamelCase
+></iframe>
+     
     </div>
   </div>
 </section>
