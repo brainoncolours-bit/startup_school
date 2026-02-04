@@ -340,7 +340,7 @@ export default function NeoBrutalHome() {
               whileHover={{ rotate: 5 }}
               transition={{ duration: 0.3 }}
             >
-              <img src="public/assets/Startupschool.png" alt="Startup School" className="w-24 h-24 sm:w-32 sm:h-32 object-cover" />
+              <img src="/assets/Startupschool.png" alt="Startup School" className="w-24 h-24 sm:w-32 sm:h-32 object-cover" />
             </motion.div>
           </motion.div>
         </section>
