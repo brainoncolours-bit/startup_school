@@ -142,7 +142,7 @@ const SnakeGame = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
-            className="fixed inset-0 md:inset-auto md:bottom-8 md:right-8 z-[60] flex items-center justify-center md:block"
+            className="fixed   md:inset-auto md:bottom-[-210px]  md:right-8 z-[60] flex items-center justify-end md:block"
           >
             {/* Backdrop for mobile to ensure focus */}
             <div className="fixed inset-0 bg-black/60 md:hidden" onClick={() => setIsOpen(false)} />
@@ -153,7 +153,7 @@ const SnakeGame = () => {
             >
               {/* Header */}
               <div className="bg-gradient-to-r from-[#ef6925] to-[#e1ff00] p-3 flex items-center justify-between border-b-2 border-black">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 ">
                   <Gamepad2 className="text-black" size={20} />
                   <h3 className="font-black text-black text-sm uppercase">Snake Protocol</h3>
                 </div>
