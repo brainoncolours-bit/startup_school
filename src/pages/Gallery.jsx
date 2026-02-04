@@ -3,14 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Maximize2, ExternalLink } from 'lucide-react';
 
 const galleryImages = [
-  { id: 1, url: 'src/assets/img2.jpeg', title: 'Minimal Void', category: 'Abstract' },
-  { id: 2, url: 'src/assets/img12.jpeg', title: 'Chroma Flow', category: 'Gradient' },
-  { id: 3, url: 'src/assets/img3.jpeg', title: 'Prism Study', category: 'Glass' },
-  { id: 5, url: 'src/assets/img5.jpeg', title: 'Static Noise', category: 'Texture' },
-  { id: 6, url: 'src/assets/img6.jpeg', title: 'Dark Matter', category: 'Abstract' },
-  { id: 7, url: 'src/assets/img7.jpeg', title: 'Ethereal', category: 'Art' },
-  { id: 8, url: 'src/assets/img8.jpeg', title: 'Geometric', category: 'Digital' },
-  { id: 4, url: 'src/assets/img14.jpeg', title: 'Neon Pulse', category: 'Digital' },
+  { id: 1, url: 'public/assets/img2.jpeg', title: 'Minimal Void', category: 'Abstract' },
+  { id: 2, url: 'public/assets/img12.jpeg', title: 'Chroma Flow', category: 'Gradient' },
+  { id: 3, url: 'public/assets/img3.jpeg', title: 'Prism Study', category: 'Glass' },
+  { id: 5, url: 'public/assets/img5.jpeg', title: 'Static Noise', category: 'Texture' },
+  { id: 6, url: 'public/assets/img6.jpeg', title: 'public Matter', category: 'Abstract' },
+  { id: 7, url: 'public/assets/img7.jpeg', title: 'Ethereal', category: 'Art' },
+  { id: 8, url: 'public/assets/img8.jpeg', title: 'Geometric', category: 'Digital' },
+  { id: 4, url: 'public/assets/img14.jpeg', title: 'Neon Pulse', category: 'Digital' },
 ];
 
 const GalleryPage = () => {
