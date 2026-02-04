@@ -3,14 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowUpRight, Plus, Hash } from 'lucide-react';
 
 const galleryImages = [
-  { id: 1, url: 'public/assets/img2.jpeg', title: 'Minimal Void', category: 'Abstract', year: '2026' },
-  { id: 2, url: 'public/assets/img12.jpeg', title: 'Chroma Flow', category: 'Gradient', year: '2025' },
-  { id: 3, url: 'public/assets/img3.jpeg', title: 'Prism Study', category: 'Glass', year: '2024' },
-  { id: 5, url: 'public/assets/img5.jpeg', title: 'Static Noise', category: 'Texture', year: '2026' },
-  { id: 6, url: 'public/assets/img6.jpeg', title: 'public Matter', category: 'Abstract', year: '2025' },
-  { id: 7, url: 'public/assets/img7.jpeg', title: 'Ethereal', category: 'Art', year: '2024' },
-  { id: 8, url: 'public/assets/img8.jpeg', title: 'Geometric', category: 'Digital', year: '2026' },
-  { id: 4, url: 'public/assets/img14.jpeg', title: 'Neon Pulse', category: 'Digital', year: '2025' },
+  { id: 1, url: '/assets/img2.jpeg', title: 'Minimal Void', category: 'Abstract', year: '2026' },
+  { id: 2, url: '/assets/img12.jpeg', title: 'Chroma Flow', category: 'Gradient', year: '2025' },
+  { id: 3, url: '/assets/img3.jpeg', title: 'Prism Study', category: 'Glass', year: '2024' },
+  { id: 5, url: '/assets/img5.jpeg', title: 'Static Noise', category: 'Texture', year: '2026' },
+  { id: 6, url: '/assets/img6.jpeg', title: 'public Matter', category: 'Abstract', year: '2025' },
+  { id: 7, url: '/assets/img7.jpeg', title: 'Ethereal', category: 'Art', year: '2024' },
+  { id: 8, url: '/assets/img8.jpeg', title: 'Geometric', category: 'Digital', year: '2026' },
+  { id: 4, url: '/assets/img14.jpeg', title: 'Neon Pulse', category: 'Digital', year: '2025' },
 ];
 
 const GalleryPage = () => {
