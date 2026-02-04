@@ -6,7 +6,6 @@ import SnakeGame from '../components/SnakeGame';
 import Loader from '../components/Loader'; // Points to src/components/Loader.jsx
 import Pillars from '../components/Pillars';
 import { useNavigate } from 'react-router-dom';
-import logo from "public/assets/Startupschool.png";
 
 // --- 1. MAGNETIC WRAPPER ---
 const MagneticBox = ({ children, strength = 20 }) => {
@@ -341,7 +340,7 @@ export default function NeoBrutalHome() {
               whileHover={{ rotate: 5 }}
               transition={{ duration: 0.3 }}
             >
-              <img src={logo} alt="Startup School" className="w-24 h-24 sm:w-32 sm:h-32 object-cover" />
+              <img src="public/assets/Startupschool.png" alt="Startup School" className="w-24 h-24 sm:w-32 sm:h-32 object-cover" />
             </motion.div>
           </motion.div>
         </section>
