@@ -1,154 +1,158 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Maximize2, ExternalLink } from 'lucide-react';
+import { X, ArrowUpRight, Plus, Hash } from 'lucide-react';
 
 const galleryImages = [
-  { id: 1, url: 'public/assets/img2.jpeg', title: 'Minimal Void', category: 'Abstract' },
-  { id: 2, url: 'public/assets/img12.jpeg', title: 'Chroma Flow', category: 'Gradient' },
-  { id: 3, url: 'public/assets/img3.jpeg', title: 'Prism Study', category: 'Glass' },
-  { id: 5, url: 'public/assets/img5.jpeg', title: 'Static Noise', category: 'Texture' },
-  { id: 6, url: 'public/assets/img6.jpeg', title: 'public Matter', category: 'Abstract' },
-  { id: 7, url: 'public/assets/img7.jpeg', title: 'Ethereal', category: 'Art' },
-  { id: 8, url: 'public/assets/img8.jpeg', title: 'Geometric', category: 'Digital' },
-  { id: 4, url: 'public/assets/img14.jpeg', title: 'Neon Pulse', category: 'Digital' },
+  { id: 1, url: 'public/assets/img2.jpeg', title: 'Minimal Void', category: 'Abstract', year: '2026' },
+  { id: 2, url: 'public/assets/img12.jpeg', title: 'Chroma Flow', category: 'Gradient', year: '2025' },
+  { id: 3, url: 'public/assets/img3.jpeg', title: 'Prism Study', category: 'Glass', year: '2024' },
+  { id: 5, url: 'public/assets/img5.jpeg', title: 'Static Noise', category: 'Texture', year: '2026' },
+  { id: 6, url: 'public/assets/img6.jpeg', title: 'public Matter', category: 'Abstract', year: '2025' },
+  { id: 7, url: 'public/assets/img7.jpeg', title: 'Ethereal', category: 'Art', year: '2024' },
+  { id: 8, url: 'public/assets/img8.jpeg', title: 'Geometric', category: 'Digital', year: '2026' },
+  { id: 4, url: 'public/assets/img14.jpeg', title: 'Neon Pulse', category: 'Digital', year: '2025' },
 ];
 
 const GalleryPage = () => {
+  const [hoveredImg, setHoveredImg] = useState(null);
   const [selectedImg, setSelectedImg] = useState(null);
 
-  const containerVars = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
-    }
-  };
-
-  const itemVars = {
-    hidden: { y: 30, opacity: 0 },
-    show: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
-  };
-
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white p-6 md:p-12 font-sans selection:bg-red-600 selection:text-white">
+    <div className="min-h-screen bg-red-600 text-yellow-400 font-sans overflow-x-hidden">
       
-      {/* --- BIG BOLD HEADER --- */}
-      <header className="mb-24 mt-12 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10">
-        <div className="max-w-4xl">
-          <motion.h1 
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            className="text-[14vw] md:text-[10vw] font-black tracking-tighter leading-[0.75] uppercase"
-          >
-            The <br />
-            <span className="font-serif italic text-red-600 font-normal lowercase tracking-normal">Collection</span>
-          </motion.h1>
-          <div className="mt-8 flex items-center gap-4">
-            <div className="h-[1px] w-12 bg-red-600"></div>
-            <p className="text-gray-500 font-mono tracking-[0.3em] text-[10px] md:text-xs uppercase">
-              Archive Labs // Selected Works 2024—2026
-            </p>
-          </div>
-        </div>
-
-        <nav className="flex gap-8 text-[10px] font-bold tracking-[0.2em] font-mono border-l border-white/10 pl-8">
-          <button className="text-red-600 transition-colors underline underline-offset-8">ALL</button>
-         
-        </nav>
-      </header>
-
-      {/* --- GRID --- */}
-      <motion.div 
-        variants={containerVars}
-        initial="hidden"
-        animate="show"
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12"
-      >
-        {galleryImages.map((img) => (
-          <motion.div
-            key={img.id}
-            variants={itemVars}
-            className="group relative cursor-crosshair"
-            onClick={() => setSelectedImg(img)}
-          >
-            <div className="aspect-[3/4] overflow-hidden bg-zinc-900 rounded-sm">
-              <motion.img
-                whileHover={{ scale: 1.08 }}
-                transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
-                src={img.url}
-                alt={img.title}
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-70 group-hover:opacity-100"
-              />
-            </div>
-
-            <div className="mt-5 flex justify-between items-center">
-              <div>
-                <h3 className="text-xs font-bold tracking-widest uppercase mb-1">{img.title}</h3>
-                <p className="text-[9px] text-zinc-500 uppercase font-mono">{img.category}</p>
-              </div>
-              <div className="h-8 w-8 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-red-600 group-hover:border-red-600 transition-all duration-300">
-                <Maximize2 size={12} className="text-white" />
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      {/* --- MODAL --- */}
+      {/* --- HOVER MODAL PREVIEW --- */}
       <AnimatePresence>
-        {selectedImg && (
+        {hoveredImg && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-12 bg-black/98 backdrop-blur-md"
-            onClick={() => setSelectedImg(null)}
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 10 }}
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none w-[300px] h-[400px] border-4 border-yellow-400 shadow-2xl overflow-hidden"
           >
-            <motion.div 
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              className="relative w-full h-full flex flex-col items-center justify-center"
-              onClick={e => e.stopPropagation()}
-            >
-              <div className="relative w-full max-h-[70vh] flex justify-center">
-                <img 
-                  src={selectedImg.url} 
-                  className="max-w-full max-h-full object-contain shadow-2xl" 
-                  alt={selectedImg.title} 
-                />
-                <button 
-                  onClick={() => setSelectedImg(null)}
-                  className="absolute -top-12 right-0 md:-right-12 text-white hover:text-red-600 transition-colors"
-                >
-                  <X size={32} strokeWidth={1} />
-                </button>
+            <div className="absolute inset-0 bg-red-900/50 backdrop-blur-sm flex flex-col">
+              <img 
+                src={hoveredImg.url} 
+                className="w-full h-full object-cover"
+                alt="hover preview"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-yellow-400 p-2 text-red-700 font-mono text-[10px] uppercase font-bold text-center">
+                Preview Mode // {hoveredImg.title}
               </div>
-
-              <div className="mt-12 text-center">
-                <span className="text-red-600 font-mono text-[10px] tracking-[0.4em] uppercase">{selectedImg.category}</span>
-                <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mt-2">{selectedImg.title}</h2>
-                <button className="mt-8 flex items-center gap-3 mx-auto px-6 py-3 border border-white/20 hover:bg-white hover:text-black transition-all text-[10px] font-mono tracking-widest uppercase">
-                  <ExternalLink size={14} />
-                  View Full Resolution
-                </button>
-              </div>
-            </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <footer className="mt-40 pb-12 border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-mono text-zinc-600 tracking-[0.2em]">
-        <div className="flex items-center gap-4">
-           <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
-           <span>SYSTEM_ACTIVE // © 2026 ARCHIVE_LABS</span>
+      <div className="relative z-10 p-6 md:p-12">
+        {/* --- HEADER --- */}
+        <header className="flex justify-between items-start mb-32">
+          <div className="font-mono text-[10px] tracking-[0.5em] uppercase">
+            [ Archive_Labs ] <br /> 
+            <span className="text-yellow-200/50 italic">Database_v4.0</span>
+          </div>
+          <h1 className="text-right text-xs font-bold tracking-widest uppercase text-yellow-400">
+            Index <br /> 2024—2026
+          </h1>
+        </header>
+
+        {/* --- THE LIST (TABLE) --- */}
+        <div className="w-full">
+          <div className="grid grid-cols-12 gap-4 py-4 border-b border-yellow-400/30 text-[9px] font-mono text-yellow-200/60 uppercase tracking-widest">
+            <div className="col-span-1 flex items-center gap-1"><Hash size={8} /></div>
+            <div className="col-span-5 md:col-span-6">Title</div>
+            <div className="col-span-3 md:col-span-3">Category</div>
+            <div className="col-span-3 md:col-span-2 text-right">Year</div>
+          </div>
+
+          {galleryImages.map((img, idx) => (
+            <motion.div
+              key={img.id}
+              onMouseEnter={() => setHoveredImg(img)}
+              onMouseLeave={() => setHoveredImg(null)}
+              onClick={() => setSelectedImg(img)}
+              className="grid grid-cols-12 gap-4 py-8 md:py-12 border-b border-yellow-400/30 group cursor-pointer items-center hover:bg-yellow-400/10 transition-colors"
+            >
+              <div className="col-span-1 font-mono text-xs text-yellow-200/50 group-hover:text-white transition-colors">
+                {idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
+              </div>
+              
+              <div className="col-span-5 md:col-span-6 flex items-center gap-4">
+                <h2 className="text-2xl md:text-5xl font-black uppercase tracking-tighter group-hover:pl-4 transition-all duration-500">
+                  {img.title}
+                </h2>
+                <ArrowUpRight className="opacity-0 group-hover:opacity-100 -translate-y-2 group-hover:translate-y-0 transition-all text-white" size={24} />
+              </div>
+
+              <div className="col-span-3 md:col-span-3 font-mono text-[10px] md:text-xs uppercase tracking-widest text-yellow-400/70">
+                {img.category}
+              </div>
+
+              <div className="col-span-3 md:col-span-2 text-right font-mono text-[10px] md:text-xs text-yellow-400/50">
+                // {img.year}
+              </div>
+            </motion.div>
+          ))}
         </div>
-        <span 
-          onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
-          className="hover:text-white cursor-pointer transition-colors border-b border-transparent hover:border-white"
-        >
-          RETURN_TO_TOP ↑
-        </span>
+      </div>
+
+      {/* --- FULLSCREEN CLICK VIEW --- */}
+      <AnimatePresence>
+        {selectedImg && (
+          <motion.div
+            initial={{ clipPath: 'inset(100% 0 0 0)' }}
+            animate={{ clipPath: 'inset(0% 0 0 0)' }}
+            exit={{ clipPath: 'inset(100% 0 0 0)' }}
+            transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+            className="fixed inset-0 z-[100] bg-red-700 text-yellow-400 flex flex-col"
+          >
+            <div className="flex justify-between items-center p-8">
+              <span className="font-mono text-xs uppercase tracking-widest">Entry_{selectedImg.id}</span>
+              <button 
+                onClick={() => setSelectedImg(null)}
+                className="flex items-center gap-2 font-bold uppercase text-xs hover:text-white transition-colors"
+              >
+                Close <X size={20} />
+              </button>
+            </div>
+
+            <div className="flex-1 flex flex-col md:flex-row p-8 pt-0 gap-12 overflow-hidden">
+                <div className="w-full md:w-2/3 h-full bg-red-800 flex items-center justify-center p-12">
+                   <img src={selectedImg.url} className="w-full h-full object-contain" alt={selectedImg.title} />
+                </div>
+                
+                <div className="w-full md:w-1/3 flex flex-col justify-end gap-12 pb-12">
+                   <div>
+                      <h3 className="text-8xl font-black uppercase tracking-tighter leading-none mb-4">{selectedImg.title}</h3>
+                      <div className="flex gap-4 items-center">
+                        <span className="px-3 py-1 border border-yellow-400 rounded-full text-[10px] font-bold uppercase">{selectedImg.category}</span>
+                        <span className="font-mono text-xs">{selectedImg.year}</span>
+                      </div>
+                   </div>
+                   
+                   <p className="text-sm leading-relaxed text-yellow-100 max-w-sm">
+                      Detailed study of visual language through digital synthesis.
+                   </p>
+
+                   <div className="flex gap-4">
+                      <button className="flex-1 py-4 bg-yellow-400 text-red-700 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-white transition-colors">
+                        <Plus size={14} /> Add to Workspace
+                      </button>
+                      <div className="w-14 h-14 border border-yellow-400 flex items-center justify-center cursor-pointer hover:bg-yellow-400 hover:text-red-700 transition-all">
+                        <ArrowUpRight size={20} />
+                      </div>
+                   </div>
+                </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <footer className="p-12 mt-20 border-t border-yellow-900/30 flex justify-between items-center">
+        <div className="text-[10px] font-mono text-yellow-600/50 uppercase">
+          Total_Items: {galleryImages.length} <br />
+          Location: REMOTE_SERVER
+        </div>
+        <div className="w-8 h-8 bg-yellow-400 rounded-full animate-ping opacity-20"></div>
       </footer>
     </div>
   );

@@ -91,10 +91,10 @@ export default function PerspectiveGallery() {
       </section>
 
       <footer className="h-[50vh] flex items-center justify-center">
-        <h2 className="text-5xl font-light tracking-[1em] uppercase opacity-40">Finis</h2> <br />
+        {/* <h2 className="text-5xl font-light tracking-[1em] uppercase opacity-40">Finis</h2> <br /> */}
 
-        <button onClick={()=>{naviagte("/gallery")}}>
-          View moreaaa
+        <button className='text-2xl font-bold' onClick={()=>{naviagte("/gallery")}}>
+          View More
         </button>
       </footer>
 

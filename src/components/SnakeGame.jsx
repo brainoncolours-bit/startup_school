@@ -128,7 +128,7 @@ const SnakeGame = () => {
       {/* Game Trigger Button */}
       <motion.button
         onClick={() => setIsOpen(true)}
-        className="  right-4 z-50 w-14 h-14 bg-gradient-to-br from-[#ef6925] to-[#e1ff00] rounded-full flex items-center justify-center text-black shadow-2xl border-2 border-black"
+        className=" shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]  right-9  z-50 w-16 h-16 bg-gradient-to-br from-[#ef6925] to-[#e1ff00] rounded-full flex items-center justify-center text-black shadow-2xl border-2 border-black box-shadow"
         whileHover={{ scale: 1.1, rotate: -5 }}
         whileTap={{ scale: 0.9 }}
         animate={{ scale: isOpen ? 0 : 1 }}
