@@ -2,11 +2,11 @@ import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'framer-motion';
 import { Zap, Target, Fingerprint, Activity, Terminal, Shield, Cpu, BarChart3, ArrowRight } from 'lucide-react';
 import { img } from 'framer-motion/client';
-import  img1 from '../../src/assets/MHD03615.JPG'
-import  img2 from '../../src/assets/MHD03642.JPG'
-import  img3 from '../../src/assets/MHD03664.JPG'
-import  img4 from '../../src/assets/MHD03684.JPG'
-import  img5 from '../../src/assets/MHD03706.JPG'
+import  img1 from 'public/assets/MHD03615.JPG'
+import  img2 from 'public/assets/MHD03642.JPG'
+import  img3 from 'public/assets/MHD03664.JPG'
+import  img4 from 'public/assets/MHD03684.JPG'
+import  img5 from 'public/assets/MHD03706.JPG'
 import { useNavigate } from 'react-router-dom';
 
 // --- 1. 3D INTERACTIVE CARD COMPONENT ---
