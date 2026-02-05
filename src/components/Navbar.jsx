@@ -9,7 +9,7 @@ import SnakeGame from './SnakeGame';
 const navItems = [
   { name: 'Home', path: '/', icon: Home, color: 'from-fuchsia-500 to-purple-600', shadow: 'shadow-fuchsia-500/40' },
   { name: 'About', path: '/about', icon: BookOpenText, color: 'from-orange-400 to-red-500', shadow: 'shadow-orange-500/40' },
-  { name: 'Gallery', path: '/gallery', icon: Layers, color: 'from-cyan-400 to-blue-500', shadow: 'shadow-cyan-500/40' },
+  { name: 'Gallery', path: '/blog', icon: Layers, color: 'from-cyan-400 to-blue-500', shadow: 'shadow-cyan-500/40' },
   { name: 'Contact', path: '/contact', icon: Mail, color: 'from-emerald-400 to-teal-500', shadow: 'shadow-emerald-500/40' },
 ];
 
