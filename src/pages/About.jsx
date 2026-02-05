@@ -228,14 +228,14 @@ const VibrantExecutiveAbout = () => {
         id: "LEAD-01", num: "01", name: "Abdul Rahiman", 
         role: "Head of Startup School", 
         icon: <Target size={48}/>,
-        img: "/assets/MHD03615.JPG",
+        img: "/assets/MHD03706.JPG",
         bio: "The guiding force behind the next generation of founders. Abdul architected the Startup School framework to turn raw ideas into market-ready ventures."
     },
-    { 
+    {   
         id: "STRAT-02", num: "02", name: "Priyankar Sengupta", 
         role: "Strategy", 
         icon: <BarChart3 size={48}/>,
-        img: "/assets/MHD03642.JPG",
+        img: "/assets/MHD03664.JPG",
         bio: "Master of long-term vision and tactical maneuvering. Priyankar maps the trajectory of growth, ensuring every move is calculated for maximum impact."
     },
     { 
@@ -249,7 +249,7 @@ const VibrantExecutiveAbout = () => {
         id: "MKTG-04", num: "04", name: "Aly Sayyad", 
         role: "Mentor Sales & Marketing", 
         icon: <Zap size={48}/>,
-        img: "/assets/MHD03642.JPG",
+        img: "/assets/MHD03615.JPG",
         bio: "The closer. Aly specializes in aggressive market entry and high-conversion sales psychological tactics to dominate the attention economy."
     },
     { 
@@ -263,7 +263,7 @@ const VibrantExecutiveAbout = () => {
         id: "EXEC-06", num: "06", name: "Jeslinz Johnson", 
         role: "Operations & Marketing Manager", 
         icon: <Activity size={48}/>,
-        img: "/assets/MHD03642.JPG",
+        img: "/assets/MHD03684.JPG",
         bio: "The operational heartbeat. Jeslinz synchronizes internal workflows with outward marketing presence to ensure a unified and efficient brand pulse."
     }
   ];
