@@ -242,7 +242,7 @@ const VibrantExecutiveAbout = () => {
         id: "FIN-03", num: "03", name: "Eijaz Khan", 
         role: "Mentor Finance", 
         icon: <Shield size={48}/>,
-        img: "/assets/MHD03642.JPG",
+        img: "/assets/image.png",
         bio: "Ensuring fiscal resilience and capital optimization. Eijaz provides the financial backbone necessary for startups to scale without losing momentum."
     },
     { 
