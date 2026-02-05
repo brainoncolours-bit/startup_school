@@ -14,6 +14,11 @@ function AppContent() {
   const [showNavbar, setShowNavbar] = useState(false);
   const location = useLocation();
 
+  // Scroll to top when route changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   // Reset navbar visibility when route changes
   useEffect(() => {
     if (location.pathname !== '/') {
