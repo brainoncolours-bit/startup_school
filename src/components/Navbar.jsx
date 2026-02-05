@@ -25,7 +25,7 @@ const VibrantAdaptiveNav = ({ isLightBg = true }) => {
   return (
     <>
       {/* Desktop Navigation - Hidden on mobile */}
-      <nav className="fixed right-8 top-1/2 -translate-y-1/2 z-[100] hidden lg:block">
+      <nav className="fixed right-8 top-1/2 -translate-y-1/2 z-[100]  hidden lg:block ">
         <motion.div
           animate={{ backgroundColor: isLightBg ? 'rgba(24, 24, 27, 0.9)' : 'rgba(255, 255, 255, 0.1)' }}
           className={`relative flex flex-col gap-3 p-4 rounded-[2.5rem] backdrop-blur-3xl border ${borderColor} shadow-2xl transition-colors duration-500`}

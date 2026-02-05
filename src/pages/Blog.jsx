@@ -3,10 +3,10 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom';
 
 const IMAGES = [
-  { url: '/assets/img9.jpeg', title: 'VOID' },
-  { url: '/assets/img12.jpeg', title: 'CHROMA' },
-  { url: '/assets/img4.jpeg', title: 'PRISM' },
-  { url: '/assets/img8.jpeg', title: 'NEON' },
+  { url: '/assets/img9.jpeg', title: 'VISION' },
+  { url: '/assets/img12.jpeg', title: 'CLARITY' },
+  { url: '/assets/img4.jpeg', title: 'Strategy' },
+  { url: '/assets/img8.jpeg', title: 'Focus' },
 ];
 
 export default function PerspectiveGallery() {

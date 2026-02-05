@@ -3,14 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowUpRight, Plus, Hash } from 'lucide-react';
 
 const galleryImages = [
-  { id: 1, url: '/assets/img2.jpeg', title: 'Minimal Void', category: 'Abstract', year: '2026' },
-  { id: 2, url: '/assets/img12.jpeg', title: 'Chroma Flow', category: 'Gradient', year: '2025' },
-  { id: 3, url: '/assets/img3.jpeg', title: 'Prism Study', category: 'Glass', year: '2024' },
-  { id: 5, url: '/assets/img5.jpeg', title: 'Static Noise', category: 'Texture', year: '2026' },
-  { id: 6, url: '/assets/img6.jpeg', title: 'public Matter', category: 'Abstract', year: '2025' },
-  { id: 7, url: '/assets/img7.jpeg', title: 'Ethereal', category: 'Art', year: '2024' },
-  { id: 8, url: '/assets/img8.jpeg', title: 'Geometric', category: 'Digital', year: '2026' },
-  { id: 4, url: '/assets/img14.jpeg', title: 'Neon Pulse', category: 'Digital', year: '2025' },
+  { id: 1, url: '/assets/img2.jpeg', title: 'Where ideas meet execution.', category: '', year: '2026' },
+  { id: 2, url: '/assets/img12.jpeg', title: 'The starting line of something big.', category: '', year: '2025' },
+  { id: 3, url: '/assets/img3.jpeg', title: 'Fueling the entrepreneurial fire.', category: '', year: '2025' },
+  { id: 5, url: '/assets/img5.jpeg', title: 'More than just a school', category: '', year: '2026' },
+  { id: 6, url: '/assets/img6.jpeg', title: 'a community dedicated to future of business', category: '', year: '2025' },
+  { id: 7, url: '/assets/img7.jpeg', title: 'Where "what if" becomes "whats next."', category: '', year: '2025' },
+  { id: 8, url: '/assets/img8.jpeg', title: 'Your network is your net worth', category: '', year: '2026' },
+  { id: 4, url: '/assets/img14.jpeg', title: 'The "Hard Work" Vibe', category: '', year: '2025' },
 ];
 
 const GalleryPage = () => {
@@ -51,7 +51,7 @@ const GalleryPage = () => {
             <span className="text-yellow-200/50 italic">Database_v4.0</span>
           </div>
           <h1 className="text-right text-xs font-bold tracking-widest uppercase text-yellow-400">
-            Index <br /> 2024—2026
+            Index <br /> 2025—2026
           </h1>
         </header>
 
@@ -60,8 +60,8 @@ const GalleryPage = () => {
           <div className="grid grid-cols-12 gap-4 py-4 border-b border-yellow-400/30 text-[9px] font-mono text-yellow-200/60 uppercase tracking-widest">
             <div className="col-span-1 flex items-center gap-1"><Hash size={8} /></div>
             <div className="col-span-5 md:col-span-6">Title</div>
-            <div className="col-span-3 md:col-span-3">Category</div>
-            <div className="col-span-3 md:col-span-2 text-right">Year</div>
+            {/* <div className="col-span-3 md:col-span-3">Category</div>
+            <div className="col-span-3 md:col-span-2 text-right">Year</div> */}
           </div>
 
           {galleryImages.map((img, idx) => (
@@ -130,7 +130,7 @@ const GalleryPage = () => {
                    </div>
                    
                    <p className="text-sm leading-relaxed text-yellow-100 max-w-sm">
-                      Detailed study of visual language through digital synthesis.
+                     A glimpse into the collaborative spirit of our cohort, where the next generation of founders connect and grow.
                    </p>
 
                    <div className="flex gap-4">
