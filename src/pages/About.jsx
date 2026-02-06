@@ -231,6 +231,13 @@ const VibrantExecutiveAbout = () => {
         img: "/assets/MHD03706.JPG",
         bio: "The guiding force behind the next generation of founders. Abdul architected the Startup School framework to turn raw ideas into market-ready ventures."
     },
+     { 
+        id: "EXEC-06", num: "06", name: "Jeslinz Johnson", 
+        role: "Operations & Marketing Manager", 
+        icon: <Activity size={48}/>,
+        img: "/assets/MHD03684.JPG",
+        bio: "The operational heartbeat. Jeslinz synchronizes internal workflows with outward marketing presence to ensure a unified and efficient brand pulse."
+    },
     {   
         id: "STRAT-02", num: "02", name: "Priyankar Sengupta", 
         role: "Strategy", 
@@ -259,13 +266,7 @@ const VibrantExecutiveAbout = () => {
         img: "/assets/MHD03642.JPG",
         bio: "Bridging the gap between code and execution. Sikta oversees the operational systems and technical stacks that power our modern infrastructure."
     },
-    { 
-        id: "EXEC-06", num: "06", name: "Jeslinz Johnson", 
-        role: "Operations & Marketing Manager", 
-        icon: <Activity size={48}/>,
-        img: "/assets/MHD03684.JPG",
-        bio: "The operational heartbeat. Jeslinz synchronizes internal workflows with outward marketing presence to ensure a unified and efficient brand pulse."
-    }
+   
   ];
 
   return (

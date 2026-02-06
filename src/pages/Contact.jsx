@@ -129,7 +129,7 @@ ${message}`;
 
             <div className="space-y-3">
               <ContactDetail icon={<Phone size={20}/>} label="VOICE_LINE" value="+91-9036354727" color="#000000" />
-              <ContactDetail icon={<Mail size={20}/>} label="ENCRYPTED_MAIL" value="info@mystartupschool.com" color="#ffffff" />
+              <ContactDetail icon={<Mail size={20}/>} label="ENCRYPTED_MAIL" value="info@mystartupschool.com" color="#ffffff"  />
               <ContactDetail icon={<Globe size={20}/>} label="GLOBAL_NODE" value="BENGALURU" color="#000000" />
             </div>
           </div>
@@ -243,23 +243,23 @@ ${message}`;
             <div className="w-8 h-2 bg-[#ef6925]"></div>
             <div className="w-8 h-2 bg-[#e1ff00]"></div>
             <div className="w-8 h-2 bg-white"></div>
-        </div>
+          </div>
       </footer>
     </div>
   );
 };
 
-const ContactDetail = ({ icon, label, value, color }) => (
-  <div className="group border-b-2 sm:border-b-4 border-black p-4 sm:p-6 flex items-center gap-4 sm:gap-6 hover:bg-black transition-all cursor-crosshair relative overflow-hidden bg-white/5">
+const ContactDetail = ({ icon, label, value, color ,size }) => (
+  <div className="group border-b-2 sm:border-b-4 border-black p-4 sm:p-6 flex items-center gap-4 sm:gap-6 hover:bg-black transition-all cursor-crosshair relative overflow-hidden bg-white/5 ">
     <div 
       className="p-2 sm:p-3 bg-black text-white group-hover:scale-110 transition-transform" 
-      style={{ backgroundColor: color === '#ffffff' ? '#ef6925' : 'black', color: color }}
+      style={{ backgroundColor: color === '#ffffff' ? '#ef6925' : 'black', color: color, width: size, height: size }}
     >
       {icon}
     </div>
-    <div className="z-10">
+    <div className="z-10 text-sm sm:text-base">
       <p className="font-mono text-[8px] sm:text-[10px] font-black opacity-60 uppercase mb-1">{label}</p>
-      <p className="text-base sm:text-xl font-black tracking-tight uppercase group-hover:text-white transition-colors break-all">{value}</p>
+      <p className="text-base sm:text-md font-black tracking-tight uppercase group-hover:text-white transition-colors break-all">{value}</p>
     </div>
     <div className="absolute bottom-0 left-0 w-1 h-0 bg-[#e1ff00] group-hover:h-full transition-all duration-300" />
   </div>

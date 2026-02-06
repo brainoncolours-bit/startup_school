@@ -3,8 +3,8 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom';
 
 const IMAGES = [
-  { url: '/assets/img9.jpeg', title: 'VISION' },
-  { url: '/assets/img12.jpeg', title: 'CLARITY' },
+  { url: '/assets/img12.jpeg', title: 'VISION' },
+  { url: '/assets/img9.jpeg', title: 'CLARITY' },
   { url: '/assets/img4.jpeg', title: 'Strategy' },
   { url: '/assets/img8.jpeg', title: 'Focus' },
 ];
