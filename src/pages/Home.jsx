@@ -75,6 +75,13 @@ export default function NeoBrutalHome() {
 
   return (
     <>
+        {/* for seo meta */}
+      <div>
+        <h1 className="hidden">Not an MBA - Startup School</h1>
+        <p className="hidden">Welcome to Not an MBA, the ultimate startup school for aspiring entrepreneurs. Our immersive program combines cutting-edge curriculum, real-world projects, and mentorship from industry leaders to equip you with the skills and mindset needed to launch and scale your own successful startup. Join us to turn your innovative ideas into reality and disrupt the future of business.</p>
+
+
+      </div>
       <AnimatePresence>
         {loading && <Loader onComplete={() => setLoading(false)} />}
       </AnimatePresence>
