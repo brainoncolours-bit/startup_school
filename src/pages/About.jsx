@@ -216,6 +216,9 @@ const VibrantExecutiveAbout = () => {
   const containerRef = useRef(null);
   const horizontalSectionRef = useRef(null);
 
+  // Detect if the device supports touch
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
   const { scrollYProgress: horizontalScroll } = useScroll({
     target: horizontalSectionRef,
     offset: ["start start", "end end"]
@@ -353,10 +356,16 @@ const VibrantExecutiveAbout = () => {
         </div>
       </section>
 
-      {/* HORIZONTAL TEAM SECTION */}
-      <section ref={horizontalSectionRef} className="relative h-auto py-10 sm:h-[400vh] bg-orange-500">
+      {/* HORIZONTAL TEAM SECTION - Works for both mobile and desktop now */}
+      <section
+        ref={horizontalSectionRef}
+        className="relative h-[300vh] bg-orange-500"
+      >
         <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-          <motion.div style={{ x: typeof window !== 'undefined' && window.innerWidth >= 640 ? xTranslate : 0 }} className="flex gap-4 sm:gap-8 md:gap-16 px-4 sm:px-8 md:px-[10vw] relative z-10 overflow-x-auto sm:overflow-visible">
+          <motion.div
+            style={{ x: xTranslate }}
+            className="flex gap-4 sm:gap-8 md:gap-16 px-4 sm:px-8 md:px-[10vw] relative z-10"
+          >
             <div className="shrink-0 w-[90vw] sm:w-[400px] md:w-[500px] flex flex-col justify-center">
               <h2 className="text-5xl sm:text-6xl md:text-8xl font-black italic uppercase text-white leading-[0.8] mb-6 sm:mb-8">
                 The <br /><span className="text-[#e72132]">Team</span> <br />Leaders.
