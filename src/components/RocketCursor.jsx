@@ -7,8 +7,17 @@ export default function RocketCursor() {
 
   useEffect(() => {
     const updateMouse = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
+    const updateTouch = (e) => {
+      if (e.touches.length > 0) {
+        setMousePosition({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+      }
+    };
     window.addEventListener('mousemove', updateMouse);
-    return () => window.removeEventListener('mousemove', updateMouse);
+    window.addEventListener('touchmove', updateTouch);
+    return () => {
+      window.removeEventListener('mousemove', updateMouse);
+      window.removeEventListener('touchmove', updateTouch);
+    };
   }, []);
 
   useEffect(() => {
@@ -33,7 +42,7 @@ export default function RocketCursor() {
 
   return (
     <motion.div 
-      className="fixed z-[999] pointer-events-none hidden md:block"
+      className="fixed z-[999] pointer-events-none"
       animate={{ x: mousePosition.x - 12, y: mousePosition.y - 12 }}
       transition={{ type: "spring", stiffness: 600, damping: 30 }}
     >
