@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'framer-motion';
-import { Zap, Target, Fingerprint, Activity, Terminal, Shield, Cpu, BarChart3, ArrowRight } from 'lucide-react';
+import { Zap, Target, Fingerprint, Activity, Terminal, Shield, Cpu, BarChart3, ArrowRight, Linkedin } from 'lucide-react';
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 // --- 1. 3D INTERACTIVE CARD COMPONENT ---
 const TeamCard3D = ({ member }) => {
@@ -79,6 +80,9 @@ const TeamCard3D = ({ member }) => {
                     <div className="flex justify-between items-end">
                         <h4 className="text-3xl font-black italic uppercase text-white leading-none">{member.name}</h4>
                         <span className="text-[#a5cb3a] font-mono text-xs">{member.id}</span>
+                        <a href={member.link} target="_blank" rel="noopener noreferrer" className="text-[#a5cb3a] hover:text-white transition-colors">
+                          <Linkedin size={20} />
+                        </a>
                     </div>
                     <div className="h-px w-full bg-white/20" />
                     <p className="text-slate-300 font-mono text-[11px] leading-relaxed uppercase tracking-tight">
@@ -232,6 +236,7 @@ const VibrantExecutiveAbout = () => {
         role: "Head of Startup School", 
         icon: <Target size={48}/>,
         img: "/assets/MHD03706.JPG",
+        link:"https://www.linkedin.com/in/abdulrahiman619/",
         bio: "The guiding force behind the next generation of founders. Abdul architected the Startup School framework to turn raw ideas into market-ready ventures."
     },
      { 
@@ -239,6 +244,7 @@ const VibrantExecutiveAbout = () => {
         role: "Operations & Marketing Manager", 
         icon: <Activity size={48}/>,
         img: "/assets/MHD03684.JPG",
+        link:"https://www.linkedin.com/in/jeslinz-johnson-2b216a146/",
         bio: "The operational heartbeat. Jeslinz synchronizes internal workflows with outward marketing presence to ensure a unified and efficient brand pulse."
     },
     {   
@@ -246,6 +252,7 @@ const VibrantExecutiveAbout = () => {
         role: "Strategy", 
         icon: <BarChart3 size={48}/>,
         img: "/assets/MHD03664.JPG",
+        link:"https://www.linkedin.com/in/priyankar-sengupta-085473188/",
         bio: "Master of long-term vision and tactical maneuvering. Priyankar maps the trajectory of growth, ensuring every move is calculated for maximum impact."
     },
     { 
@@ -253,6 +260,7 @@ const VibrantExecutiveAbout = () => {
         role: "Mentor Finance", 
         icon: <Shield size={48}/>,
         img: "/assets/image.png",
+        link:"https://www.linkedin.com/in/eijaz-khan-b25193235/",
         bio: "Ensuring fiscal resilience and capital optimization. Eijaz provides the financial backbone necessary for startups to scale without losing momentum."
     },
     { 
@@ -260,6 +268,7 @@ const VibrantExecutiveAbout = () => {
         role: "Mentor Sales & Marketing", 
         icon: <Zap size={48}/>,
         img: "/assets/MHD03615.JPG",
+        link:"https://www.linkedin.com/in/aly-sayyad-40501a20/",
         bio: "The closer. Aly specializes in aggressive market entry and high-conversion sales psychological tactics to dominate the attention economy."
     },
     { 
@@ -267,6 +276,7 @@ const VibrantExecutiveAbout = () => {
         role: "Operations & Tech", 
         icon: <Cpu size={48}/>,
         img: "/assets/MHD03642.JPG",
+        link:"https://www.linkedin.com/in/sikta/",
         bio: "Bridging the gap between code and execution. Sikta oversees the operational systems and technical stacks that power our modern infrastructure."
     },
    
