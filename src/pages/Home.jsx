@@ -356,7 +356,7 @@ export default function NeoBrutalHome() {
         <div className="bg-[#e72132] border-y-2 sm:border-y-4 border-black py-4 sm:py-8 overflow-hidden flex whitespace-nowrap rotate-[-1deg] z-20 relative w-full">
           <motion.div 
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 125, repeat: Infinity, ease: "linear" }}
             className="text-3xl sm:text-5xl md:text-7xl font-black uppercase flex items-center gap-6 sm:gap-12 pr-6 sm:pr-12 text-black"
           >
             {[...Array(6)].map((_, i) => (
