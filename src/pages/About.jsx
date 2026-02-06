@@ -79,10 +79,8 @@ const TeamCard3D = ({ member }) => {
                 <div className="space-y-4">
                     <div className="flex justify-between items-end">
                         <h4 className="text-3xl font-black italic uppercase text-white leading-none">{member.name}</h4>
-                        <span className="text-[#a5cb3a] font-mono text-xs">{member.id}</span>
-                        <a href={member.link} target="_blank" rel="noopener noreferrer" className="text-[#a5cb3a] hover:text-white transition-colors">
-                          <Linkedin size={20} />
-                        </a>
+                        {/* <span className="text-[#a5cb3a] font-mono text-xs">{member.id}</span> */}
+                      
                     </div>
                     <div className="h-px w-full bg-white/20" />
                     <p className="text-slate-300 font-mono text-[11px] leading-relaxed uppercase tracking-tight">
@@ -94,8 +92,10 @@ const TeamCard3D = ({ member }) => {
                             <p className="text-sm font-bold text-[#a5cb3a]">LEVEL_MAX</p>
                         </div>
                         <div className="border border-white/10 p-3">
-                            <p className="text-[9px] text-slate-500 uppercase">Status</p>
-                            <p className="text-sm font-bold text-[#e72132]">ACTIVE</p>
+                             <a href={member.link} target="_blank" rel="noopener noreferrer" className="text-[#a5cb3a] hover:text-white transition-colors">
+                          <Linkedin size={35} />
+                          {/* <span >linkedin</span> */}
+                        </a>
                         </div>
                     </div>
                 </div>
