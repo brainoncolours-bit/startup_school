@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, Layers, Mail, Sparkles, BookOpenText, Menu, X } from 'lucide-react';
+import { Home, Layers, Mail, BookOpenText } from 'lucide-react';
 
 import Chatbot from './Chatbot';
 import SnakeGame from './SnakeGame';
@@ -18,19 +18,17 @@ const VibrantAdaptiveNav = ({ isLightBg = true }) => {
   const location = useLocation();
 
   // Theme logic based on background color
-  const navBg = isLightBg ? 'bg-zinc-900/90' : 'bg-white/10';
   const borderColor = isLightBg ? 'border-white/10' : 'border-white/20';
-  const inactiveIcon = isLightBg ? 'text-zinc-500' : 'text-white/40';
 
   return (
     <>
-      {/* Desktop Navigation - Hidden on mobile */}
-      <nav className="fixed right-8 top-1/2 -translate-y-1/2 z-[100]  hidden lg:block    ">
+      {/* --- DESKTOP NAVIGATION (Right Side) --- */}
+      <nav className="fixed right-8 top-1/2 -translate-y-1/2 z-[100] hidden lg:block">
         <motion.div
           animate={{ backgroundColor: isLightBg ? 'rgba(24, 24, 27, 0.9)' : 'rgba(255, 255, 255, 0.1)' }}
           className={`relative flex flex-col gap-3 p-4 rounded-[2.5rem] backdrop-blur-3xl border ${borderColor} shadow-2xl transition-colors duration-500`}
         >
-          {/* Animated Background Blob */}
+          {/* Animated Background Blob for Desktop */}
           <AnimatePresence>
             {hovered !== null && (
               <motion.div
@@ -42,7 +40,7 @@ const VibrantAdaptiveNav = ({ isLightBg = true }) => {
                 transition={{ type: "spring", stiffness: 400, damping: 28 }}
                 style={{
                   height: '52px',
-                  top: hovered * 68 + 16,
+                  top: hovered * 64 + 16, // Adjusted for standard w-12/h-12 spacing
                 }}
               />
             )}
@@ -59,7 +57,7 @@ const VibrantAdaptiveNav = ({ isLightBg = true }) => {
                 to={item.path}
                 onMouseEnter={() => setHovered(idx)}
                 onMouseLeave={() => setHovered(null)}
-                className="relative z-10 w-13 h-13 flex items-center justify-center"
+                className="relative z-10 w-12 h-12 flex items-center justify-center"
               >
                 <motion.div
                   animate={{
@@ -77,7 +75,7 @@ const VibrantAdaptiveNav = ({ isLightBg = true }) => {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: -25 }}
                       exit={{ opacity: 0, x: 20 }}
-                      className={`absolute right-full mr-6 px-4 py-2 rounded-xl bg-zinc-900 text-white text-[10px] font-black uppercase tracking-widest shadow-2xl border border-white/10 whitespace-nowrap`}
+                      className="absolute right-full mr-6 px-4 py-2 rounded-xl bg-zinc-900 text-white text-[10px] font-black uppercase tracking-widest shadow-2xl border border-white/10 whitespace-nowrap"
                     >
                       <span className={`bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>
                         {item.name}
@@ -99,51 +97,63 @@ const VibrantAdaptiveNav = ({ isLightBg = true }) => {
 
           <div className={`h-[1px] w-8 mx-auto my-1 rounded-full ${isLightBg ? 'bg-white/10' : 'bg-white/20'}`} />
 
-          <Chatbot />
-          <SnakeGame />
+          <div className="flex flex-col items-center gap-3">
+            <Chatbot />
+            <SnakeGame />
+          </div>
         </motion.div>
       </nav>
 
-      {/* Mobile Bottom Navigation - Same design as desktop but at bottom */}
-      <nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[99] lg:hidden">
+      {/* --- MOBILE NAVIGATION (Bottom Bar) --- */}
+      <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[99] lg:hidden w-full px-4 flex justify-center">
         <motion.div
-          animate={{ backgroundColor: isLightBg ? 'rgba(24, 24, 27, 0.9)' : 'rgba(255, 255, 255, 0.1)' }}
-          className={`relative flex flex-row gap-3 p-4 rounded-[2.5rem] backdrop-blur-3xl border ${borderColor} shadow-2xl transition-colors duration-500`}
+          animate={{ backgroundColor: isLightBg ? 'rgba(24, 24, 27, 0.95)' : 'rgba(255, 255, 255, 0.1)' }}
+          className={`relative flex items-center justify-between gap-2 px-4 py-2 rounded-full backdrop-blur-3xl border ${borderColor} shadow-2xl max-w-full overflow-hidden`}
         >
-          {navItems.map((item, idx) => {
-            const isActive = location.pathname === item.path;
-            const Icon = item.icon;
+          <div className="flex items-center gap-1 sm:gap-2">
+            {navItems.map((item) => {
+              const isActive = location.pathname === item.path;
+              const Icon = item.icon;
 
-            return (
-              <Link
-                key={item.name}
-                to={item.path}
-                className="relative z-10 w-13 h-13 flex items-center justify-center"
-              >
-                <motion.div
-                  animate={{
-                    scale: isActive ? 1.15 : 1,
-                    color: isActive ? "#ffffff" : (isLightBg ? "#71717a" : "#ffffff66")
-                  }}
+              return (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  className="relative z-10 w-11 h-11 flex-shrink-0 flex items-center justify-center"
                 >
-                  <Icon size={22} strokeWidth={isActive ? 2.5 : 2} />
-                </motion.div>
-
-                {/* Active Indicator */}
-                {isActive && (
                   <motion.div
-                    layoutId="active-indicator"
-                    className={`absolute -top-1.5 w-6 h-1.5 rounded-full bg-gradient-to-r ${item.color}`}
-                  />
-                )}
-              </Link>
-            );
-          })}
+                    animate={{
+                      scale: isActive ? 1.2 : 1,
+                      color: isActive ? "#ffffff" : (isLightBg ? "#71717a" : "#ffffff66")
+                    }}
+                  >
+                    <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
+                  </motion.div>
 
-          <div className={`w-[1px] h-8 mx-1 rounded-full ${isLightBg ? 'bg-white/10' : 'bg-white/20'}`} />
+                  {/* Active Indicator - Horizontal for Mobile */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="active-indicator-mobile"
+                      className={`absolute -bottom-1 w-5 h-1 rounded-full bg-gradient-to-r ${item.color}`}
+                    />
+                  )}
+                </Link>
+              );
+            })}
+          </div>
 
-          <Chatbot />
-          <SnakeGame />
+          {/* Separator */}
+          <div className={`w-[1px] h-6 flex-shrink-0 ${isLightBg ? 'bg-white/10' : 'bg-white/20'}`} />
+
+          {/* Special Buttons (Chat & Game) */}
+          <div className="flex items-center gap-1">
+            <div className="w-11 h-11 flex-shrink-0 flex items-center justify-center scale-90 sm:scale-100">
+               <Chatbot />
+            </div>
+            <div className="w-11 h-11 flex-shrink-0 flex items-center justify-center scale-90 sm:scale-100">
+               <SnakeGame />
+            </div>
+          </div>
         </motion.div>
       </nav>
     </>
