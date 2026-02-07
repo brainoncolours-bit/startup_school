@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Gamepad2, X, RotateCcw, Trophy, Zap } from 'lucide-react';
 
@@ -91,32 +92,87 @@ const SnakeGame = () => {
         <Gamepad2 size={20} />
       </motion.button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div className="fixed inset-0 flex items-center justify-center md:items-end md:justify-end md:p-12 z-[110] pointer-events-none">
-            <div className="absolute inset-0 bg-black/80 md:hidden pointer-events-auto" onClick={() => setIsOpen(false)} />
-            <motion.div 
+      {isOpen && createPortal(
+        <AnimatePresence>
+          <motion.div className="fixed inset-0 flex items-center justify-center z-[99999] pointer-events-none">
+            <div className="absolute inset-0 bg-black/80 pointer-events-auto" onClick={() => setIsOpen(false)} />
+            <motion.div
               initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
               className="relative bg-black border-4 border-[#ef6925] shadow-[10px_10px_0px_0px_rgba(239,105,37,1)] pointer-events-auto"
-              style={{ width: GRID_SIZE * CELL_SIZE + 40 }}
+              style={{ width: GRID_SIZE * CELL_SIZE + 40, maxWidth: '90vw', maxHeight: '90vh' }}
             >
               <div className="bg-gradient-to-r from-[#ef6925] to-[#e1ff00] p-2 flex justify-between items-center border-b-2 border-black">
-                <span className="font-black text-black text-xs uppercase flex items-center gap-2"><Gamepad2 size={14}/> Snake Protocol</span>
-                <button onClick={() => setIsOpen(false)} className="text-black border border-black p-0.5"><X size={14} /></button>
+                <span className="font-black text-black text-xs uppercase flex items-center gap-2"><Gamepad2 size={14}/> SNAKE_PROTOCOL</span>
+                <button onClick={() => setIsOpen(false)} className="text-black border border-black p-0.5 hover:bg-black hover:text-white transition-colors"><X size={14} /></button>
               </div>
-              <div className="p-4 bg-black">
-                <div className="bg-zinc-900 relative mx-auto" style={{ width: GRID_SIZE * CELL_SIZE, height: GRID_SIZE * CELL_SIZE }}>
-                  {snake.map((s, i) => (
-                    <div key={i} className={`absolute ${i === 0 ? 'bg-[#e1ff00] z-10' : 'bg-[#ef6925]'}`} style={{ left: s.x * CELL_SIZE, top: s.y * CELL_SIZE, width: CELL_SIZE - 2, height: CELL_SIZE - 2, border: '1px solid black' }} />
-                  ))}
-                  <motion.div className="absolute bg-white border-2 border-[#e1ff00]" style={{ left: food.x * CELL_SIZE, top: food.y * CELL_SIZE, width: CELL_SIZE - 2, height: CELL_SIZE - 2 }} animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 0.5 }} />
-                  {gameOver && <div className="absolute inset-0 bg-black/90 flex flex-col items-center justify-center z-20"><h2 className="text-[#ef6925] font-black italic">CRASHED</h2><button onClick={resetGame} className="mt-2 bg-[#e1ff00] px-3 py-1 text-xs font-black">REBOOT</button></div>}
+
+              <div className="p-4 bg-black flex flex-col items-center">
+                <div className="w-full flex justify-between mb-2 font-mono text-[10px] text-[#e1ff00] uppercase tracking-tighter">
+                  <span>Score: {score}</span>
+                  <span>High: {highScore}</span>
                 </div>
+
+                {/* Grid container handles its own scaling */}
+                <div className="bg-zinc-900 relative border-2 border-zinc-800 overflow-hidden"
+                     style={{
+                        aspectRatio: '1/1',
+                        width: '100%',
+                        display: 'grid',
+                        gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)`,
+                        gridTemplateRows: `repeat(${GRID_SIZE}, 1fr)`
+                     }}>
+
+                  {/* Food */}
+                  <motion.div
+                    className="bg-white border-2 border-[#e1ff00]"
+                    style={{
+                        gridColumn: food.x + 1,
+                        gridRow: food.y + 1
+                    }}
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ repeat: Infinity, duration: 0.5 }}
+                  />
+
+                  {/* Snake */}
+                  {snake.map((segment, i) => (
+                    <div
+                        key={i}
+                        className={`${i === 0 ? 'bg-[#e1ff00] z-10' : 'bg-[#ef6925]'}`}
+                        style={{
+                            gridColumn: segment.x + 1,
+                            gridRow: segment.y + 1,
+                            border: '1px solid black'
+                        }}
+                    />
+                  ))}
+
+                  {/* Game Over Overlay */}
+                  {gameOver && (
+                    <div className="absolute inset-0 bg-black/90 flex flex-col items-center justify-center z-20">
+                      <h2 className="text-[#ef6925] font-black italic text-3xl">CRASHED</h2>
+                      <button
+                        onClick={resetGame}
+                        className="mt-4 bg-[#e1ff00] px-6 py-2 text-xs font-black text-black hover:bg-white transition-colors"
+                      >
+                        REBOOT_SYSTEM
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Pause Overlay */}
+                  {isPaused && !gameOver && (
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-20">
+                      <span className="text-[#e1ff00] font-black italic animate-pulse">PAUSED</span>
+                    </div>
+                  )}
+                </div>
+                <p className="mt-4 text-[9px] text-zinc-500 font-mono uppercase">Use Arrows to Move | Space to Pause</p>
               </div>
             </motion.div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   );
 };

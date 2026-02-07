@@ -97,9 +97,13 @@ const VibrantAdaptiveNav = ({ isLightBg = true }) => {
 
           <div className={`h-[1px] w-8 mx-auto my-1 rounded-full ${isLightBg ? 'bg-white/10' : 'bg-white/20'}`} />
 
-          <div className="flex flex-col items-center gap-3 pointer-events-none">
-            <Chatbot />
-            <SnakeGame />
+          <div className="flex flex-col items-center gap-3">
+            <div className="cursor-pointer transform transition-transform hover:scale-110">
+              <Chatbot />
+            </div>
+            <div className="cursor-pointer transform transition-transform hover:scale-110">
+              <SnakeGame />
+            </div>
           </div>
         </motion.div>
       </nav>
@@ -146,11 +150,11 @@ const VibrantAdaptiveNav = ({ isLightBg = true }) => {
           <div className={`w-[1px] h-6 flex-shrink-0 ${isLightBg ? 'bg-white/10' : 'bg-white/20'}`} />
 
           {/* Special Buttons (Chat & Game) */}
-          <div className="flex items-center gap-1 pointer-events-none">
-            <div className="w-11 h-11 flex-shrink-0 flex items-center justify-center scale-90 sm:scale-100">
+          <div className="flex items-center gap-1">
+            <div className="w-11 h-11 flex-shrink-0 flex items-center justify-center scale-90 sm:scale-100 cursor-pointer transform transition-transform hover:scale-110">
                <Chatbot />
             </div>
-            <div className="w-11 h-11 flex-shrink-0 flex items-center justify-center scale-90 sm:scale-100">
+            <div className="w-11 h-11 flex-shrink-0 flex items-center justify-center scale-90 sm:scale-100 cursor-pointer transform transition-transform hover:scale-110">
                <SnakeGame />
             </div>
           </div>
