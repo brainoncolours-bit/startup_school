@@ -14,33 +14,37 @@ export default function PerspectiveGallery() {
   const [captures, setCaptures] = useState([]);
   const [flash, setFlash] = useState(false);
 
-  const handleCapture = (e) => {
-    // Prevent capture when clicking buttons
-    if (e.target.closest('button')) return;
+ const handleCapture = (e) => {
+  // 1. Prevent capture when clicking buttons
+  if (e.target.closest('button')) return;
 
-    setFlash(true);
-    setTimeout(() => setFlash(false), 150);
+  // 2. Check if it's a mobile device (width < 768px)
+  const isMobile = window.innerWidth < 768;
+  if (isMobile) return; // Exit early so no flash or polaroid happens
 
-    // Support for both mouse clicks and touch taps
-    const x = e.clientX || (e.touches ? e.touches[0].clientX : 0);
-    const y = e.clientY || (e.touches ? e.touches[0].clientY : 0);
+  // 3. If not mobile, proceed with Flash and Polaroid logic
+  setFlash(true);
+  setTimeout(() => setFlash(false), 150);
 
-    const randomImg = IMAGES[Math.floor(Math.random() * IMAGES.length)];
-    
-    const newPhoto = {
-      id: Date.now(),
-      x,
-      y,
-      url: randomImg.url,
-      rotate: Math.random() * 20 - 10,
-    };
+  const x = e.clientX || (e.touches ? e.touches[0].clientX : 0);
+  const y = e.clientY || (e.touches ? e.touches[0].clientY : 0);
 
-    setCaptures((prev) => [...prev, newPhoto].slice(-5));
+  const randomImg = IMAGES[Math.floor(Math.random() * IMAGES.length)];
+  
+  const newPhoto = {
+    id: Date.now(),
+    x,
+    y,
+    url: randomImg.url,
+    rotate: Math.random() * 20 - 10,
   };
+
+  setCaptures((prev) => [...prev, newPhoto].slice(-5));
+};
 
   return (
     <main className="bg-red-600 text-yellow-400 overflow-x-hidden relative selection:bg-yellow-400 selection:text-red-600">
-      {/* Visual Grain Overlay to fill the red void */}
+      {/* Visual Grain Overlay */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.04] z-50 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
       {/* Flash Overlay */}
@@ -61,7 +65,7 @@ export default function PerspectiveGallery() {
         onTouchStart={handleCapture}
         className="h-[100dvh] flex flex-col items-start justify-center md:justify-end p-6 md:p-10 border-b border-yellow-400/30 relative overflow-hidden cursor-crosshair"
       >
-        {/* Mobile Header: Fills the top space gap */}
+        {/* Mobile Header */}
         <div className="absolute top-12 left-6 right-6 flex justify-between items-start md:hidden z-20">
           <div className="flex flex-col gap-1">
             <span className="text-[10px] font-mono leading-none tracking-[0.2em] uppercase text-yellow-300">System // Online</span>
@@ -72,7 +76,7 @@ export default function PerspectiveGallery() {
           </div>
         </div>
 
-        {/* Captured Polaroids Layer */}
+        {/* Captured Polaroids Layer - HIDDEN ON MOBILE (hidden md:block) */}
         <AnimatePresence>
           {captures.map((photo) => (
             <motion.div
@@ -80,7 +84,7 @@ export default function PerspectiveGallery() {
               initial={{ scale: 1.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              className="absolute w-28 h-36 md:w-40 md:h-52 bg-white p-1.5 md:p-2 shadow-2xl z-10 pointer-events-none"
+              className="hidden md:block absolute w-28 h-36 md:w-40 md:h-52 bg-white p-1.5 md:p-2 shadow-2xl z-10 pointer-events-none"
               style={{ 
                 left: 0, 
                 top: 0, 
@@ -107,7 +111,8 @@ export default function PerspectiveGallery() {
           <div className="flex flex-col md:flex-row justify-between w-full font-mono text-[10px] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.3em] text-yellow-300 gap-2">
             <span>Bengaluru // Perspective</span>
             <span className="opacity-70 md:block hidden">Click to snap / Scroll to explore</span>
-            <span className="opacity-70 md:hidden block animate-pulse">Tap screen to capture</span>
+            {/* Updated Mobile Text */}
+            <span className="opacity-70 md:hidden block animate-pulse">Scroll to explore</span>
           </div>
         </div>
 
