@@ -40,8 +40,8 @@ function AppContent() {
             <Route path="/courses" element={<Courses />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
-            <Route path ='/gallery' element={<Gallery/>} />
-            <Route path = '/faq' element={<FAQ />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/faq" element={<FAQ />} />
           </Routes>
         </main>
         <Footer />

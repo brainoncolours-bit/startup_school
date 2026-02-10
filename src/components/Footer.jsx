@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { 
   Globe, 
   Sparkles, 
@@ -13,6 +14,7 @@ import {
 } from 'lucide-react';
 
 const Footer = () => {
+  const navigate = useNavigate();
   const constraintsRef = useRef(null);
 
   // Social Media Data Array for cleaner mapping
@@ -137,7 +139,12 @@ const Footer = () => {
       <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-10 text-[9px] font-mono text-black/40 uppercase tracking-[0.5em] font-bold">
         <span>©2026</span>
         <span>startupschool</span>
-        <span>bigrip</span>
+        <button
+          onClick={()=>navigate('/faq')}
+          className="hover:text-white transition-colors underline decoration-dotted hover:decoration-solid cursor-pointer"
+        >
+          FAQ
+        </button>
       </div>
     </footer>
   );
