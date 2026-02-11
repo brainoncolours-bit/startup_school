@@ -23,30 +23,7 @@ const FAQ = () => {
       {/* SEO Schema */}
       <FAQSchema />
 
-      {/* HERO SECTION - Inspired by other pages but funkier */}
-      <section className="h-screen relative flex items-center justify-center bg-[#43646b] overflow-hidden border-b-[20px] border-black">
-        <motion.div style={{ y: heroY }} className="z-10 w-full max-w-7xl px-12 sm:px-24 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="bg-white text-black border-2 border-black px-4 py-1 font-black uppercase text-sm italic mb-4 inline-block shadow-[4px_4px_0px_#000]">
-              Status: Question Overflow
-            </span>
-            <h1 className="text-[14vw] sm:text-[10vw] font-[1000] leading-[0.8] tracking-[-0.05em] text-black uppercase">
-              FREQUENTLY <br />
-              <span className="flex items-center gap-4 justify-center">
-                <span className="italic text-white [text-shadow:8px_8px_0px_#000]">ASKED QUESTIONS</span>
-                <div className="h-[2px] sm:h-[4px] flex-grow bg-black mt-4"></div>
-              </span>
-            </h1>
-          </motion.div>
-        </motion.div>
-
-        {/* Funky side scrolling text */}
-       
-      </section>
+     
 
       {/* FUNNY FAQ SECTION WITH PARALLAX EFFECT */}
       <section className="py-20 sm:py-40 bg-[#f2e8d5] relative">
@@ -112,68 +89,7 @@ const FAQ = () => {
         </div>
       </section>
 
-      {/* FUNNY INFO SECTION - Inspired by About page layout */}
-      <section className="py-20 bg-black text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/asfalt-light.png')] opacity-10"></div>
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            whileHover={{ scale: 1.05 }}
-            className="bg-[#a5cb3a] p-8 border-4 border-black shadow-[8px_8px_0px_#000] text-center"
-          >
-            <h3 className="text-3xl font-black italic uppercase mb-4 leading-none">24/7 Support</h3>
-            <p className="font-bold uppercase text-xs">We're always here to answer your questions.</p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            whileHover={{ scale: 1.05 }}
-            className="bg-red-400 p-8 border-4 border-black shadow-[8px_8px_0px_#000] text-center"
-          >
-            <h3 className="text-3xl font-black italic uppercase mb-4 leading-none">Quick Answers</h3>
-            <p className="font-bold uppercase text-xs">Most queries answered within 24 hours.</p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            whileHover={{ scale: 1.05 }}
-            className="bg-[#f9bb1a] p-8 border-4 border-black shadow-[8px_8px_0px_#000] text-center"
-          >
-            <h3 className="text-3xl font-black italic uppercase mb-4 leading-none">No Limits</h3>
-            <p className="font-bold uppercase text-xs">Ask as many questions as you want.</p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* FINAL CTA - Funky twist */}
-      <section className="py-40 bg-[#1da89d] text-center relative border-t border-white/10">
-        <div className="relative z-10 px-6">
-          <motion.h2
-            initial={{ scale: 0.5 }}
-            whileInView={{ scale: 1 }}
-            className="text-[25vw] sm:text-[20vw] font-black leading-none text-black text-center mb-8 sm:mb-12"
-          >
-            MORE?
-          </motion.h2>
-          <div className="flex flex-row items-center justify-center gap-4 sm:gap-6 w-full flex-wrap">
-            <motion.button
-              whileHover={{ scale: 1.05, y: -5 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate('/contact')}
-              className="border-2 sm:border-4 border-black bg-black text-white px-8 sm:px-12 py-4 font-bold hover:bg-white hover:text-black transition-all uppercase w-80 sm:w-88 text-center flex items-center justify-center gap-3"
-            >
-              Get In Touch <ArrowDownRight className="w-5 h-5" />
-            </motion.button>
-          </div>
-        </div>
-      </section>
+     
     </div>
   );
 };

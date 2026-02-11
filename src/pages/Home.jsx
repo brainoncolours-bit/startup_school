@@ -6,6 +6,7 @@ import SnakeGame from '../components/SnakeGame';
 import Loader from '../components/Loader'; // Points to src/components/Loader.jsx
 import Pillars from '../components/Pillars';
 import { useNavigate } from 'react-router-dom';
+import FAQ from './Faq';
 
 // --- 1. MAGNETIC WRAPPER ---
 const MagneticBox = ({ children, strength = 20 }) => {
@@ -404,6 +405,9 @@ export default function NeoBrutalHome() {
             ))}
           </div>
         </footer>
+        <section>
+          <FAQ />
+        </section>
       </div>
       
       {/* Chatbot */}
