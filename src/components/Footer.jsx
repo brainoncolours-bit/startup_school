@@ -6,9 +6,8 @@ import {
   Sparkles, 
   Command, 
   Ghost, 
-  ArrowRight, 
-  Youtube, // Changed from Github
-  Facebook, // Changed from Twitter
+  Youtube, 
+  Facebook, 
   Instagram, 
   Linkedin 
 } from 'lucide-react';
@@ -17,7 +16,6 @@ const Footer = () => {
   const navigate = useNavigate();
   const constraintsRef = useRef(null);
 
-  // Social Media Data Array for cleaner mapping
   const socialLinks = [
     { icon: Linkedin, url: 'https://www.linkedin.com/company/mystartup-school' },
     { icon: Facebook, url: 'https://www.facebook.com/mystartupschool' },
@@ -28,7 +26,7 @@ const Footer = () => {
   return ( 
     <footer className="relative bg-[#ef6925] text-black min-h-[90vh] flex flex-col justify-center items-center overflow-hidden py-20 pb-32 font-sans">
       
-      {/* 1. INDUSTRIAL BACKGROUND EFFECTS (Kept as is) */}
+      {/* 1. INDUSTRIAL BACKGROUND EFFECTS */}
       <div className="absolute inset-0 z-0">
          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.1] brightness-100 pointer-events-none" />
       </div>
@@ -93,8 +91,14 @@ const Footer = () => {
       </div>
 
       {/* 4. THE INDUSTRIAL GRID BAR */}
-      <div className="absolute bottom-32 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-40 px-4">
-        <div className="p-8 bg-white border-4 border-black border-double shadow-[8px_8px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row justify-between items-center gap-10">
+      {/* FIXED: Added pointer-events-none to the container so it doesn't 
+          block the FAQ button below it.
+      */}
+      <div className="absolute bottom-32 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-40 px-4 pointer-events-none">
+        {/* FIXED: Added pointer-events-auto so social links and 
+            buttons inside the bar remain clickable.
+        */}
+        <div className="p-8 bg-white border-4 border-black border-double shadow-[8px_8px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row justify-between items-center gap-10 pointer-events-auto">
           
           <div className="flex items-center gap-8">
             <div className="text-left">
@@ -102,10 +106,7 @@ const Footer = () => {
               <p className="text-sm font-black text-black uppercase">Startup School</p>
             </div>
             <div className="h-8 w-1 bg-black" />
-            
           </div>
-
-        
 
           {/* SOCIAL MEDIA ICONS WITH LINKS */}
           <div className="flex gap-4">
@@ -126,22 +127,20 @@ const Footer = () => {
           <div className="text-left flex items-center gap-4">
              <div className="h-8 w-1 bg-black" />
              <div>
-
               <p className="text-[10px] font-mono text-black/50 uppercase tracking-[0.3em] font-bold">NOT AN </p>
               <p className="text-lg font-black text-[#ef6925]">MBA</p>
              </div>
-
-            </div>
+          </div>
         </div>
       </div>
 
-      {/* Subtle Bottom Bar */}
-      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-10 text-[9px] font-mono text-black/40 uppercase tracking-[0.5em] font-bold">
+      {/* 5. SUBTLE BOTTOM BAR (FAQ is now clickable) */}
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-10 text-[9px] font-mono text-black/40 uppercase tracking-[0.5em] font-bold z-50">
         <span>©2026</span>
         <span>startupschool</span>
         <button
-          onClick={()=>navigate('/faq')}
-          className="hover:text-white transition-colors underline decoration-dotted hover:decoration-solid cursor-pointer"
+          onClick={() => navigate('/faq')}
+          className="hover:text-white transition-colors underline decoration-dotted hover:decoration-solid cursor-pointer pointer-events-auto"
         >
           FAQ
         </button>
