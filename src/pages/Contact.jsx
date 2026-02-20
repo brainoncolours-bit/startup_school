@@ -128,7 +128,7 @@ ${message}`;
             </div>
 
             <div className="space-y-3">
-              <ContactDetail icon={<Phone size={20}/>} label="VOICE_LINE" value="+91-9036354727" color="#000000" />
+              <ContactDetail icon={<Phone size={20}/>} label="VOICE_LINE" value="+91-9035052280" color="#000000" />
               <ContactDetail icon={<Mail size={20}/>} label="ENCRYPTED_MAIL" value="info@mystartupschool.com" color="#ffffff"  />
               <ContactDetail icon={<Globe size={20}/>} label="GLOBAL_NODE" value="BENGALURU" color="#000000" />
             </div>
