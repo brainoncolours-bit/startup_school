@@ -53,9 +53,19 @@ export default function NeoBrutalHome() {
     }
     return true;
   });
+
+  const [showModal, setShowModal] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const hasSeenModal = sessionStorage.getItem('modalShown');
+      return !hasSeenModal;
+    }
+    return true;
+  });
+
   const { scrollYProgress } = useScroll();
   const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -63,6 +73,12 @@ export default function NeoBrutalHome() {
       sessionStorage.setItem('loaderShown', 'true');
     }
   }, [loading]);
+
+  useEffect(() => {
+    if (!showModal) {
+      sessionStorage.setItem('modalShown', 'true');
+    }
+  }, [showModal]);
 
   useEffect(() => {
     const updateMouse = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
@@ -85,6 +101,39 @@ export default function NeoBrutalHome() {
       </div>
       <AnimatePresence>
         {loading && <Loader onComplete={() => setLoading(false)} />}
+      </AnimatePresence>
+
+      {/* First Load Modal */}
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[1000] bg-black/80 flex items-center justify-center p-4"
+            onClick={() => setShowModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, y: 50 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.8, y: 50 }}
+              className="bg-[#f9bb1a] border-4 border-black shadow-[8px_8px_0px_0px_#000] max-w-2xl w-full relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setShowModal(false)}
+                className="absolute -top-4 -right-4 bg-[#e72132] text-white w-10 h-10 sm:w-12 sm:h-12 border-4 border-black shadow-[4px_4px_0px_0px_#000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all font-black text-xl flex items-center justify-center"
+              >
+                ×
+              </button>
+              <img
+                src="/assets/Ad.jpeg"
+                alt="Startup School"
+                className="w-full h-auto object-contain"
+              />
+            </motion.div>
+          </motion.div>
+        )}
       </AnimatePresence>
 
       <div className="bg-[#43646b] text-white selection:bg-[#e72132] selection:text-white min-h-screen cursor-none">
