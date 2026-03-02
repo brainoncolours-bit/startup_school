@@ -55,8 +55,8 @@ const Loader = ({ onComplete }) => {
   );
 
   return (
-    <div 
-      className="fixed inset-0 z-[1000] flex items-center justify-center overflow-hidden select-none"
+    <div
+      className="fixed inset-0 z-[1001] flex items-center justify-center overflow-hidden select-none"
       style={{ backgroundColor: colors.red }}
     >
       {/* Background Elements */}
