@@ -197,16 +197,11 @@ const VibrantExecutiveAbout = () => {
     offset: ["start start", "end end"]
   });
 
-  // Responsive translate: on mobile we scroll less distance
-  const xTranslate = useTransform(horizontalScroll, [0, 1], ["0%", "-88%"]);
+  // Single-card layout: keep the section static now that only one leader remains
+  const xTranslate = useTransform(horizontalScroll, [0, 1], ["0%", "0%"]);
 
   const team = [
     { id: "LEAD-01", num: "01", name: "Abdul Rahiman", role: "Head of Startup School", img: "/assets/MHD03706.JPG", link:"https://www.linkedin.com/in/abdulrahiman619/", bio: "The guiding force behind the next generation of founders. Abdul architected the Startup School framework to turn raw ideas into market-ready ventures." },
-    { id: "EXEC-06", num: "06", name: "Jeslinz Johnson", role: "Operations & Marketing Manager", img: "/assets/MHD03684.JPG", link:"https://www.linkedin.com/in/jeslinz-johnson-2b216a146/", bio: "The operational heartbeat. Jeslinz synchronizes internal workflows with outward marketing presence." },
-    { id: "STRAT-02", num: "02", name: "Priyankar Sengupta", role: "Strategy", img: "/assets/MHD03664.JPG", link:"https://www.linkedin.com/in/priyankar-sengupta-085473188/", bio: "Master of long-term vision and tactical maneuvering. Priyankar maps the trajectory of growth." },
-    { id: "FIN-03", num: "03", name: "Eijaz Khan", role: "Mentor Finance", img: "/assets/image.png", link:"https://www.linkedin.com/in/eijaz-khan-b25193235/", bio: "Ensuring fiscal resilience and capital optimization for startups to scale." },
-    { id: "MKTG-04", num: "04", name: "Aly Sayyad", role: "Mentor Sales & Marketing", img: "/assets/MHD03615.JPG", link:"https://www.linkedin.com/in/aly-sayyad-40501a20/", bio: "The closer. Aly specializes in aggressive market entry and high-conversion tactics." },
-    { id: "TECH-05", num: "05", name: "Sikta Misra", role: "Operations & Tech", img: "/assets/MHD03642.JPG", link:"https://www.linkedin.com/in/sikta/", bio: "Bridging the gap between code and execution. Sikta oversees technical stacks." },
   ];
 
   return (
@@ -267,14 +262,14 @@ const VibrantExecutiveAbout = () => {
       </section>
 
       {/* HORIZONTAL TEAM SECTION */}
-      <section ref={horizontalSectionRef} className="relative h-[300vh] bg-[#ef6925]">
-        <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-          <motion.div style={{ x: xTranslate }} className="flex gap-4 sm:gap-16 px-6 sm:px-[10vw] relative z-10">
-            <div className="shrink-0 w-[85vw] sm:w-[500px] flex flex-col justify-center">
-              <h2 className="text-5xl sm:text-8xl font-black italic uppercase text-white leading-[0.8] mb-8">
-                The <br /><span className="text-black">Team</span> <br />Leaders.
-              </h2>
-            </div>
+      <section ref={horizontalSectionRef} className="relative py-20 sm:py-32 bg-[#ef6925]">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-16">
+          <div className="shrink-0 w-full lg:w-[420px] flex flex-col justify-center">
+            <h2 className="text-5xl sm:text-8xl font-black italic uppercase text-white leading-[0.8] mb-8">
+              The <br /><span className="text-black">Team</span> <br />Leaders.
+            </h2>
+          </div>
+          <motion.div style={{ x: xTranslate }} className="relative z-10">
             {team.map((member, i) => (
               <TeamCard3D key={i} member={member} />
             ))}
